@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Table Manager</string>
+    <string name="hello_placeholder_string">Hello</string>
+    <string name="app_icon_description_string">App Icon</string>
+    <string name="back_button_description_string">Back Button</string>
+    <string name="sign_up_title_string">Sign Up</string>
+    <string name="name_title_String">Name</string>
+    <string name="first_name_placeholder_string">First Name</string>
+    <string name="last_name_placeholder_string">Last Name</string>
+    <string name="email_title_string">Email</string>
+    <string name="email_id_placeholder_string">Email</string>
+    <string name="create_password_title_string">Create Password</string>
+    <string name="new_password_placeholder_string">New Password</string>
+    <string name="confirm_password_placeholder_string">Confirm Password</string>
+    <string name="id_number_title_string">Unique ID Number</string>
+    <string name="id_number_placeholder_string">ID Number eg. (XX00X1234)</string>
+
+</resources>
