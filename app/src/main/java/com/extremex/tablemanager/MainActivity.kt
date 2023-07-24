@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         // Intent to go to Activity
         startActivity(loginActivity)
 
+
         // Close this Activity
         finish()
     }

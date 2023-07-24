@@ -14,5 +14,6 @@
     <string name="confirm_password_placeholder_string">Confirm Password</string>
     <string name="id_number_title_string">Unique ID Number</string>
     <string name="id_number_placeholder_string">ID Number eg. (XX00X1234)</string>
+<string name="short_password_error">Password should comprise of 8 characters</string>
 
 </resources>
