@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.text.trimmedLength
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.FragmentSignUpBinding
+import com.extremex.tablemanager.lib.StringReferences
 import java.util.jar.Attributes.Name
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
@@ -34,7 +36,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     binding.IDNumber
                 )
             ) {
-                signUp()
+                signUp(binding.FirstName.text.toString().trim(), binding.LastName.text.toString().trim())
             } else {
                 Toast.makeText(this.requireContext(), "Invalid data", Toast.LENGTH_SHORT).show()
             }
@@ -76,7 +78,18 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         return false
 
     }
-    private fun signUp(){
-        Toast.makeText(this.requireContext(), "You Signed up ", Toast.LENGTH_SHORT).show()
+    private fun checkPassword(password: EditText, confirmPassword: EditText) : Boolean
+    {
+        if(password.text.toString().trim().length>8) {
+            //if statement
+        } else {
+            password.error = StringReferences(this.requireContext()).SHORT_PASSWORD_ERROR
+        }
+        return false
+    }
+    private fun signUp( firstName: String, lastName: String ){
+
+        val fullName: String = "$firstName $lastName"
+        Toast.makeText(this.requireContext(), "You Signed up as $fullName  ", Toast.LENGTH_SHORT).show()
     }
 }
