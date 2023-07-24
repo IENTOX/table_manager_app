@@ -9,6 +9,6 @@ data class SigninData(
     val phNum: Int,
     val cCode: Int,
     val gander: String,
-    val email: Email,
+    val email: String,
     val passwordHash: String
 )
