@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.ActivityHomeBinding
+import com.extremex.tablemanager.fragment.HomeFragment
 import com.extremex.tablemanager.fragment.TimetableFragment
 
 class HomeActivity : AppCompatActivity() {
@@ -16,13 +17,15 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        setCurrentFrame(HomeFragment())
         binding.BottomNavBar.setOnItemSelectedListener {
             when(it.itemId){
+                R.id.Home -> setCurrentFrame(HomeFragment())
                 R.id.Schedule -> setCurrentFrame(TimetableFragment())
                 // add more id's and set fragment as frame
                 else -> {
-                // do nothing
-                // }
+                setCurrentFrame(HomeFragment())
                 }
             }
             true
