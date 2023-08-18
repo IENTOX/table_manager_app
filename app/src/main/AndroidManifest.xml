@@ -13,13 +13,13 @@
         android:theme="@style/Theme.TableManager"
         tools:targetApi="31">
         <activity
-            android:name=".SignupInActivity"
+            android:name=".teacher.SignupInActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".teacher.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".teacher.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

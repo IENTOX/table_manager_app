@@ -1,4 +1,4 @@
-package com.extremex.tablemanager
+package com.extremex.tablemanager.teacher
 
 
 import android.content.Intent

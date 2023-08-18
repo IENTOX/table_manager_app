@@ -1,5 +1,6 @@
 package com.extremex.tablemanager.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Email
 import android.text.Editable
@@ -9,14 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import androidx.annotation.InspectableProperty.ValueType
-import androidx.core.text.trimmedLength
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
-import com.extremex.tablemanager.databinding.FragmentSignUpBinding
 import com.extremex.tablemanager.lib.SigninData
-import com.extremex.tablemanager.lib.StringReferences
-import java.util.jar.Attributes.Name
+import com.extremex.tablemanager.teacher.HomeActivity
+import com.extremex.tablemanager.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var binding: FragmentSignUpBinding
@@ -29,7 +27,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.SignUpButton.setOnClickListener{
-            verifyDetails(
+            /*verifyDetails(
                 binding.FirstName,
                 binding.LastName,
                 binding.EmailAddress,
@@ -37,6 +35,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 binding.ConfirmPassword,
                 binding.IDNumber
             )
+             */
+            requireContext().startActivity(Intent(requireContext(),HomeActivity::class.java))
+            requireActivity().finish()
         }
     }
     private fun verifyDetails(firstName: EditText, lastName: EditText, email: EditText, password: EditText, cPassword: EditText, Id: EditText) : Boolean
@@ -55,14 +56,14 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             password.error="Invalid Password: password should contain at least 1 number, 1 Capital latter, and a special character."
         } else if(cPassword.text.isEmpty()) {
             cPassword.error="This field cannot be empty"
-        } else if(password.text != cPassword.text) {
+        } else if(password.text.toString().trim() != cPassword.text.toString().trim()) {
             cPassword.error="Password does not match"
         }  else if(Id.text.isEmpty()) {
             Id.error="This field cannot be empty"
         } else {
             // reformation of data before signup
             //signUpBuilder()
-            Toast.makeText(this.requireContext(), "You Signed up as ${firstName.text}  ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.requireContext(), "You Signed up as ${firstName.text}", Toast.LENGTH_SHORT).show()
             return true
         }
         return false
@@ -95,4 +96,3 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         return null
     }
 }
-//@1Wwwwww
