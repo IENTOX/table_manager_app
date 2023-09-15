@@ -2,7 +2,6 @@ package com.extremex.tablemanager.teacher
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.ActivityHomeBinding
@@ -16,7 +15,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         setCurrentFrame(HomeFragment())
         binding.BottomNavBar.setOnItemSelectedListener {
