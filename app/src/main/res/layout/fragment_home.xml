@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragment.HomeFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -13,6 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:elevation="5dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/tv_background"
         android:orientation="horizontal"
@@ -34,27 +36,15 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="15dp"
-        android:elevation="5dp"
-        android:background="@drawable/tv_background"
-        android:orientation="horizontal"
-        android:padding="20dp">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clipToPadding="true"
-            android:cropToPadding="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_notifications" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        android:padding="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:icon="@drawable/ic_notifications" />
 
     <RelativeLayout
         android:id="@+id/MainContainer"
@@ -149,10 +139,12 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/tv_background"
                     android:orientation="vertical"
+                    android:elevation="5dp"
                     android:padding="10dp"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
+                        android:id="@+id/StatusTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/b_bold"
@@ -249,13 +241,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:orientation="vertical"
-                        android:layout_margin="10dp"
+                        android:orientation="horizontal"
+                        android:elevation="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:background="@drawable/tv_background_inner">
 
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:elevation="5dp"
                             android:fontFamily="@font/b_bold"
@@ -266,7 +262,45 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/StatusDiscription"
+                            android:id="@+id/StatusDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/b_bold"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:elevation="5dp"
+                        android:orientation="vertical"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/tv_background_inner">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:elevation="5dp"
+                            android:fontFamily="@font/b_bold"
+                            android:gravity="start"
+                            android:padding="5dp"
+                            android:text="Description:"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/UserDescription"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:elevation="5dp"

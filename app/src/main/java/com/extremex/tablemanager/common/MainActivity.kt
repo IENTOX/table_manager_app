@@ -1,9 +1,11 @@
-package com.extremex.tablemanager.teacher
+package com.extremex.tablemanager.common
 
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.extremex.tablemanager.service.DateTimeService
+import com.extremex.tablemanager.teacher.SignupInActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

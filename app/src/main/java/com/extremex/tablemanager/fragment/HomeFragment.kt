@@ -1,46 +1,96 @@
 package com.extremex.tablemanager.fragment
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
-import android.text.style.TtsSpan.TimeBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.FragmentHomeBinding
+import com.extremex.tablemanager.lib.LeaveApplicationDialog
 import com.extremex.tablemanager.lib.LeaveProgressController
 import com.extremex.tablemanager.lib.LeaveProgressStatus
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.Date
-import java.util.Locale
+import com.extremex.tablemanager.service.DateTimeService
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
 
+    // Date Time service intent
+    private lateinit var serviceIntent: Intent
+
+    // helper to get status enums
+    private var status :String? = null
+
+    private val DateTimeReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val time = intent.getStringExtra(DateTimeService.DEVICE_TIME_UPDATED)
+            val date = intent.getStringExtra(DateTimeService.DEVICE_DATE_UPDATED)
+
+            binding.DateView.text = date
+            binding.TimeView.text = time
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        // initialising DateTime updating Service
+        serviceIntent = Intent(requireActivity().applicationContext, DateTimeService::class.java)
+        this.requireActivity().registerReceiver(DateTimeReceiver, IntentFilter(DateTimeService.DEVICE_DATE_TIME))
+        requireActivity().startService(serviceIntent)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Get the current date and time
 
-        val currentTime = Date()
-
-        // Format the date and time
-        val dateFormat = SimpleDateFormat("hh : mm : ss ", Locale.getDefault())
-        val formattedTime = dateFormat.format(currentTime)
-        binding.DateView.text = "${LocalDate.now().dayOfMonth} ${(LocalDate.now().month).toString().lowercase()} ${LocalDate.now().year}"
-        binding.TimeView.text = formattedTime
         binding.LeaveApplicationButton.setOnClickListener {
-            if (binding.LeaveApplicationProgressView.isVisible){
-                binding.LeaveApplicationProgressView.visibility = View.GONE
-            } else {
-                binding.LeaveApplicationProgressView.visibility = View.VISIBLE
-                LeaveProgressController(requireContext(), binding.LeaveProgress,LeaveProgressStatus.approved.name,binding.LeaveStatus)
-            }
+            createLeaveApplication(LeaveProgressStatus.requested.name)
         }
+    }
+
+    private fun createLeaveApplication(applicationStatus: String?, reason: String="") {
+        val leaveApplicationDialog = LeaveApplicationDialog(requireContext())
+
+        leaveApplicationDialog.setApplyListener(object : LeaveApplicationDialog.ApplyListener {
+            override fun onApply(userName: String, userId: String, description: String, isUncertain: Boolean) {
+                    binding.LeaveApplicationProgressView.visibility = View.VISIBLE
+                if (applicationStatus == LeaveProgressStatus.requested.name){
+                    statusType("Leave Application", description, applicationStatus, "Your request has been Submitted")
+                } else if (applicationStatus == LeaveProgressStatus.awaiting.name){
+                    statusType("Leave Application", description, applicationStatus, "Your request for leave is on hold, it might a while due to $reason.")
+                } else if (applicationStatus == LeaveProgressStatus.approved.name){
+                    statusType("Leave Application", description, applicationStatus, "Your leave application have been approved ")
+                } else if (applicationStatus == LeaveProgressStatus.regected.name){
+                    statusType("Leave Application", description, applicationStatus, "Sorry to inform you that your leave application has been rejected due to $reason.")
+                } else {
+                    statusType("Leave Application", description, applicationStatus, "Undefined")
+                }
+
+            }
+        })
+
+        leaveApplicationDialog.setCancelListener(object : LeaveApplicationDialog.CancelListener {
+            override fun onCancel() {
+                binding.LeaveApplicationProgressView.visibility = View.GONE
+            }
+        })
+        leaveApplicationDialog.show()
+    }
+
+    private fun statusType(title: String, description: String, applicationStatus: String?, status: String?){
+        binding.StatusTitle.text = title
+        binding.UserDescription.text = description
+        binding.StatusDescription.text = status
+        LeaveProgressController(requireContext(), binding.LeaveProgress, applicationStatus!!, binding.LeaveStatus)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        requireActivity().stopService(serviceIntent)
     }
 }
