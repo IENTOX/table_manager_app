@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gestionnaire de Table</string>
+    <string name="hello_placeholder_string">Bonjour</string>
+    <string name="app_icon_description_string">Icône de l'application</string>
+    <string name="back_button_description_string">Bouton Retour</string>
+    <string name="sign_up_title_string">S'Inscrire</string>
+    <string name="name_title_String">Nom</string>
+    <string name="first_name_placeholder_string">Prénom</string>
+    <string name="last_name_placeholder_string">Nom de famille</string>
+    <string name="email_title_string">Adresse e-mail</string>
+    <string name="email_id_placeholder_string">Adresse e-mail</string>
+    <string name="create_password_title_string">Créer un Mot de Passe</string>
+    <string name="new_password_placeholder_string">Nouveau Mot de Passe</string>
+    <string name="confirm_password_placeholder_string">Confirmer le Mot de Passe</string>
+    <string name="id_number_title_string">Numéro d'Identification Unique</string>
+    <string name="id_number_placeholder_string">Numéro d'Identification ex. (XX00X1234)</string>
+    <string name="short_password_error">Le mot de passe doit comporter au moins 8 caractères</string>
+    <string name="date_format_placeholder_string">JJ/MM/AAAA</string>
+    <string name="date_of_birth_title_string">Date de Naissance :</string>
+    <string name="phone_number_title_string">Numéro de Téléphone</string>
+    <string name="teacher_name_placeholder_string">Rudi Fernandes</string>
+    <string name="home_nav_title">Accueil</string>
+    <string name="schedule_nav_title">Calendrier</string>
+    <string name="settings_nav_title">Paramètres</string>
+</resources>

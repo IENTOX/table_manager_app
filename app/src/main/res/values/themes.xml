@@ -30,4 +30,11 @@
         <item name="android:textColorTertiary">@color/md_theme_light_onSurface</item>
         <item name="android:statusBarColor">@color/md_theme_light_inversePrimary</item>
     </style>
+
+
+    <style name="DialogBox" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_popup_container</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
 </resources>

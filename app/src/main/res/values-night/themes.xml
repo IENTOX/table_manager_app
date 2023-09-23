@@ -30,4 +30,9 @@
         <item name="android:textColorTertiary">@color/md_theme_dark_inverseSurface</item>
         <item name="android:statusBarColor">@color/md_theme_dark_inversePrimary</item>
     </style>
+
+    <style name="DialogBox" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_popup_container</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>

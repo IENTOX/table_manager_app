@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gestor de Tablas</string>
+    <string name="hello_placeholder_string">Hola</string>
+    <string name="app_icon_description_string">Icono de la aplicación</string>
+    <string name="back_button_description_string">Botón Atrás</string>
+    <string name="sign_up_title_string">Registrarse</string>
+    <string name="name_title_String">Nombre</string>
+    <string name="first_name_placeholder_string">Nombre</string>
+    <string name="last_name_placeholder_string">Apellido</string>
+    <string name="email_title_string">Correo Electrónico</string>
+    <string name="email_id_placeholder_string">Correo Electrónico</string>
+    <string name="create_password_title_string">Crear Contraseña</string>
+    <string name="new_password_placeholder_string">Nueva Contraseña</string>
+    <string name="confirm_password_placeholder_string">Confirmar Contraseña</string>
+    <string name="id_number_title_string">Número de Identificación Único</string>
+    <string name="id_number_placeholder_string">Número de Identificación ej. (XX00X1234)</string>
+    <string name="short_password_error">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="date_format_placeholder_string">DD/MM/AAAA</string>
+    <string name="date_of_birth_title_string">Fecha de Nacimiento:</string>
+    <string name="phone_number_title_string">Número de Teléfono</string>
+    <string name="teacher_name_placeholder_string">Rudi Fernandes</string>
+    <string name="home_nav_title">Inicio</string>
+    <string name="schedule_nav_title">Calendario</string>
+    <string name="settings_nav_title">Ajustes</string>
+</resources>

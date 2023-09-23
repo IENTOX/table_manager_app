@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="LeaveType">
+        <item>Annual Leave</item>
+        <item>Sick Leave</item>
+        <item>Emergency Leave</item>
+        <item>Unofficial Leave</item>
+    </string-array>
+
     <string-array name="CountryCode">
         <item>+91</item>
         <item>+1</item>
         <item>+44</item>
+    </string-array>
+
+    <string-array name="CountryCodeNames">
+        <item>(India)</item>
+        <item>(Canada)</item>
+        <item>(United Kingdom)</item>
     </string-array>
 </resources>
