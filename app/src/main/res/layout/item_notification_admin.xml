@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".lib.AdminMessagesDialog"
+    android:gravity="top"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:id="@+id/MessageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/tv_background_inner"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/tv_background_inner"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="2">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/TeachersName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/b_bold"
+                    android:text="Name: "
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/TeachersID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/b_bold"
+                    android:gravity="center"
+                    android:text="ID : B0015"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/tv_background_inner"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="2">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/b_balck"
+                    android:text="Message Title"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/Date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/b_balck"
+                    android:gravity="end"
+                    android:text="29 Sep 2023 "
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/b_bold"
+                android:paddingTop="15dp"
+                android:text="Message Sub: "
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/b_bold"
+                android:paddingTop="15dp"
+                android:text="Message body: "
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/AcceptButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/MessageContainer"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:padding="15dp"
+            android:background="@drawable/bg_accept_button"
+            app:icon="@drawable/ic_check"
+            android:text="Accept"
+            app:backgroundTintMode="screen"
+            app:iconGravity="textStart"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/HoldButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/MessageContainer"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="5dp"
+            android:padding="15dp"
+            android:layout_toStartOf="@+id/AcceptButton"
+            android:background="@drawable/bg_hold_button"
+            app:icon="@drawable/ic_hold_icon"
+            android:text="Hold"
+            app:backgroundTintMode="screen"
+            app:iconGravity="textStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/RejectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/MessageContainer"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="5dp"
+            android:padding="15dp"
+            android:layout_toStartOf="@+id/HoldButton"
+            android:background="@drawable/bg_reject_button"
+            android:text="Reject"
+            app:backgroundTintMode="screen"
+            app:icon="@drawable/ic_close"
+            app:iconGravity="textStart" />
+
+    </RelativeLayout>
+
+</LinearLayout>

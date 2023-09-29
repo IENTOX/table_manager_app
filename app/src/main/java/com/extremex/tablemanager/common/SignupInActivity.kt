@@ -1,10 +1,10 @@
-package com.extremex.tablemanager.teacher
+package com.extremex.tablemanager.common
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
-import com.extremex.tablemanager.fragment.SignUpFragment
+import com.extremex.tablemanager.common.fragment.SignUpFragment
 
 class SignupInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -103,7 +103,7 @@ class LeaveApplicationDialog(private val context: Context) {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                // TODO: nothing has changed
+                selectedLeaveType = leaveTypeArray[0]
             }
         }
 

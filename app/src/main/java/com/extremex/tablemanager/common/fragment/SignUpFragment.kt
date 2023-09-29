@@ -1,10 +1,7 @@
-package com.extremex.tablemanager.fragment
+package com.extremex.tablemanager.common.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
-import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +9,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.admin.AdminHomeActivity
 import com.extremex.tablemanager.lib.SigninData
-import com.extremex.tablemanager.teacher.HomeActivity
 import com.extremex.tablemanager.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
@@ -36,7 +33,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 binding.IDNumber
             )
              */
-            requireContext().startActivity(Intent(requireContext(),HomeActivity::class.java))
+            //requireContext().startActivity(Intent(requireContext(),TeachersHomeActivity::class.java))
+            requireContext().startActivity(Intent(requireContext(), AdminHomeActivity::class.java))
             requireActivity().finish()
         }
     }

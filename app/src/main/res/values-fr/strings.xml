@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
     <string name="app_name">Gestionnaire de Table</string>
     <string name="hello_placeholder_string">Bonjour</string>
     <string name="app_icon_description_string">Icône de l'application</string>
@@ -23,4 +24,5 @@
     <string name="home_nav_title">Accueil</string>
     <string name="schedule_nav_title">Calendrier</string>
     <string name="settings_nav_title">Paramètres</string>
+    -->
 </resources>

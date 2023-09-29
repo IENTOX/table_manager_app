@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/TopPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/tv_background"
+                android:elevation="5dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/AdminUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+
+                    android:layout_marginBottom="15dp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/tv_background_2"
+                    android:fontFamily="@font/b_bold"
+                    android:padding="15dp"
+                    android:text="Admin"
+                    android:textSize="24sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/RoomCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/tv_background_2"
+                    android:fontFamily="@font/b_bold"
+                    android:padding="15dp"
+                    android:text="q2e34wr432"
+                    android:textSize="24sp" />
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/ShareCodeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/bg_share_button"
+                android:elevation="10dp"
+                android:padding="15dp"
+                android:src="@drawable/ic_forward_icon" />
+
+
+            <RelativeLayout
+                android:id="@+id/TeachersAvailabilityContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TopPanel"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/tv_background"
+                android:elevation="5dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <Spinner
+                    android:id="@+id/TeachersAvailabilitySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/b_bold"
+                    android:gravity="center_vertical|start"
+                    android:textSize="16sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/TeachersListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/TeachersAvailabilitySpinner"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:scrollbars="none" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+<LinearLayout
+    android:id="@+id/MessagesButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/bg_notify_button"
+    android:padding="15dp"
+    android:layout_marginEnd="20dp"
+    android:elevation="15dp"
+    android:gravity="center"
+    android:layout_marginBottom="20dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        android:background="#00000000"
+        android:gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_notification" />
+
+</LinearLayout>
+
+
+</RelativeLayout>

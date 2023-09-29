@@ -4,16 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
-import com.extremex.tablemanager.databinding.ActivityHomeBinding
-import com.extremex.tablemanager.fragment.HomeFragment
-import com.extremex.tablemanager.fragment.TimetableFragment
+import com.extremex.tablemanager.databinding.ActivityHomeTeachersBinding
+import com.extremex.tablemanager.teacher.fragment.HomeFragment
+import com.extremex.tablemanager.teacher.fragment.TimetableFragment
 
-class HomeActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityHomeBinding
+class TeachersHomeActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityHomeTeachersBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityHomeTeachersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setCurrentFrame(HomeFragment())

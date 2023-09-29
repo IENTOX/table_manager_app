@@ -1,4 +1,4 @@
-package com.extremex.tablemanager.fragment
+package com.extremex.tablemanager.teacher.fragment
 
 import android.content.BroadcastReceiver
 import android.content.Context
