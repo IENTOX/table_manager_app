@@ -63,7 +63,7 @@
                     android:background="@drawable/tv_background_2"
                     android:fontFamily="@font/b_bold"
                     android:padding="15dp"
-                    android:text="q2e34wr432"
+                        android:text="A3Q5DG430S"
                     android:textSize="24sp" />
             </RelativeLayout>
 

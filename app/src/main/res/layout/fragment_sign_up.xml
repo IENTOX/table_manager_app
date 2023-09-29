@@ -77,13 +77,16 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/tv_background_inner"
+                android:layout_gravity="bottom"
                 android:scrollbars="none">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="0dp"
                     android:orientation="vertical">
 
@@ -91,10 +94,8 @@
                         android:id="@+id/Name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="20dp"
                         android:layout_weight="1"
                         android:autoSizeTextType="uniform"
                         android:text="@string/name_title_String"
@@ -107,10 +108,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:paddingStart="15dp"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="15dp"
-                        android:paddingBottom="0dp">
+                        android:paddingHorizontal="20dp">
 
                         <EditText
                             android:id="@+id/FirstName"
@@ -142,7 +140,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="20dp"
+                        android:paddingHorizontal="20dp"
                         android:weightSum="3">
 
                         <TextView
@@ -155,6 +153,7 @@
                             android:textStyle="bold" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/DobSetter"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -181,10 +180,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:paddingStart="10dp"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="20dp"
-                        android:paddingBottom="0dp">
+                        android:paddingHorizontal="20dp">
 
                         <EditText
                             android:id="@+id/PhoneNumber"
@@ -194,7 +190,7 @@
                             android:autofillHints="Numbers"
                             android:hint="@string/phone_number_title_string"
                             android:inputType="phone"
-                            android:maxLength="8"
+                            android:maxLength="10"
                             android:maxLines="1"
                             android:textIsSelectable="true" />
 
@@ -203,10 +199,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginHorizontal="20dp"
                         android:layout_weight="1"
                         android:autoSizeTextType="uniform"
                         android:text="@string/email_title_string"
@@ -217,10 +210,7 @@
                         android:id="@+id/EmailAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginHorizontal="20dp"
                         android:autofillHints="EmailID"
                         android:hint="@string/email_id_placeholder_string"
                         android:inputType="textEmailAddress"
@@ -230,10 +220,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
+                        android:layout_marginHorizontal="20dp"
                         android:autoSizeTextType="uniform"
                         android:text="@string/create_password_title_string"
                         android:textIsSelectable="false"
@@ -244,10 +231,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:paddingStart="15dp"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="15dp"
-                        android:paddingBottom="0dp">
+                        android:paddingHorizontal="20dp">
 
                         <EditText
                             android:id="@+id/NewPassword"
@@ -276,13 +260,9 @@
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:paddingStart="15dp"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="15dp"
-                        android:paddingBottom="0dp">
+                        android:paddingHorizontal="20dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -300,10 +280,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:paddingStart="10dp"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="20dp"
-                        android:paddingBottom="0dp">
+                        android:paddingHorizontal="20dp">
 
                         <EditText
                             android:id="@+id/IDNumber"
@@ -319,10 +296,75 @@
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:background="@drawable/tv_background_2"
+                        android:elevation="5dp"
+                        android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:autoSizeTextType="uniform"
+                            android:gravity="center"
+                            android:paddingStart="5dp"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/b_bold"
+                            android:text="Join an existing room"/>
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/roomInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
+                            android:alpha="0.7"
+                            android:src="@drawable/ic_info"/>
+
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/JoinRoomCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/roomCode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="room code provided by your admin"
+                            android:visibility="gone"
+                            android:inputType="numberDecimal"
+                            android:maxLength="8"
+                            android:maxLines="1"
+                            android:textIsSelectable="true" />
+
+                    </LinearLayout>
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </ScrollView>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginVertical="10dp"
+                android:text="By signing up you except our terms of use."
+                android:textAllCaps="false"
+                android:textStyle="normal" />
 
         </LinearLayout>
 

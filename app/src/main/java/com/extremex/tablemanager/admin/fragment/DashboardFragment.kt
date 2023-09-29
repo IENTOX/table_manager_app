@@ -16,6 +16,7 @@ import com.extremex.tablemanager.lib.AdminMessage
 import com.extremex.tablemanager.lib.AdminMessagesDialog
 import com.extremex.tablemanager.lib.AllTeachers
 import com.extremex.tablemanager.lib.AvailableTeachers
+import com.extremex.tablemanager.lib.CodeGenerator
 import com.extremex.tablemanager.lib.LeaveApplicationDialog
 import com.extremex.tablemanager.lib.LeaveProgressStatus
 import com.extremex.tablemanager.lib.TeachersAllAvailabilityAdapter
@@ -48,6 +49,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.RoomCode.text = smartGenerateRoomCode()
         binding.ShareCodeButton.setOnClickListener {
             shareClassroomCode(binding.RoomCode.text.trim().toString())
         }
@@ -141,6 +143,10 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             viewMessages()
         }
 
+    }
+
+    private fun smartGenerateRoomCode() :String{
+        return CodeGenerator().generateCode()
     }
 
     private fun shareClassroomCode(classroomCode: String) {
