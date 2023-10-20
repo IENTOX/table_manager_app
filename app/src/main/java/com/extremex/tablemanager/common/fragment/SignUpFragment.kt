@@ -1,6 +1,7 @@
 package com.extremex.tablemanager.common.fragment
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +22,24 @@ import java.util.Calendar
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var binding: FragmentSignUpBinding
 
+    interface OnBack{
+        fun backPressed()
+    }
+    private var onBack :OnBack? = null
+
+    fun onBackClicked(listener: OnBack){
+        this.onBack = listener
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnBack){
+            onBack = context
+        } else {
+            throw RuntimeException("$context must implement AccountClickListener")
+        }
+    }
+
     private var dateArray: Array<Int>? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
@@ -29,6 +48,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.BackBtn.setOnClickListener {
+            onBack?.backPressed()
+        }
 
         binding.DobSetter.setOnClickListener {
             showDateSetter() { day, month, year ->

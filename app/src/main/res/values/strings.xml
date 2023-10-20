@@ -23,5 +23,9 @@
     <string name="schedule_nav_title">Schedule</string>
     <string name="settings_nav_title">Settings</string>
     <string name="dashboard_nav_title">Dashboard</string>
+    <string name="password_title_string">Password</string>
+    <string name="create_account_title_string">Sign Up</string>
+    <string name="reset_password_title_string">Reset Password</string>
+    <string name="Login_title_string">Login</string>
 
 </resources>

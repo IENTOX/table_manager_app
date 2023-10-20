@@ -26,7 +26,7 @@ import com.extremex.tablemanager.lib.UnavailableTeachers
 
 /*
 *
-*
+*   login icon attr/ <a href="https://www.flaticon.com/free-icons/login" title="login icons">Login icons created by afif fudin - Flaticon</a>
 *   hold icon attr/ <a href="https://www.flaticon.com/free-icons/stop" title="stop icons">Stop icons created by Freepik - Flaticon</a>
 *   notification icon attr/ <a href="https://www.flaticon.com/free-icons/notification" title="notification icons">Notification icons created by Freepik - Flaticon</a>
 *   settings icon attr/  <a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Pixel perfect - Flaticon</a>
