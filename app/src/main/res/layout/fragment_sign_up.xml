@@ -257,51 +257,12 @@
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="20dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="start"
-                            android:text="@string/id_number_title_string"
-                            android:textAllCaps="false"
-                            android:textStyle="bold" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="20dp">
-
-                        <EditText
-                            android:id="@+id/IDNumber"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:autofillHints="Numbers"
-                            android:hint="@string/id_number_placeholder_string"
-                            android:inputType="numberDecimal"
-                            android:maxLength="8"
-                            android:maxLines="1"
-                            android:textIsSelectable="true" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginVertical="10dp"
                         android:gravity="center"
                         android:background="@drawable/tv_background_2"
                         android:elevation="5dp"
@@ -353,6 +314,31 @@
                             android:textIsSelectable="true" />
 
                     </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/InstuteTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_weight="1"
+                        android:autoSizeTextType="uniform"
+                        android:text="@string/instute_title_string"
+                        android:textIsSelectable="false"
+                        android:textStyle="bold"
+                        android:visibility="visible"/>
+
+                    <EditText
+                        android:id="@+id/InstuteName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:autofillHints="name"
+                        android:hint="@string/instute_title_string"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textIsSelectable="true"
+                        android:visibility="visible" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

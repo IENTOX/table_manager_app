@@ -27,5 +27,6 @@
     <string name="create_account_title_string">Sign Up</string>
     <string name="reset_password_title_string">Reset Password</string>
     <string name="Login_title_string">Login</string>
+    <string name="instute_title_string">Instute Name</string>
 
 </resources>

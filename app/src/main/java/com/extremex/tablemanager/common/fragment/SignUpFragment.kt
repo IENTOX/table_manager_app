@@ -1,9 +1,11 @@
 package com.extremex.tablemanager.common.fragment
 
 import android.app.DatePickerDialog
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,26 +17,36 @@ import com.extremex.tablemanager.admin.AdminHomeActivity
 import com.extremex.tablemanager.lib.SigninData
 import com.extremex.tablemanager.databinding.FragmentSignUpBinding
 import com.extremex.tablemanager.lib.PopUpBox
+import com.google.firebase.Firebase
+import com.google.firebase.app
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDate
 import java.time.Period
 import java.util.Calendar
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var binding: FragmentSignUpBinding
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseDatabase: FirebaseDatabase
 
-    interface OnBack{
+    interface SignupListener{
         fun backPressed()
+        fun onSuccess(user :FirebaseUser)
+        fun onFail()
     }
-    private var onBack :OnBack? = null
+    private var signUpListener :SignupListener? = null
 
-    fun onBackClicked(listener: OnBack){
-        this.onBack = listener
+    fun onBackClicked(listener: SignupListener){
+        this.signUpListener = listener
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnBack){
-            onBack = context
+        if (context is SignupListener){
+            signUpListener = context
         } else {
             throw RuntimeException("$context must implement AccountClickListener")
         }
@@ -49,7 +61,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.BackBtn.setOnClickListener {
-            onBack?.backPressed()
+            signUpListener?.backPressed()
         }
 
         binding.DobSetter.setOnClickListener {
@@ -60,8 +72,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
         binding.JoinRoomCheckBox.setOnCheckedChangeListener { _, isChecked ->
             binding.roomCode.visibility = if (isChecked){
+                binding.InstuteTitle.visibility = View.GONE
+                binding.InstuteName.visibility = View.GONE
                 View.VISIBLE
             } else {
+                binding.InstuteTitle.visibility = View.VISIBLE
+                binding.InstuteName.visibility = View.VISIBLE
                 View.GONE
             }
         }
@@ -89,10 +105,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     binding.EmailAddress,
                     binding.NewPassword,
                     binding.ConfirmPassword,
-                    binding.IDNumber,
+                    0,
                     dateArray,
                     binding.PhoneNumber.text.toString(),
-                    binding.roomCode.text.toString()
+                    binding.roomCode.text.toString(),
+                    binding.JoinRoomCheckBox.isChecked,
+                    binding.InstuteName.text.toString()
                 )
             }
         }
@@ -103,10 +121,14 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         email: EditText,
         password: EditText,
         cPassword: EditText,
-        numberId: EditText,
+        numberId: Int,
         birthDate: Array<Int>?,
         phNum: String,
-        roomID: String) : Boolean
+        roomID: String,
+        isTeacher: Boolean,
+        instuteName: String
+    ) : Boolean
+
     {
         if(firstName.text.isEmpty()) {
             firstName.error="This field cannot be empty"
@@ -124,9 +146,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             cPassword.error="This field cannot be empty"
         } else if(password.text.toString().trim() != cPassword.text.toString().trim()) {
             cPassword.error="Password does not match"
-        }  else if(numberId.text.isEmpty()) {
+        } /* else if(numberId.text.isEmpty()) {
             numberId.error="This field cannot be empty"
-        } else if(birthDate == null){
+        } */else if(birthDate == null){
             binding.DobSetter.error="Date of birth is required"
         } else if(!isValidPhoneNumber(phNum.toString())){
             binding.DobSetter.error="please enter a valid Phone number"
@@ -140,10 +162,16 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     "You Signed up as ${firstName.text}",
                     Toast.LENGTH_SHORT
                 ).show()
-                //requireContext().startActivity(Intent(requireContext(),TeachersHomeActivity::class.java))
-                requireContext().startActivity(Intent(requireContext(), AdminHomeActivity::class.java))
-                requireActivity().finish()
-                //signUpBuilder()
+                signUpBuilder(
+                    firstName.text.toString().trim(),
+                    lastName.text.toString().trim(),
+                    "${birthDate[0]}/${birthDate[1]}/${birthDate[2]}",
+                    numberId,
+                    phNum.toInt(),
+                    email.text.toString().trim(),
+                    password.text.toString().trim(),
+                    isTeacher
+                )
                 return true
             } else {
                 PopUpBox(requireContext(),
@@ -192,19 +220,66 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         firstName: String,
         lastName: String,
         DOB: String,
-        module: List<String>,
         Id : Int,
         phNum: Int,
-        cCode: Int,
-        gander: String,
         email: String,
-        password: String
+        password: String,
+        isTeacher: Boolean
     ): List<SigninData>?{
-        val fullName: String = "$firstName $lastName"
-
-        Toast.makeText(this.requireContext(), "You Signed up as $fullName  ", Toast.LENGTH_SHORT).show()
-
+        firebaseSignup(email,password)
         // this function should not be null
         return null
     }
+    private fun firebaseSignup(email: String, password: String) : Boolean {
+        var result: Boolean = false
+        firebaseAuth =Firebase.auth
+        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
+            if (it.isSuccessful) {
+                // Sign in success, update UI with the signed-in user's information
+                Log.d(TAG, "createUserWithEmail:success")
+                val user = firebaseAuth.currentUser
+                if (user != null) {
+                    user.sendEmailVerification().addOnCompleteListener {
+                        result = if (it.isSuccessful){
+                            PopUpBox(requireContext(),
+                                "Close",
+                                "Email verification has been sent to $email, proceed and verify before login.",
+                                true,
+                                true,
+                                "Email Verification")
+                            signUpListener?.onSuccess(user)
+                            true
+                        } else{
+                            signUpListener?.onFail()
+                            false
+                        }
+                    }
+                } else {
+                    signUpListener?.onFail()
+                    PopUpBox(requireContext(),
+                        "Close",
+                        "Failed to sign up, Unknown Error.",
+                        true,
+                        true,
+                        "Failed To Sign Up")
+                    result = false
+                }
+
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.w(TAG, "createUserWithEmail:failure", it.exception)
+                signUpListener?.onFail()
+                PopUpBox(requireContext(),
+                    "Close",
+                    "Failed to sign up, please make sure you are connected to Internet.",
+                    true,
+                    true,
+                    "Failed To Sign Up")
+                result = false
+            }
+        }
+        return result
+    }
+
 }
+

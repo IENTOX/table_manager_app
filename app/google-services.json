@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "580041689583",
+    "project_id": "table-manager-25147",
+    "storage_bucket": "table-manager-25147.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580041689583:android:f203ae6f38a0bc4f168e1a",
+        "android_client_info": {
+          "package_name": "com.extremex.tablemanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIgzYbUSdN1qZKYPXTDKxJ_iZm8-j1cYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
