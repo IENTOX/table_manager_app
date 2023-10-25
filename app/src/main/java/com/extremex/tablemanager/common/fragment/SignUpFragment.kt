@@ -22,6 +22,7 @@ import com.google.firebase.app
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDate
 import java.time.Period
@@ -30,6 +31,8 @@ import java.util.Calendar
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+    private lateinit var firebaseDatabase: FirebaseDatabase
 
     interface SignupListener{
         fun backPressed()
@@ -248,12 +251,25 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 if (user != null) {
                     user.sendEmailVerification().addOnCompleteListener {
                         result = if (it.isSuccessful){
+
+                            val UID = user.uid
+                            firebaseDatabase = FirebaseDatabase.getInstance()
+                            database = firebaseDatabase.getReferenceFromUrl("https://table-manager-25147-default-rtdb.firebaseio.com")
+                            database.child("Users").child(UID)
+                            database.child("Users").child(UID).child("FirstName").setValue(firstName)
+                            database.child("Users").child(UID).child("LastName").setValue(lastName)
+                            database.child("Users").child(UID).child("DateOfBirth").setValue(DOB)
+                            database.child("Users").child(UID).child("UniqueID").setValue(Id)
+                            database.child("Users").child(UID).child("PhoneNumber").setValue(phNum)
+                            database.child("Users").child(UID).child("Email").setValue(email)
+
                             PopUpBox(requireContext(),
                                 "Close",
                                 "Email verification has been sent to $email, proceed and verify before login.",
                                 true,
                                 true,
                                 "Email Verification")
+
                             signUpListener?.onSuccess(user,firstName, lastName,DOB, Id, phNum, email, isTeacher )
                             true
                         } else{
