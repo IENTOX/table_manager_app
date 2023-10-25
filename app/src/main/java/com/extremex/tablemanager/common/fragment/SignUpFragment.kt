@@ -30,12 +30,20 @@ import java.util.Calendar
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var firebaseDatabase: FirebaseDatabase
 
     interface SignupListener{
         fun backPressed()
-        fun onSuccess(user :FirebaseUser)
-        fun onFail()
+        fun onSuccess(
+            user :FirebaseUser,
+            firstName: String,
+            lastName: String,
+            DOB: String,
+            Id : Int,
+            phNum: String,
+            email: String,
+            isTeacher: Boolean
+        )
+        fun onFail(message: String)
     }
     private var signUpListener :SignupListener? = null
 
@@ -226,11 +234,10 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         password: String,
         isTeacher: Boolean
     ): List<SigninData>?{
-        firebaseSignup(email,password)
-        // this function should not be null
+        firebaseSignup(email,password, firstName, lastName, DOB, Id, phNum, isTeacher )
         return null
     }
-    private fun firebaseSignup(email: String, password: String) : Boolean {
+    private fun firebaseSignup(email: String, password: String, firstName: String, lastName: String, DOB: String, Id : Int, phNum: String, isTeacher: Boolean) : Boolean {
         var result: Boolean = false
         firebaseAuth =Firebase.auth
         firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
@@ -247,34 +254,22 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                                 true,
                                 true,
                                 "Email Verification")
-                            signUpListener?.onSuccess(user)
+                            signUpListener?.onSuccess(user,firstName, lastName,DOB, Id, phNum, email, isTeacher )
                             true
                         } else{
-                            signUpListener?.onFail()
+                            signUpListener?.onFail("Failed to send a Verification email, you can try using a different email or try again after some time. ")
                             false
                         }
                     }
                 } else {
-                    signUpListener?.onFail()
-                    PopUpBox(requireContext(),
-                        "Close",
-                        "Failed to sign up, Unknown Error.",
-                        true,
-                        true,
-                        "Failed To Sign Up")
+                    signUpListener?.onFail("Failed to sign up, Unknown Error.")
                     result = false
                 }
 
             } else {
                 // If sign in fails, display a message to the user.
                 Log.w(TAG, "createUserWithEmail:failure", it.exception)
-                signUpListener?.onFail()
-                PopUpBox(requireContext(),
-                    "Close",
-                    "Failed to sign up, please make sure you are connected to Internet.",
-                    true,
-                    true,
-                    "Failed To Sign Up")
+                signUpListener?.onFail("Failed to sign up, please make sure you are connected to Internet.")
                 result = false
             }
         }
