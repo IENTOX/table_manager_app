@@ -151,7 +151,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         } */else if(birthDate == null){
             binding.DobSetter.error="Date of birth is required"
         } else if(!isValidPhoneNumber(phNum.toString())){
-            binding.DobSetter.error="please enter a valid Phone number"
+            binding.PhoneNumber.error="please enter a valid Phone number"
         } else if(binding.JoinRoomCheckBox.isChecked && roomID.isBlank()){
             binding.roomCode.error="This field cannot be empty"
         } else {
@@ -167,7 +167,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     lastName.text.toString().trim(),
                     "${birthDate[0]}/${birthDate[1]}/${birthDate[2]}",
                     numberId,
-                    phNum.toInt(),
+                    phNum.toString(),
                     email.text.toString().trim(),
                     password.text.toString().trim(),
                     isTeacher
@@ -221,7 +221,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         lastName: String,
         DOB: String,
         Id : Int,
-        phNum: Int,
+        phNum: String,
         email: String,
         password: String,
         isTeacher: Boolean
