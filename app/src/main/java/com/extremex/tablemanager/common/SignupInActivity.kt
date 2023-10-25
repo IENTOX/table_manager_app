@@ -17,9 +17,7 @@ import com.google.firebase.database.database
 
 class SignupInActivity : AppCompatActivity(),LoginFragment.AccountClickListener, SignUpFragment.SignupListener {
 
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var firebaseDatabase: FirebaseDatabase
-    private lateinit var firebaseReference: DatabaseReference
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +42,8 @@ class SignupInActivity : AppCompatActivity(),LoginFragment.AccountClickListener,
         user :FirebaseUser, firstName: String, lastName: String, DOB: String, Id : Int, phNum: String, email: String, isTeacher: Boolean
     ) {
         val UID = user.uid
-        firebaseDatabase = FirebaseDatabase.getInstance("https://table-manager-25147-default-rtdb.asia-southeast1.firebasedatabase.app/")
-        firebaseReference = firebaseDatabase.getReferenceFromUrl("https://table-manager-25147-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val database = Firebase.database("https://table-manager-25147-default-rtdb.asia-southeast1.firebasedatabase.app/")
-        val databaseReference = database.getReferenceFromUrl("https://table-manager-25147-default-rtdb.asia-southeast1.firebasedatabase.app/")
+        val databaseReference = Firebase.database.getReferenceFromUrl("https://table-manager-25147-default-rtdb.asia-southeast1.firebasedatabase.app/")
         databaseReference.child("users").child(UID)
         databaseReference.child("users").child(UID).child("FirstName").setValue(firstName)
         databaseReference.child("users").child(UID).child("LastName").setValue(lastName)
