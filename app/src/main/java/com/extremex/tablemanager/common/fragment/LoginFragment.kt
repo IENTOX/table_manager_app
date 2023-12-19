@@ -3,6 +3,7 @@ package com.extremex.tablemanager.common.fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,18 +40,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        Log.v("LoginFragment","Binding Views to the Fragment Class")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.CreateButton.setOnClickListener{
+            Log.v("LoginFragment","Signup Button Pressed")
             accountClickListener?.onCreateAccount()
         }
         binding.ResetButton.setOnClickListener{
+            Log.v("LoginFragment","Reset Password Button Pressed")
             ResetPasswordDialog(requireContext())
         }
         binding.LoginButton.setOnClickListener{
+            Log.v("LoginFragment","Login Button Pressed")
             verifyAndLogin(binding.EmailAddress.text.toString().trim(), binding.Password.text.toString().trim())
         }
 

@@ -10,12 +10,26 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.common.fragment.LoginFragment
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ResetPasswordDialog (context: Context){
+
+    interface ResetPassword{
+        fun onPasswordSubmitted(email :String)
+    }
+    private var resetPassword : ResetPassword? = null
+
+    fun onResetPassword(listener: ResetPassword){
+        this.resetPassword = listener
+    }
+
     init {
         resetPasswordDialog(context)
     }
+
+
     @SuppressLint("MissingInflatedId")
     private fun resetPasswordDialog(context: Context,){
         val uiInflater = LayoutInflater.from(context).inflate(R.layout.reset_password, null)
@@ -25,9 +39,18 @@ class ResetPasswordDialog (context: Context){
         popUpBox.create()
         val popupMenu = popUpBox.show()
         val resetButton: MaterialButton = uiInflater.findViewById(R.id.ResetButton)
+        val cancelButton: FloatingActionButton = uiInflater.findViewById(R.id.CancelButton)
         val email: EditText = uiInflater.findViewById(R.id.EmailText)
 
         resetButton.setOnClickListener {
+            if (email.text.toString().trim().isNotBlank()) {
+                resetPassword?.onPasswordSubmitted(email.text.toString().trim())
+            } else {
+                email.error = "Field cannot be empty!"
+            }
+        }
+
+        cancelButton.setOnClickListener {
             popupMenu.dismiss()
         }
     }

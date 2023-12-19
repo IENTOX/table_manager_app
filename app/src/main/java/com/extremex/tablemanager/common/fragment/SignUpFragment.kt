@@ -16,6 +16,7 @@ import com.extremex.tablemanager.R
 import com.extremex.tablemanager.admin.AdminHomeActivity
 import com.extremex.tablemanager.lib.SigninData
 import com.extremex.tablemanager.databinding.FragmentSignUpBinding
+import com.extremex.tablemanager.lib.FileBuilder
 import com.extremex.tablemanager.lib.PopUpBox
 import com.google.firebase.Firebase
 import com.google.firebase.app
@@ -166,6 +167,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         } else if(binding.JoinRoomCheckBox.isChecked && roomID.isBlank()){
             binding.roomCode.error="This field cannot be empty"
         } else {
+
             // reformation of data before signup
             if (verifyAge(birthDate[2], birthDate[1], birthDate[0], 24)) {
                 Toast.makeText(
@@ -173,14 +175,34 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     "You Signed up as ${firstName.text}",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                val firstName = firstName.text.toString().trim()
+                val lastName = lastName.text.toString().trim()
+                val birthDate = "${birthDate[0]}/${birthDate[1]}/${birthDate[2]}"
+                val phNum = phNum.toString()
+                val email = email.text.toString().trim()
+                val password = password.text.toString().trim()
+
+                val data = listOf(
+                    mapOf("Key" to "FirstName", "Value" to firstName),
+                    mapOf("Key" to "LastName", "Value" to lastName),
+                    mapOf("Key" to "BirthDate", "Value" to birthDate),
+                    mapOf("Key" to "NumberId", "Value" to numberId.toString()),
+                    mapOf("Key" to "PhoneNumber", "Value" to phNum),
+                    mapOf("Key" to "Email", "Value" to email),
+                    mapOf("Key" to "Password", "Value" to password),
+                    mapOf("Key" to "IsTeacher", "Value" to isTeacher.toString())
+                )
+
+                FileBuilder().makeFile("userTemp",data, requireContext())
                 signUpBuilder(
-                    firstName.text.toString().trim(),
-                    lastName.text.toString().trim(),
-                    "${birthDate[0]}/${birthDate[1]}/${birthDate[2]}",
+                    firstName,
+                    lastName,
+                    birthDate,
                     numberId,
-                    phNum.toString(),
-                    email.text.toString().trim(),
-                    password.text.toString().trim(),
+                    phNum,
+                    email,
+                    password,
                     isTeacher
                 )
                 return true
