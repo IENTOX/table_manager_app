@@ -185,7 +185,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 )
                 return true
             } else {
-                PopUpBox(requireContext(),
+                PopUpBox(
+                    requireContext(),
                     "close",
                     "Your age does not meet the minimum requirement",
                     true
