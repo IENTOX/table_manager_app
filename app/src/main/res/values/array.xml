@@ -7,6 +7,35 @@
         <item>Unofficial Leave</item>
     </string-array>
 
+    <string-array name="subjects1">
+        <item>Web Tech</item>
+    </string-array>
+
+    <string-array name="subjects2">
+        <item>Web Tech</item>
+    </string-array>
+
+    <string-array name="subjects3">
+        <item>Web Tech</item>
+    </string-array>
+
+    <string-array name="ClassRooms">
+        <item>c1</item>
+    </string-array>
+    <string-array name="Tier">
+        <item>1 Year</item>
+        <item>2 Year</item>
+        <item>3 Year</item>
+    </string-array>
+
+    <string-array name="TimeSlots">
+        <item>08:30–09:30</item>
+        <item>09:30–10:30</item>
+        <item>10:30–11:30</item>
+        <item>11:45–12:45</item>
+        <item>12:45–01:45</item>
+    </string-array>
+
     <string-array name="TeachersAvailability">
         <item>All Teachers</item>
         <item>available Teachers</item>

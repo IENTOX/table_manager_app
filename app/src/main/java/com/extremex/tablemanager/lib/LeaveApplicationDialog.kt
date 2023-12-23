@@ -1,6 +1,7 @@
 package com.extremex.tablemanager.lib
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -19,6 +20,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.service.DateTimeService
+import java.util.Calendar
 
 class LeaveApplicationDialog(private val context: Context) {
 
@@ -36,7 +38,10 @@ class LeaveApplicationDialog(private val context: Context) {
             userId: String,
             description: String,
             isUncertain: Boolean,
-            selectedLeaveType: String
+            selectedLeaveType: String,
+            leaveApplicationDate: String,
+            leaveStartDate: String,
+            leaveEndDate: String
         ): String
     }
     interface CancelListener {
@@ -111,10 +116,12 @@ class LeaveApplicationDialog(private val context: Context) {
             if (isChecked){
                 leaveEndTitle.alpha = 0.5f
                 leaveEndDurationButton.alpha = 0.5f
+                leaveEndDurationButton.text ="∞"
                 leaveEndDurationButton.isClickable = false
             } else {
                 leaveEndTitle.alpha = 1f
                 leaveEndDurationButton.alpha = 1f
+                leaveEndDurationButton.text =""
                 leaveEndDurationButton.isClickable = true
             }
         }
@@ -134,6 +141,25 @@ class LeaveApplicationDialog(private val context: Context) {
             }
         }
          */
+        var startDateArray: Array<Int>? = null
+        var endDateArray: Array<Int>? = null
+        val userNameText = userName.text.toString()
+        val userIdText = userId.text.toString()
+        var descriptionText = leaveDescription.text.toString()
+        val isUncertain = leaveCheckBox.isChecked
+
+        leaveStartDurationButton.setOnClickListener {
+            showDateSetter() { day, month, year ->
+                startDateArray = arrayOf(day,month,year)
+                leaveStartDurationButton.text = "$day/$month/$year"
+            }
+        }
+        leaveEndDurationButton.setOnClickListener {
+            showDateSetter() { day, month, year ->
+                endDateArray = arrayOf(day,month,year)
+                leaveEndDurationButton.text = "$day/$month/$year"
+            }
+        }
 
         // Set click listeners for cancel and apply buttons
         cancelButton.setOnClickListener {
@@ -142,15 +168,18 @@ class LeaveApplicationDialog(private val context: Context) {
         }
 
         applyButton.setOnClickListener {
-            val userNameText = userName.text.toString()
-            val userIdText = userId.text.toString()
-            val descriptionText = leaveDescription.text.toString()
-            val isUncertain = leaveCheckBox.isChecked
-            applyListener?.onApply(userNameText,userIdText,descriptionText,isUncertain,selectedLeaveType)
+            if (leaveDescription.text.isNullOrBlank() && leaveStartDurationButton.text.isNullOrBlank() && leaveEndDurationButton.text.isNullOrBlank()){
+                leaveDescription.error = "Field cannot be empty"
+                leaveStartDurationButton.error = "Field cannot be empty"
+                leaveEndDurationButton.error = "Field cannot be empty"
+            } else {
+                descriptionText = leaveDescription.text.toString()
+                applyListener?.onApply(userNameText,userIdText,descriptionText,isUncertain,selectedLeaveType, TODAT_S_DATE, leaveStartDurationButton.text.toString(), leaveEndDurationButton.text.toString())
 
-            saveLeaveData(userNameText, userIdText, descriptionText,isUncertain,selectedLeaveType)
-            // Dismiss the dialog
-            alertDialog.dismiss()
+                saveLeaveData(userNameText, userIdText, descriptionText,isUncertain,selectedLeaveType,leaveStartDurationButton.text.toString(), leaveEndDurationButton.text.toString())
+                // Dismiss the dialog
+                alertDialog.dismiss()
+            }
         }
 
         userName.text = "John Doe"
@@ -159,22 +188,41 @@ class LeaveApplicationDialog(private val context: Context) {
         alertDialog.show()
     }
 
-    private fun saveLeaveData(userName: String, userId: String, description: String, isUncertain: Boolean, selectedLeaveType: String) :Boolean {
+    private fun showDateSetter( onDateSet: (day: Int, month: Int, year: Int) -> Unit) {
+        // Get current date
+        val calendar = Calendar.getInstance()
+        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentYear = calendar.get(Calendar.YEAR)
+
+        // Show DatePickerDialog
+        val datePicker = DatePickerDialog(context, { _, year, monthOfYear, dayOfMonth ->
+            onDateSet(dayOfMonth, monthOfYear + 1, year)
+        }, currentYear, currentMonth, currentDay)
+
+        datePicker.show()
+    }
+
+    private fun saveLeaveData(userName: String, userId: String, description: String, isUncertain: Boolean, selectedLeaveType: String, leaveStart: String, leaveEnd: String) :Boolean {
         leavePref = context.getSharedPreferences(SerialService.LEAVE_APPLICATION_FILE, AppCompatActivity.MODE_PRIVATE)
         leavePrefEditor = leavePref.edit()
         leavePrefEditor.putString("Name", userName)
-        Log.e("leave Data: Name", userName)
+        Log.v("leave Data: Name", userName)
         leavePrefEditor.putString("userId", userId)
-        Log.e("leave Data: userId", userId)
+        Log.v("leave Data: userId", userId)
         leavePrefEditor.putString("Description",description)
-        Log.e("leave Data: Description",description)
+        Log.v("leave Data: Description",description)
         leavePrefEditor.putBoolean("isUncertain", isUncertain)
-        Log.e("leave Data: isUncertain", isUncertain.toString())
+        Log.v("leave Data: isUncertain", isUncertain.toString())
         leavePrefEditor.putString("selected Leave Type",selectedLeaveType)
-        Log.e("leave Data: selected Leave Type",selectedLeaveType)
+        Log.v("leave Data: selected Leave Type",selectedLeaveType)
+        leavePrefEditor.putString("Leave From Date", leaveStart)
+        Log.v("leave Data: Leave From Date", leaveStart)
+        leavePrefEditor.putString("Back On Date", leaveEnd)
+        Log.v("leave Data: Back On Date", leaveEnd)
         leavePrefEditor.putString("Today_s Date", TODAT_S_DATE)
-        Log.e("leave Data: Today_s Date", TODAT_S_DATE)
-        Log.e("leave Data:", "leave data stored successfully")
+        Log.v("leave Data: Today_s Date", TODAT_S_DATE)
+        Log.v("leave Data:", "leave data stored successfully")
         leavePrefEditor.commit()
 
         return false

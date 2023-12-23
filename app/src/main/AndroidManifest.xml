@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TableManager"
         tools:targetApi="33" >
+
         <activity
             android:name=".admin.AdminHomeActivity"
             android:exported="false" />

@@ -58,6 +58,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         // init leave prefs
         leavePref = requireContext().getSharedPreferences(SerialService.LEAVE_APPLICATION_FILE, AppCompatActivity.MODE_PRIVATE)
+
         leavePrefEditor = leavePref.edit()
 
         binding.LeaveApplicationButton.setOnClickListener {
@@ -68,34 +69,38 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun createLeaveApplication(applicationStatus: String?, reason: String="") {
         val leaveApplicationDialog = LeaveApplicationDialog(requireContext())
 
+
         leaveApplicationDialog.setApplyListener(object : LeaveApplicationDialog.ApplyListener {
             override fun onApply(
                 userName: String,
                 userId: String,
                 description: String,
                 isUncertain: Boolean,
-                selectedLeaveType: String
+                selectedLeaveType: String,
+                leaveApplicationDate: String,
+                leaveStartDate: String,
+                leaveEndDate: String
             ): String {
                     binding.LeaveApplicationProgressView.visibility = View.VISIBLE
                 when (applicationStatus) {
                     LeaveProgressStatus.requested.name -> {
-                        statusType("Leave Application", description, applicationStatus, "Your request has been Submitted")
+                        statusType("Leave Application", description, applicationStatus, "Your request has been Submitted", leaveApplicationDate, leaveStartDate, leaveEndDate)
                     }
                     LeaveProgressStatus.awaiting.name -> {
-                        statusType("Leave Application", description, applicationStatus, "Your request for leave is on hold, it might a while due to $reason.")
+                        statusType("Leave Application", description, applicationStatus, "Your request for leave is on hold, it might a while due to $reason.", leaveApplicationDate, leaveStartDate, leaveEndDate)
                     }
                     LeaveProgressStatus.approved.name -> {
-                        statusType("Leave Application", description, applicationStatus, "Your leave application have been approved ")
+                        statusType("Leave Application", description, applicationStatus, "Your leave application have been approved ", leaveApplicationDate, leaveStartDate, leaveEndDate)
                     }
                     LeaveProgressStatus.regected.name -> {
-                        statusType("Leave Application", description, applicationStatus, "Sorry to inform you that your leave application has been rejected due to $reason.")
+                        statusType("Leave Application", description, applicationStatus, "Sorry to inform you that your leave application has been rejected due to $reason.", leaveApplicationDate, leaveStartDate, leaveEndDate)
                     }
                     else -> {
                         Log.e("leave Data:", "leave Application submitted")
-                        statusType("Leave Application", description, applicationStatus, "Undefined")
+                        statusType("Leave Application", description, applicationStatus, "Undefined", leaveApplicationDate, leaveStartDate, leaveEndDate)
                     }
                 }
-                binding.TimeTableShortView.text = selectedLeaveType
+                //binding.TimeTableShortView.text = selectedLeaveType
                 return ""
             }
         })
@@ -108,10 +113,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         leaveApplicationDialog.show()
     }
 
-    private fun statusType(title: String, description: String, applicationStatus: String?, status: String?){
+    private fun statusType(title: String, description: String, applicationStatus: String?, status: String?, applicationDate: String, leaveStartDate: String, leaveEndDate: String){
         binding.StatusTitle.text = title
         binding.UserDescription.text = description
         binding.StatusDescription.text = status
+        binding.ApplicationDate.text = applicationDate
+        binding.LeaveStartDate.text = leaveStartDate
+        binding.LeaveEndDate.text = leaveEndDate
         LeaveProgressController(requireContext(), binding.LeaveProgress, applicationStatus!!, binding.LeaveStatus)
     }
 

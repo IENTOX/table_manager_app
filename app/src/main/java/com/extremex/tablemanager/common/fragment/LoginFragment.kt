@@ -12,6 +12,7 @@ import com.extremex.tablemanager.R
 import com.extremex.tablemanager.admin.AdminHomeActivity
 import com.extremex.tablemanager.databinding.FragmentLoginBinding
 import com.extremex.tablemanager.lib.ResetPasswordDialog
+import com.extremex.tablemanager.teacher.TeachersHomeActivity
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
@@ -62,7 +63,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     }
     private fun verifyAndLogin(username: String, password: String){
-        requireContext().startActivity(Intent(requireContext(), AdminHomeActivity::class.java))
+        requireContext().startActivity(Intent(requireContext(), TeachersHomeActivity::class.java))
         requireActivity().finish()
     }
 
