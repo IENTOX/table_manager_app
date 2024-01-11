@@ -63,7 +63,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     }
     private fun verifyAndLogin(username: String, password: String){
-        requireContext().startActivity(Intent(requireContext(), TeachersHomeActivity::class.java))
+        requireContext().startActivity(Intent(requireContext(), AdminHomeActivity::class.java))
         requireActivity().finish()
     }
 

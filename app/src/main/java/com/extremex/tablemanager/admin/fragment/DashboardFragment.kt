@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.FragmentDashboardBinding
@@ -49,7 +50,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.RoomCode.text = smartGenerateRoomCode()
+        binding.RoomCode.text = smartGenerateRoomCode() + "   "
         binding.ShareCodeButton.setOnClickListener {
             shareClassroomCode(binding.RoomCode.text.trim().toString())
         }
@@ -58,6 +59,18 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         val adapter = ArrayAdapter(requireContext(), com.google.android.material.R.layout.support_simple_spinner_dropdown_item, selectedList)
         adapter.setDropDownViewResource(com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
         binding.TeachersAvailabilitySpinner.adapter = adapter
+
+        binding.ToggleTeachersList.setOnClickListener {
+            if (binding.TeachersListView.isVisible && binding.TeachersAvailabilitySpinner.isVisible){
+                binding.ToggleTeachersList.text = "View all teachers"
+                binding.TeachersListView.visibility = View.GONE
+                binding.TeachersAvailabilitySpinner.visibility = View.GONE
+            } else {
+                binding.ToggleTeachersList.text = "Hide..."
+                binding.TeachersListView.visibility = View.VISIBLE
+                binding.TeachersAvailabilitySpinner.visibility = View.VISIBLE
+            }
+        }
 
 
         var defaultSelection = selectedList[0]

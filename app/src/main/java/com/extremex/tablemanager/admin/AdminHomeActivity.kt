@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.admin.fragment.DashboardFragment
 import com.extremex.tablemanager.databinding.ActivityAdminHomeBinding
+import com.extremex.tablemanager.teacher.fragment.TimetableFragment
 
 class AdminHomeActivity : AppCompatActivity() {
     private lateinit var binding : ActivityAdminHomeBinding
