@@ -204,7 +204,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/b_balck"
+                                android:fontFamily="@font/b_black"
                                 android:text="Requested"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -224,7 +224,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/b_balck"
+                                android:fontFamily="@font/b_black"
                                 android:text="Awaiting"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -245,7 +245,7 @@
                                 android:id="@+id/LeaveStatus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/b_balck"
+                                android:fontFamily="@font/b_black"
                                 android:text="Approved"
                                 android:textSize="14sp" />
                         </LinearLayout>

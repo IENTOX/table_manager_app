@@ -35,6 +35,32 @@
         <item>11:45–12:45</item>
         <item>12:45–01:45</item>
     </string-array>
+    <string-array name="TimeDuration">
+        <item>0:05:00</item>
+        <item>00:10:00</item>
+        <item>00:15:00</item>
+        <item>00:20:00</item>
+        <item>00:25:00</item>
+        <item>00:30:00</item>
+        <item>00:35:00</item>
+        <item>00:40:00</item>
+        <item>00:45:00</item>
+        <item>00:50:00</item>
+        <item>00:55:00</item>
+        <item>01:00:00</item>
+        <item>01:05:00</item>
+        <item>01:10:00</item>
+        <item>01:15:00</item>
+        <item>01:20:00</item>
+        <item>01:25:00</item>
+        <item>01:30:00</item>
+        <item>01:35:00</item>
+        <item>01:40:00</item>
+        <item>01:45:00</item>
+        <item>01:50:00</item>
+        <item>01:55:00</item>
+        <item>02:00:00</item>
+    </string-array>
 
     <string-array name="TeachersAvailability">
         <item>All Teachers</item>

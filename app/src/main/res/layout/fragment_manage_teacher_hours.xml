@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ManageHoursTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/manage_hours_title"
+        android:fontFamily="@font/b_black"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/SetSemesterSizeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Semester Size"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@+id/ManageHoursTitle"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/SemesterSizeSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SetSemesterSizeTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_toStartOf="@+id/SemesterSizeView"
+        android:stepSize="12"
+        android:valueFrom="0"
+        android:valueTo="12" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/SemesterSizeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SetSemesterSizeTitle"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/b_black"
+        android:padding="15dp"
+        android:textSize="16sp"
+        android:text="12"/>
+
+</RelativeLayout>

@@ -29,5 +29,6 @@
     <string name="Login_title_string">Login</string>
     <string name="instute_title_string">Instute Name</string>
     <string name="assign_teachers_info_string">you have to assign a subject to a teacher, one teacher can teach multiple subjects in this case the second subject of the teacher will be considered as a substitute</string>
+    <string name="manage_hours_title">Manage Hours</string>
 
 </resources>

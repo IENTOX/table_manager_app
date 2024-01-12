@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_weight="1"
-                    android:fontFamily="@font/b_balck"
+                    android:fontFamily="@font/b_black"
                     android:text="Message Title"
                     android:textSize="18sp" />
 
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:fontFamily="@font/b_balck"
+                    android:fontFamily="@font/b_black"
                     android:gravity="end"
                     android:text="29 Sep 2023 "
                     android:textSize="18sp"/>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/AddClassroomTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Add a Classroom"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ClassroomNameTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Classroom Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@+id/AddClassroomTitle"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ClassroomNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ClassroomNameTitle"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Classroom Name"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ClassroomCodeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Classroom Code"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@+id/ClassroomNameText"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ClassroomCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ClassroomCodeTitle"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Classroom Code"/>
+
+    <LinearLayout
+        android:id="@+id/ButtonPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ClassroomCode"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/CancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:text="Cancel"
+            app:icon="@drawable/ic_close"
+            app:iconGravity="textStart"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/AddButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:text="Add"
+            app:icon="@drawable/ic_add"
+            app:iconGravity="textStart"/>
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ClassroomList"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ButtonPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:visibility="gone"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/viewAllClassroomsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ClassroomList"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="View Added Classrooms"
+        app:icon="@drawable/ic_list_bulleted"
+        app:iconGravity="textStart" />
+
+
+</RelativeLayout>

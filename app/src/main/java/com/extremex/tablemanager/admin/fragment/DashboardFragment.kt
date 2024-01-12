@@ -3,7 +3,6 @@ package com.extremex.tablemanager.admin.fragment
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +12,16 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.FragmentDashboardBinding
+import com.extremex.tablemanager.lib.AddClassroomDialog
+import com.extremex.tablemanager.lib.AddSubjectsDialog
+import com.extremex.tablemanager.lib.AddTimeSlotDialog
 import com.extremex.tablemanager.lib.AdminMessage
 import com.extremex.tablemanager.lib.AdminMessagesDialog
 import com.extremex.tablemanager.lib.AllTeachers
+import com.extremex.tablemanager.lib.AssignTeachersDialog
 import com.extremex.tablemanager.lib.AvailableTeachers
 import com.extremex.tablemanager.lib.CodeGenerator
-import com.extremex.tablemanager.lib.LeaveApplicationDialog
-import com.extremex.tablemanager.lib.LeaveProgressStatus
+import com.extremex.tablemanager.lib.ManageTeachersDialog
 import com.extremex.tablemanager.lib.TeachersAllAvailabilityAdapter
 import com.extremex.tablemanager.lib.TeachersAvailabilityAdapter
 import com.extremex.tablemanager.lib.TeachersUnavailabilityAdapter
@@ -71,6 +73,26 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 binding.TeachersAvailabilitySpinner.visibility = View.VISIBLE
             }
         }
+        binding.AddSubjectButton.setOnClickListener {
+            showAddSubjectsDialog()
+        }
+
+        binding.AssignTeachersButton.setOnClickListener {
+            showAssignTeachersDialog()
+        }
+
+        binding.AddClassroomButton.setOnClickListener {
+            showAddClassroomDialog()
+        }
+
+        binding.AddTimeSlotButton.setOnClickListener {
+            showAddTimeSlotsDialog()
+        }
+
+        binding.ManageTeachersButton.setOnClickListener {
+            showManageTeachersDialog()
+        }
+
 
 
         var defaultSelection = selectedList[0]
@@ -171,6 +193,26 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         share.putExtra(Intent.EXTRA_TEXT, shareBody)
         startActivity(Intent.createChooser(share, "Classroom Joining code"))
     }
+    private fun showAddClassroomDialog() {
+        val addClassroomDialog = AddClassroomDialog(requireContext())
+        addClassroomDialog.show()
+    }
+    private fun showAddSubjectsDialog() {
+        val addSubjectsDialog = AddSubjectsDialog(requireContext())
+        addSubjectsDialog.show()
+    }
+    private fun showAssignTeachersDialog() {
+        val assignTeachersDialog = AssignTeachersDialog(requireContext())
+        assignTeachersDialog.show()
+    }
+    private fun showAddTimeSlotsDialog() {
+        val addTimeSlotsDialog = AddTimeSlotDialog(requireContext())
+        addTimeSlotsDialog.show()
+    }
+    private fun showManageTeachersDialog() {
+        val manageTeachersDialog = ManageTeachersDialog(requireContext())
+        manageTeachersDialog.show()
+    }
 
 
     private fun viewMessages() {
@@ -199,9 +241,5 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             }
         })
         messagesDialog.show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
