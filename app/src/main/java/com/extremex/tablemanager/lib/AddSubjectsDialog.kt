@@ -2,21 +2,19 @@ package com.extremex.tablemanager.lib
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.R
-import com.extremex.tablemanager.databinding.DialogAddClassroomBinding
 import com.extremex.tablemanager.databinding.DialogAddSubjectsBinding
-import java.time.Year
 
 class AddSubjectsDialog(private val context: Context) {
 
     private lateinit var binding: DialogAddSubjectsBinding
     private var isElective: Boolean = false
     private var isYear: Boolean = false
-    private lateinit var subjectListData: MutableList<SubjectListModel>
     private var year1: Int = 0
     private var year2: Int = 0
     private var year3: Int = 0
@@ -32,17 +30,34 @@ class AddSubjectsDialog(private val context: Context) {
         binding.ElectiveCheckBox.setOnCheckedChangeListener { _, isChecked ->
             onElectiveChecked(binding,isChecked)
             }
+        binding.Year1CheckBox.setOnCheckedChangeListener { _, isChecked ->
+            year1 = if (isChecked){ 1 } else {0}
+        }
+        binding.Year2Checkbox.setOnCheckedChangeListener { _, isChecked ->
+            year2 = if (isChecked){ 1 } else {0}
+        }
+        binding.Year3CheckBox.setOnCheckedChangeListener { _, isChecked ->
+            year3 = if (isChecked){ 1 } else {0}
+        }
 
         binding.viewAllSubjectsButton.setOnClickListener {
             toggleSubjectList(binding)
         }
         binding.AddButton.setOnClickListener {
-            verifySubjects(
-                binding.SubjectNameText.text.toString(),
-                binding.SubjectCode.text.toString(),
-                binding.ElectiveSubjectNameText.text.toString(),
-                binding.ElectiveSubjectCode.text.toString()
-            )
+            if (year1 + year2 + year3 == 0 || year1 + year2 + year3 < 0 || year1 + year2 + year3 > 3){
+                isYear = false
+                PopUpBox(context,"Dismiss","You have to select at least a year before proceeding.",true)
+            } else {
+                isYear = true
+                Log.v("year array", "$year1 , $year2 , $year3")
+                verifySubjects(
+                    binding.SubjectNameText.text.toString(),
+                    binding.SubjectCode.text.toString(),
+                    intArrayOf(year1,year2,year3),
+                    binding.ElectiveSubjectNameText.text.toString(),
+                    binding.ElectiveSubjectCode.text.toString()
+                )
+            }
             alertDialog.dismiss()
         }
         binding.CancelButton.setOnClickListener {
@@ -57,44 +72,25 @@ class AddSubjectsDialog(private val context: Context) {
     private fun verifySubjects(
         subjectName: String,
         subjectCode: String,
+        year: IntArray,
         electiveSubjectName: String ="",
         electiveSubjectCode: String=""){
         if (subjectName.isNotEmpty() && subjectCode.isNotEmpty()){
             if ( isElective){
                 if (electiveSubjectName.isNotEmpty() && electiveSubjectCode.isNotEmpty()){
                     if (isYear){
-
+                        storeSubjectData(subjectName,subjectCode,year,electiveSubjectName, electiveSubjectCode)
                     } else {
-                        //TODO: elective sub verification faile
+                        PopUpBox(context,"Dismiss","ERR:007\nYear not selected or invalid year selection, selecting a year is important. ",true)
                     }
                 } else {
-                    //TODO: elective sub verification failed
+                    PopUpBox(context,"Dismiss","ERR:006\nError caused due to failure in verifying Elective Subject",true)
                 }
             } else {
-                //TODO: add code for non elective subjects
+                storeSubjectData(subjectName,subjectCode,year)
             }
-
         } else {
-            //TODO: sub verification failed
-        }
-
-    }
-    private fun checkYearSelected(context: Context, binding: DialogAddSubjectsBinding): IntArray {
-        binding.Year1CheckBox.setOnCheckedChangeListener { _, isChecked ->
-            year1 = if (isChecked){ 1 } else {0}
-        }
-        binding.Year2Checkbox.setOnCheckedChangeListener { _, isChecked ->
-            year2 = if (isChecked){ 1 } else {0}
-        }
-        binding.Year3CheckBox.setOnCheckedChangeListener { _, isChecked ->
-            year3 = if (isChecked){ 1 } else {0}
-        }
-        if (year1 + year2 + year3 == 0 && year1 + year2 + year3 < 0 && year1 + year2 + year3 > 3){
-            isYear = false
-            PopUpBox(context,"Dismiss","You have to select at least a year before proceeding.",true)
-        } else {
-            isYear = true
-            return intArrayOf(year1,year2,year3)
+            PopUpBox(context,"Dismiss","ERR:005\nError caused due to failure in verifying Subject",true)
         }
     }
 
@@ -114,16 +110,16 @@ class AddSubjectsDialog(private val context: Context) {
         }
     }
     private fun addToListView(binding: DialogAddSubjectsBinding){
-        var subjectList: MutableList<SubjectListModel> = mutableListOf(SubjectListModel("","", intArrayOf(1,1,1)))
+        var subjectList: MutableList<SubjectListModel> = mutableListOf(SubjectListModel("","", ""))
         val prefs = context.getSharedPreferences("SubjectData",Context.MODE_PRIVATE)
         val readKeys = readList("SubjectData")
         for (keys in 0 until readKeys.size) {
             val sCode = readKeys[keys]
             val sbody = prefs.getString(sCode,"")?.split("ӿ")
             val sName = sbody?.get(0)!!
-            val sYear = sbody?.get(2)!!
-            val esName = sbody?.get(4)
-            val esCode = sbody?.get(3)
+            val sYear = sbody[2]
+            val esName = sbody[4]
+            val esCode = sbody[3]
 
             subjectList.add(SubjectListModel(sName,sCode,sYear,esName,esCode))
         }
@@ -141,19 +137,21 @@ class AddSubjectsDialog(private val context: Context) {
         electiveSubjectName: String ="",
         electiveSubjectCode: String=""){
         val fileBuilder: FileBuilder = FileBuilder(context)
+        Log.v("year array", "${year[0]} ${year[1]} ${year[2]}")
         subjectData = mapOf(subjectCode to "${subjectName+"ӿ"+subjectCode+"ӿ"+yearDeterminer(year)+"ӿ"+electiveSubjectCode+"ӿ"+electiveSubjectName}")
-        fileBuilder.makeFileForStorage("ClassRoomData", subjectData)
+        fileBuilder.makeFileForStorage("SubjectData", subjectData)
 
     }
     private fun yearDeterminer(year: IntArray): String {
-        when (year) {
-            intArrayOf(1,0,0) -> return "First year"
-            intArrayOf(0,1,0) -> return "Second year"
-            intArrayOf(0,0,1) -> return "Third year"
-            intArrayOf(1,1,0) -> return "First and Second year"
-            intArrayOf(0,1,1) -> return "Second and Third year"
-            intArrayOf(1,0,1) -> return "First and Third year"
-            intArrayOf(1,1,1) -> return "First, Second and third year"
+        return when {
+            year.contentEquals(intArrayOf(1, 0, 0)) -> "First year"
+            year.contentEquals(intArrayOf(0, 1, 0)) -> "Second year"
+            year.contentEquals(intArrayOf(0, 0, 1)) -> "Third year"
+            year.contentEquals(intArrayOf(1, 1, 0)) -> "First and Second year"
+            year.contentEquals(intArrayOf(0, 1, 1)) -> "Second and Third year"
+            year.contentEquals(intArrayOf(1, 0, 1)) -> "First and Third year"
+            year.contentEquals(intArrayOf(1, 1, 1)) -> "First, Second, and Third year"
+            else -> "Year not determined"
         }
     }
     private fun readList(filename: String): MutableList<String>{
@@ -166,6 +164,7 @@ class AddSubjectsDialog(private val context: Context) {
             binding.SubjectList.visibility = View.GONE
             binding.viewAllSubjectsButton.text = "View Added Subjects"
         } else {
+            addToListView(binding)
             binding.PlaceholderImage.visibility = View.GONE
             binding.SubjectList.visibility = View.VISIBLE
             binding.viewAllSubjectsButton.text = "Hide..."

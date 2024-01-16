@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/tv_background"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ElectiveSubjectTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="3dp"
+        android:text="Elective subject:"/>
+
+    <LinearLayout
+        android:id="@+id/ElectiveSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:weightSum="5"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/ElectiveSubjectCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="ESC"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/ElectiveSubjectName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:text="ESN"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/MainSubjectTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="3dp"
+        android:text="Subject:"/>
+
+    <LinearLayout
+        android:id="@+id/MainSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/SubjectCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_weight="4"
+            android:text="SC"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:weightSum="2"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/SubjectName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="SN"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/SubjectYear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="SY"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/RemoveItemSubjectButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:layout_marginHorizontal="5dp"
+            android:padding="3dp"
+            android:src="@drawable/rs_remove_btn_material_3_default"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:padding="2dp"
+        android:layout_marginHorizontal="5dp"
+        android:src="@drawable/div_main"/>
+
+</LinearLayout>
