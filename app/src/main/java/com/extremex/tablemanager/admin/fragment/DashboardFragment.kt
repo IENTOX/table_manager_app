@@ -29,6 +29,9 @@ import com.extremex.tablemanager.lib.UnavailableTeachers
 
 /*
 *
+*
+*   <a href="https://www.flaticon.com/free-icons/books" title="books icons">Books icons created by popo2021 - Flaticon</a>
+*   <a href="https://www.flaticon.com/free-icons/classroom" title="classroom icons">Classroom icons created by Freepik - Flaticon</a>
 *   login icon attr/ <a href="https://www.flaticon.com/free-icons/login" title="login icons">Login icons created by afif fudin - Flaticon</a>
 *   hold icon attr/ <a href="https://www.flaticon.com/free-icons/stop" title="stop icons">Stop icons created by Freepik - Flaticon</a>
 *   notification icon attr/ <a href="https://www.flaticon.com/free-icons/notification" title="notification icons">Notification icons created by Freepik - Flaticon</a>

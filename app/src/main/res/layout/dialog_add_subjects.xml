@@ -56,11 +56,55 @@
         android:layout_marginBottom="10dp"
         android:hint="Subject Initials"/>
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ElectiveSubjectNameTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Elective Subject Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@+id/SubjectCode"
+        android:visibility="gone"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ElectiveSubjectNameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ElectiveSubjectNameTitle"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Elective Subject Name"
+        android:visibility="gone"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ElectiveSubjectCodeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Elective Subject Code"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        android:layout_below="@+id/ElectiveSubjectNameText"
+        android:visibility="gone"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ElectiveSubjectCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ElectiveSubjectCodeTitle"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Elective Subject Initials"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:id="@+id/CheckBoxPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/SubjectCode"
+        android:layout_below="@+id/ElectiveSubjectCode"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
@@ -198,12 +242,25 @@
             app:iconGravity="textStart"/>
 
     </LinearLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/PlaceholderImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/viewAllSubjectsButton"
+        android:layout_below="@+id/ButtonPanel"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.5"
+        android:padding="50dp"
+        android:src="@drawable/img_books"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/SubjectList"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/ButtonPanel"
+        android:layout_above="@+id/viewAllSubjectsButton"
+        android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
+        android:background="@drawable/tv_background_inner"
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:visibility="gone"/>
@@ -212,10 +269,9 @@
         android:id="@+id/viewAllSubjectsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/SubjectList"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:text="View Added Subjects"

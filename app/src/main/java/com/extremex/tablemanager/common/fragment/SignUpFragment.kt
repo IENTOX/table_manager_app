@@ -194,7 +194,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     mapOf("Key" to "IsTeacher", "Value" to isTeacher.toString())
                 )
 
-                FileBuilder().makeFile("userTemp",data, requireContext())
+                val fileBuilder = FileBuilder(requireContext())
+                fileBuilder.makeFile("userTemp",data,)
                 signUpBuilder(
                     firstName,
                     lastName,
