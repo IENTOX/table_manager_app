@@ -173,7 +173,7 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="add Subjects"
+                                    android:text="Manage Subjects"
                                     android:layout_weight="1"
                                     android:textSize="16sp"
                                     android:textAlignment="center"
@@ -185,7 +185,7 @@
                                     android:layout_weight="1"
                                     android:textAlignment="center"
                                     android:alpha="0.7"
-                                    android:text="No Subjects Added" />
+                                    android:text="Add, remove or update subjects." />
                             </LinearLayout>
 
                             <com.google.android.material.button.MaterialButton
@@ -230,7 +230,7 @@
                                     android:layout_weight="1"
                                     android:textAlignment="center"
                                     android:alpha="0.7"
-                                    android:text="No Subjects been Assigned to Teachers" />
+                                    android:text="Assign or re-assign subjects to teachers." />
                             </LinearLayout>
 
                             <com.google.android.material.button.MaterialButton
@@ -263,7 +263,7 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="add Time Slots"
+                                    android:text="Manage Time Slots"
                                     android:layout_weight="1"
                                     android:textSize="16sp"
                                     android:textAlignment="center"
@@ -275,7 +275,7 @@
                                     android:layout_weight="1"
                                     android:textAlignment="center"
                                     android:alpha="0.7"
-                                    android:text="No time slots been Added" />
+                                    android:text="manage time including holidays and days off." />
                             </LinearLayout>
 
                             <com.google.android.material.button.MaterialButton
@@ -305,7 +305,7 @@
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="add Classrooms"
+                                    android:text="Manage Classrooms"
                                     android:textSize="16sp"
                                     android:textAlignment="center"
                                     android:textStyle="bold"/>
@@ -315,7 +315,7 @@
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
                                     android:alpha="0.7"
-                                    android:text="No Classrooms have been Added" />
+                                    android:text="add and remove classrooms." />
                             </LinearLayout>
 
                             <com.google.android.material.button.MaterialButton
