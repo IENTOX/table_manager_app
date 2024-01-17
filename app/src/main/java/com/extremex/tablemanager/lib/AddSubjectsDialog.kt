@@ -26,7 +26,7 @@ class AddSubjectsDialog(private val context: Context) {
         val classroomList = classroomListView() // Get the list of subjects
         val classroomList2 = classroomListView() // Get the list of subjects
         var selection1 = classroomList[0]  // Get the default selection to start with
-        var selection2 = classroomList2[1]  // Get the default selection for elective to start with
+        var selection2 = classroomList2[0]  // Get the default selection for elective to start with
 
         //val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_subjects, null)
         // Initialize view binding
