@@ -7,21 +7,22 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/AddSubjectTitle"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="64dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:padding="10dp"
         android:text="Add a subject"
         android:textAlignment="center"
-        android:padding="10dp"
-        android:textStyle="bold"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/SubjectNameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Subject Name"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:layout_marginHorizontal="10dp"
         android:layout_below="@+id/AddSubjectTitle"/>
@@ -36,36 +37,95 @@
         android:layout_marginBottom="10dp"
         android:hint="Subject Name"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/SubjectCodeTitle"
+    <LinearLayout
+        android:id="@+id/ClassroomCodeBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Subject Code"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginHorizontal="10dp"
-        android:layout_below="@+id/SubjectNameText"/>
+        android:layout_below="@+id/SubjectNameText"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:weightSum="2"
+        android:orientation="horizontal">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/SubjectCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SubjectCodeTitle"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Subject Initials"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/SubjectCodeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Subject Code"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_weight="2"
+                android:layout_marginHorizontal="10dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/SubjectCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:autoSizeTextType="uniform"
+                android:hint="Code"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ClassroomCodeSetTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Classroom Code"
+                android:layout_weight="2"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="10dp"/>
+
+            <Spinner
+                android:id="@+id/ClassroomCodeSetter"
+                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:scrollbarSize="0dp"
+                android:layout_weight="1"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/bg_spinner_main_default"
+                android:fontFamily="@font/b_bold"
+                android:gravity="center"
+                android:popupBackground="@drawable/bg_spinner_default"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ElectiveSubjectNameTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Elective Subject Name"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_below="@+id/ClassroomCodeBox"
         android:layout_marginHorizontal="10dp"
-        android:layout_below="@+id/SubjectCode"
-        android:visibility="gone"/>
+        android:text="Elective Subject Name"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ElectiveSubjectNameText"
@@ -78,33 +138,90 @@
         android:hint="Elective Subject Name"
         android:visibility="gone"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/ElectiveSubjectCodeTitle"
+    <LinearLayout
+        android:id="@+id/ClassroomCodeElectiveBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Elective Subject Code"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginHorizontal="10dp"
         android:layout_below="@+id/ElectiveSubjectNameText"
-        android:visibility="gone"/>
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:gravity="center"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/ElectiveSubjectCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ElectiveSubjectCodeTitle"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="10dp"
-        android:hint="Elective Subject Initials"
-        android:visibility="gone"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ElectiveSubjectCodeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Elective Subject Code"
+                android:layout_weight="2"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="10dp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ElectiveSubjectCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Elective code"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ClassroomCodeSetElectiveTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Elective Classroom Code"
+                android:layout_weight="2"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="10dp"/>
+
+            <Spinner
+                android:id="@+id/ClassroomCodeElectiveSetter"
+                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:scrollbarSize="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_spinner_main_default"
+                android:fontFamily="@font/b_bold"
+                android:gravity="center"
+                android:popupBackground="@drawable/bg_spinner_default"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/CheckBoxPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ElectiveSubjectCode"
+        android:layout_below="@+id/ClassroomCodeElectiveBox"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"

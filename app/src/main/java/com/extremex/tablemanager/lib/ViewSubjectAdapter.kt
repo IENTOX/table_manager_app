@@ -29,16 +29,18 @@ class ViewSubjectAdapter(private val context: Context,private val subjectList: M
             binding.apply {
 
                 SubjectCode.text = subjectListModel.subjectCode
-                SubjectName.text = subjectListModel.subjectName
+                SubjectName.text = "${subjectListModel.subjectName} in ${subjectListModel.cName}"
                 SubjectYear.text = subjectListModel.year
                 ElectiveSubjectCode.text = subjectListModel.electiveSubjectCode
-                ElectiveSubjectName.text = subjectListModel.electiveSubjectName
+                ElectiveSubjectName.text = "${subjectListModel.electiveSubjectName} in ${subjectListModel.ecName}"
                 if (subjectListModel.electiveSubjectCode.isNullOrBlank()){
                     ElectiveSubjectTitle.visibility = View.GONE
                     ElectiveSubject.visibility = View.GONE
+                    MainSubjectTitle.visibility = View.VISIBLE
                 } else {
                     ElectiveSubjectTitle.visibility = View.VISIBLE
                     ElectiveSubject.visibility = View.VISIBLE
+                    MainSubjectTitle.visibility = View.GONE
                 }
 
                 RemoveItemSubjectButton.visibility = View.GONE

@@ -18,6 +18,15 @@
     <string-array name="subjects3">
         <item>Web Tech</item>
     </string-array>
+    <string-array name="WeekDays">
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
 
     <string-array name="ClassRooms">
         <item>c1</item>
@@ -26,6 +35,20 @@
         <item>1 Year</item>
         <item>2 Year</item>
         <item>3 Year</item>
+    </string-array>
+
+    <string-array name="TeacherNames">
+        <item>Teacher 1</item>
+        <item>Teacher 2</item>
+        <item>Teacher 3</item>
+        <item>Teacher 4</item>
+        <item>Teacher 5</item>
+        <item>Teacher 6</item>
+        <item>Teacher 7</item>
+        <item>Teacher 8</item>
+        <item>Teacher 9</item>
+        <item>Teacher 10</item>
+        <!-- Add more teacher names here -->
     </string-array>
 
     <string-array name="TimeSlots">

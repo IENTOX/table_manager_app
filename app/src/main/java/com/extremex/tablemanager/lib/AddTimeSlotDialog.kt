@@ -2,7 +2,11 @@ package com.extremex.tablemanager.lib
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.res.Resources
+import android.content.res.Resources.Theme
 import android.view.LayoutInflater
+import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.DialogTimeSlotsBinding
 
@@ -10,16 +14,19 @@ class AddTimeSlotDialog(private val context: Context) {
 
     private lateinit var binding: DialogTimeSlotsBinding
     fun show() {
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_time_slots, null)
+        //val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_time_slots, null)
         // Initialize view binding
         binding = DialogTimeSlotsBinding.inflate(LayoutInflater.from(context))
 
         val dialogBuilder = AlertDialog.Builder(context, R.style.DialogBox)
-            .setView(dialogView)
+            .setView(binding.root)
         val alertDialog = dialogBuilder.create()
+        val weekdays = context.resources.getStringArray(R.array.WeekDays)
 
-
-
+        // Set up the RecyclerView
+        val layoutManager = GridLayoutManager(context, 7)
+        binding.FixedDaysOffSelector.layoutManager = layoutManager
+        binding.FixedDaysOffSelector.adapter = ViewWeekdaysAdapter(context, weekdays)
         alertDialog.show()
     }
 }
