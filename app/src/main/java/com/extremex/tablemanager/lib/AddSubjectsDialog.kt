@@ -35,9 +35,15 @@ class AddSubjectsDialog(private val context: Context) {
         val dialogBuilder = AlertDialog.Builder(context, R.style.DialogBox)
             .setView(binding.root)
         val alertDialog = dialogBuilder.create()
+        val itemList = context.resources.getStringArray(R.array.NumberByTimes)
+        val customSpinnerAdapter = ArrayAdapter<Any?>(context, R.layout.item_simple_spinner_default,itemList)
+        customSpinnerAdapter.setDropDownViewResource(R.layout.item_simple_spinner_default)
+
         binding.ElectiveCheckBox.setOnCheckedChangeListener { _, isChecked ->
             onElectiveChecked(binding,isChecked)
             }
+        binding.NumberSetter.adapter = customSpinnerAdapter
+
         binding.Year1CheckBox.setOnCheckedChangeListener { _, isChecked ->
             year1 = if (isChecked){ 1 } else {0}
         }
@@ -152,11 +158,13 @@ class AddSubjectsDialog(private val context: Context) {
             binding.ClassroomCodeElectiveBox.visibility = View.VISIBLE
             binding.ElectiveSubjectNameText.visibility = View.VISIBLE
             binding.ElectiveSubjectNameTitle.visibility = View.VISIBLE
+            binding.Divider.visibility = View.VISIBLE
         } else {
             isElective = false
             binding.ClassroomCodeElectiveBox.visibility = View.GONE
             binding.ElectiveSubjectNameText.visibility = View.GONE
             binding.ElectiveSubjectNameTitle.visibility = View.GONE
+            binding.Divider.visibility = View.GONE
         }
     }
     private fun addToListView(binding: DialogAddSubjectsBinding){

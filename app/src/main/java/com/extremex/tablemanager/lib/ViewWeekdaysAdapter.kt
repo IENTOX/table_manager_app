@@ -29,6 +29,7 @@ class ViewWeekdaysAdapter(private val context: Context, private val weekdays: Ar
         private val context: Context,
         private val binding: ItemWeekdaysBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
+        val getColor = GetAttrColor(context)
 
         init {
             binding.root.setOnClickListener {
@@ -44,11 +45,14 @@ class ViewWeekdaysAdapter(private val context: Context, private val weekdays: Ar
                 if (selectedPositions.contains(position)) {
                     // Set the selected state
                     DaysDisplay.isSelected = true
-                    DaysDisplay.setBackgroundResource(R.drawable.tv_background)
+                    DaysDisplay.setBackgroundResource(R.drawable.item_selected)
+                    DaysDisplay.setTextColor(getColor.getTextColor().color)
                 } else {
                     // Set the unselected state
                     DaysDisplay.isSelected = false
-                    DaysDisplay.setBackgroundResource(R.drawable.tv_background_2)
+                    DaysDisplay.setTextColor(getColor.getTextInverseColor().color)
+                    DaysDisplay.setBackgroundResource(R.drawable.item_deselected)
+
                 }
             }
         }

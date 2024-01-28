@@ -51,6 +51,35 @@
         <!-- Add more teacher names here -->
     </string-array>
 
+    <string-array name="LargeTimeUnits">
+        <item>Days</item>
+        <item>Weeks</item>
+        <item>Month</item>
+        <item>Years</item>
+    </string-array>
+
+    <string-array name="SmallTimeUnits">
+        <item>Seconds</item>
+        <item>Minutes</item>
+        <item>Hours</item>
+    </string-array>
+
+    <string-array name="NumberByTimes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <!-- Add more numbers here -->
+    </string-array>
+
     <string-array name="TimeSlots">
         <item>08:30–09:30</item>
         <item>09:30–10:30</item>

@@ -159,32 +159,52 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/NumberOfLectures"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
                 android:layout_below="@+id/SetterPanel"
-                android:layout_marginHorizontal="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
                 android:autoSizeTextType="uniform"
-                android:text="Number of lectures per day"
+                android:text="Number of lectures per day:"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SubjectCode"
+            <Spinner
+                android:id="@+id/NumberSetterDropDown"
+                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_below="@+id/SetterPanel"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/NumberOfLectures"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/bg_spinner_main_default_1"
+                android:entries="@array/NumberByTimes"
+                android:fontFamily="@font/b_bold"
+                android:gravity="start"
+                android:popupBackground="@drawable/bg_spinner_default_1"
+                android:scrollbarSize="0dp"
+                android:scrollbars="none"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/Divider"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1dp"
+                android:layout_below="@+id/NumberSetterDropDown"
+                android:alpha="0.3"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/NumberOfLectures"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="10dp"
-                android:hint="Number of lectures per day"
-                android:inputType="number" />
+                android:src="@drawable/black_box"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:visibility="visible"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/FixedDayOff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/SubjectCode"
+                android:layout_below="@+id/Divider"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="10dp"
                 android:autoSizeTextType="uniform"
@@ -201,11 +221,23 @@
                 android:layout_marginHorizontal="10dp"
                 android:scrollbars="none" />
 
+            <ImageView
+                android:id="@+id/Divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/FixedDaysOffSelector"
+                android:alpha="0.3"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/black_box"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:visibility="visible"/>
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/CustomDayOff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/FixedDaysOffSelector"
+                android:layout_below="@+id/Divider2"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:autoSizeTextType="uniform"
@@ -275,7 +307,7 @@
                         android:id="@+id/CustomHolidayDateSetter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -298,51 +330,115 @@
                 android:weightSum="3">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_weight="2"
-                    android:weightSum="2"
+                    android:weightSum="3"
                     android:layout_marginStart="20dp"
-                    android:gravity="center">
+                    android:gravity="top|start">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/CustomHolidayDuration"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:autoSizeTextType="uniform"
                         android:text="Add Number Of Holidays"
+                        android:layout_weight="1"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/CustomHolidayDurationSetter"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:layout_weight="1"
+                        android:weightSum="2"
                         android:hint="Number of Holidays"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+
+                        <LinearLayout
+                            android:id="@+id/CustomHolidayDurationSetter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_spinner_default_1"
+                            android:hint="Number of Holidays"
+                            android:inputType="number"
+                            android:weightSum="2"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/HolidayNumberSetterDropDown"
+                                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_spinner_main_default_1"
+                                android:entries="@array/NumberByTimes"
+                                android:fontFamily="@font/b_bold"
+                                android:gravity="start"
+                                android:padding="5dp"
+                                android:popupBackground="@drawable/bg_spinner_default_1"
+                                android:scrollbarSize="0dp"
+                                android:scrollbars="none"
+                                android:textSize="12sp" />
+
+                            <Spinner
+                                android:id="@+id/HolidayUnitSetterDropDown"
+                                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_spinner_main_default_1"
+                                android:entries="@array/LargeTimeUnits"
+                                android:fontFamily="@font/b_bold"
+                                android:gravity="start"
+                                android:padding="5dp"
+                                android:popupBackground="@drawable/bg_spinner_default_1"
+                                android:scrollbarSize="0dp"
+                                android:scrollbars="none"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/AddButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="15dp"
+                            android:layout_marginHorizontal="40dp"
+                            android:text="Add"
+                            app:icon="@drawable/ic_add"
+                            app:iconGravity="textStart"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/AddButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"
-                    android:text="Add"
-                    app:icon="@drawable/ic_add"
-                    app:iconGravity="textStart"/>
-
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/Divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/CustomHolidayPanel"
+                android:alpha="0.3"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/black_box"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:visibility="visible"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/CustomHolidayList"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/CustomHolidayPanel"
+                android:layout_below="@+id/Divider3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"

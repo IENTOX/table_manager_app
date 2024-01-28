@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textview.MaterialTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:background="@drawable/bg_spinner_default_1"
+    android:paddingVertical="5dp"
+    android:textSize="12dp"
+    android:gravity="center_horizontal"
+    android:textStyle="normal"
+    android:textColor="?android:textColorPrimaryInverse"/>

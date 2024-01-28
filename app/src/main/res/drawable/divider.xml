@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-<stroke android:color="@color/cardview_dark_background"
-    android:width="3dp"/>
-    <solid android:color="#00000000"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/black_box"
+        android:top="245dp"
+        android:bottom="245dp"/>
+</layer-list>

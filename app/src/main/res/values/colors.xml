@@ -1,5 +1,7 @@
 
 <resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blacK">#FF000000</color>
     <color name="seed">#00ce63</color>
     <color name="md_theme_light_primary">#006D31</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
