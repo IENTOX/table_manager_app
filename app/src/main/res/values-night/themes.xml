@@ -31,6 +31,7 @@
         <item name="android:statusBarColor">@color/md_theme_dark_inversePrimary</item>
         <item name="android:textColor">@color/md_theme_dark_onSurface</item>
         <item name="android:textColorPrimaryInverse">@color/md_theme_dark_surface</item>
+        <item name="colorErrorInverse">?android:colorError</item>
     </style>
 
     <style name="DialogBox" parent="Theme.AppCompat.DayNight.Dialog.Alert">

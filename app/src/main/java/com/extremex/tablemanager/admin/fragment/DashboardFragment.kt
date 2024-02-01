@@ -1,5 +1,6 @@
 package com.extremex.tablemanager.admin.fragment
 
+import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
@@ -12,16 +13,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.FragmentDashboardBinding
-import com.extremex.tablemanager.lib.AddClassroomDialog
-import com.extremex.tablemanager.lib.AddSubjectsDialog
-import com.extremex.tablemanager.lib.AddTimeSlotDialog
 import com.extremex.tablemanager.lib.AdminMessage
 import com.extremex.tablemanager.lib.AdminMessagesDialog
 import com.extremex.tablemanager.lib.AllTeachers
-import com.extremex.tablemanager.lib.AssignTeachersDialog
 import com.extremex.tablemanager.lib.AvailableTeachers
 import com.extremex.tablemanager.lib.CodeGenerator
-import com.extremex.tablemanager.lib.ManageTeachersDialog
 import com.extremex.tablemanager.lib.TeachersAllAvailabilityAdapter
 import com.extremex.tablemanager.lib.TeachersAvailabilityAdapter
 import com.extremex.tablemanager.lib.TeachersUnavailabilityAdapter
@@ -41,7 +37,23 @@ import com.extremex.tablemanager.lib.UnavailableTeachers
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
+    interface ItemListeners{
+        fun onAddTimeSlot()
+        fun onManageTeacher()
+        fun onManageClassroom()
+        fun onManageSubject()
+    }
+    private var listener: ItemListeners? = null
     private lateinit var binding: FragmentDashboardBinding
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ItemListeners){
+            listener = context
+        } else {
+            throw IllegalArgumentException("ItemListeners has to be implemented to the root Activity")
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,23 +89,19 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             }
         }
         binding.AddSubjectButton.setOnClickListener {
-            showAddSubjectsDialog()
-        }
-
-        binding.AssignTeachersButton.setOnClickListener {
-            showAssignTeachersDialog()
+            listener?.onManageSubject()
         }
 
         binding.AddClassroomButton.setOnClickListener {
-            showAddClassroomDialog()
+            listener?.onManageClassroom()
         }
 
         binding.AddTimeSlotButton.setOnClickListener {
-            showAddTimeSlotsDialog()
+            listener?.onAddTimeSlot()
         }
 
         binding.ManageTeachersButton.setOnClickListener {
-            showManageTeachersDialog()
+            listener?.onManageTeacher()
         }
 
 
@@ -195,26 +203,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         share.putExtra(Intent.EXTRA_SUBJECT, sub)
         share.putExtra(Intent.EXTRA_TEXT, shareBody)
         startActivity(Intent.createChooser(share, "Classroom Joining code"))
-    }
-    private fun showAddClassroomDialog() {
-        val addClassroomDialog = AddClassroomDialog(requireContext())
-        addClassroomDialog.show()
-    }
-    private fun showAddSubjectsDialog() {
-        val addSubjectsDialog = AddSubjectsDialog(requireContext())
-        addSubjectsDialog.show()
-    }
-    private fun showAssignTeachersDialog() {
-        val assignTeachersDialog = AssignTeachersDialog(requireContext())
-        assignTeachersDialog.show()
-    }
-    private fun showAddTimeSlotsDialog() {
-        val addTimeSlotsDialog = AddTimeSlotDialog(requireContext())
-        addTimeSlotsDialog.show()
-    }
-    private fun showManageTeachersDialog() {
-        val manageTeachersDialog = ManageTeachersDialog(requireContext())
-        manageTeachersDialog.show()
     }
 
 

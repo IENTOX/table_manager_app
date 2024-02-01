@@ -1,47 +1,67 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.admin.fragment
 
-import android.app.AlertDialog
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.R
-import com.extremex.tablemanager.databinding.DialogAddSubjectsBinding
+import com.extremex.tablemanager.databinding.FragmentManageSubjectsViewBinding
+import com.extremex.tablemanager.lib.FileBuilder
+import com.extremex.tablemanager.lib.PopUpBox
+import com.extremex.tablemanager.lib.SubjectListModel
+import com.extremex.tablemanager.lib.ViewSubjectAdapter
 
-class AddSubjectsDialog(private val context: Context) {
+class ManageSubjectFragment : Fragment(){
 
-    private lateinit var binding: DialogAddSubjectsBinding
+    interface ManageSubjectListener{
+        fun onBack()
+    }
+    private lateinit var _binding: FragmentManageSubjectsViewBinding
+    private val binding get() = _binding
+    private var listener: ManageSubjectListener? = null
     private var isElective: Boolean = false
     private var isYear: Boolean = false
     private var year1: Int = 0
     private var year2: Int = 0
     private var year3: Int = 0
     private lateinit var subjectData:Map<String,String>
-    fun show() {
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ManageSubjectListener){
+            listener = context
+        } else {
+            throw IllegalArgumentException("ManageSubjectListener has to be implemented to the root Activity")
+        }
+    }
 
-        val classroomList = classroomListView() // Get the list of subjects
-        val classroomList2 = classroomListView() // Get the list of subjects
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentManageSubjectsViewBinding.inflate(LayoutInflater.from(context), container, false)
+
+        val classroomList = classroomListView().ifEmpty { mutableListOf("No classrooms have been added") } // Get the list of subjects
+        val classroomList2 = classroomListView().ifEmpty { mutableListOf("No classrooms have been added") } // Get the list of subjects
         var selection1 = classroomList[0]  // Get the default selection to start with
         var selection2 = classroomList2[0]  // Get the default selection for elective to start with
+        val itemList = if (requireContext().resources.getStringArray(R.array.NumberByTimes).isNotEmpty()){
+            requireContext().resources.getStringArray(R.array.NumberByTimes)
+        } else { arrayOf("Unresolved Numbers") }
 
-        //val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_subjects, null)
-        // Initialize view binding
-        binding = DialogAddSubjectsBinding.inflate(LayoutInflater.from(context))
-
-        val dialogBuilder = AlertDialog.Builder(context, R.style.DialogBox)
-            .setView(binding.root)
-        val alertDialog = dialogBuilder.create()
-        val itemList = context.resources.getStringArray(R.array.NumberByTimes)
-        val customSpinnerAdapter = ArrayAdapter<Any?>(context, R.layout.item_simple_spinner_default,itemList)
+        val customSpinnerAdapter = ArrayAdapter<Any?>(requireContext(), R.layout.item_simple_spinner_default,itemList)
         customSpinnerAdapter.setDropDownViewResource(R.layout.item_simple_spinner_default)
 
         binding.ElectiveCheckBox.setOnCheckedChangeListener { _, isChecked ->
             onElectiveChecked(binding,isChecked)
-            }
+        }
         binding.NumberSetter.adapter = customSpinnerAdapter
 
         binding.Year1CheckBox.setOnCheckedChangeListener { _, isChecked ->
@@ -53,14 +73,10 @@ class AddSubjectsDialog(private val context: Context) {
         binding.Year3CheckBox.setOnCheckedChangeListener { _, isChecked ->
             year3 = if (isChecked){ 1 } else {0}
         }
-
-        binding.viewAllSubjectsButton.setOnClickListener {
-            toggleSubjectList(binding)
-        }
         binding.AddButton.setOnClickListener {
             if (year1 + year2 + year3 == 0 || year1 + year2 + year3 < 0 || year1 + year2 + year3 > 3){
                 isYear = false
-                PopUpBox(context,"Dismiss","You have to select at least a year before proceeding.",true)
+                PopUpBox(requireContext(),"Dismiss","You have to select at least a year before proceeding.",true)
             } else {
                 isYear = true
                 verifySubjects(
@@ -72,12 +88,12 @@ class AddSubjectsDialog(private val context: Context) {
                     binding.ElectiveSubjectCode.text.toString(),
                     selection2
                 )
+                toggleSubjectList(binding)
             }
-            alertDialog.dismiss()
         }
 
-        binding.ClassroomCodeSetter.adapter = ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, classroomList)
-        binding.ClassroomCodeElectiveSetter.adapter = ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, classroomList)
+        binding.ClassroomCodeSetter.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, classroomList)
+        binding.ClassroomCodeElectiveSetter.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, classroomList)
 
         binding.ClassroomCodeSetter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -108,20 +124,11 @@ class AddSubjectsDialog(private val context: Context) {
                 selection2 = classroomList2[1] // Update default Selection with the first subject if nothing is selected
             }
         }
-
-
-        binding.CancelButton.setOnClickListener {
-            alertDialog.dismiss()
+        binding.BackButton.setOnClickListener {
+            listener?.onBack()
         }
 
-
-        binding.CancelButton.setOnClickListener {
-            alertDialog.dismiss()
-        }
-
-
-
-        alertDialog.show()
+        return binding.root
     }
 
     private fun verifySubjects(
@@ -139,20 +146,20 @@ class AddSubjectsDialog(private val context: Context) {
                     if (isYear){
                         storeSubjectData(subjectName, subjectCode, year, cName, electiveSubjectName, electiveSubjectCode, ecName)
                     } else {
-                        PopUpBox(context,"Dismiss","ERR:007\nYear not selected or invalid year selection, selecting a year is important. ",true)
+                        PopUpBox(requireContext(),"Dismiss","ERR:007\nYear not selected or invalid year selection, selecting a year is important. ",true)
                     }
                 } else {
-                    PopUpBox(context,"Dismiss","ERR:006\nError caused due to failure in verifying Elective Subject",true)
+                    PopUpBox(requireContext(),"Dismiss","ERR:006\nError caused due to failure in verifying Elective Subject",true)
                 }
             } else {
                 storeSubjectData(subjectName,subjectCode, year, cName)
             }
         } else {
-            PopUpBox(context,"Dismiss","ERR:005\nError caused due to failure in verifying Subject",true)
+            PopUpBox(requireContext(),"Dismiss","ERR:005\nError caused due to failure in verifying Subject",true)
         }
     }
 
-    private fun onElectiveChecked(binding: DialogAddSubjectsBinding, checked: Boolean) {
+    private fun onElectiveChecked(binding: FragmentManageSubjectsViewBinding, checked: Boolean) {
         if (checked){
             isElective = true
             binding.ClassroomCodeElectiveBox.visibility = View.VISIBLE
@@ -167,9 +174,9 @@ class AddSubjectsDialog(private val context: Context) {
             binding.Divider.visibility = View.GONE
         }
     }
-    private fun addToListView(binding: DialogAddSubjectsBinding){
+    private fun addToListView(binding: FragmentManageSubjectsViewBinding){
         var subjectList: MutableList<SubjectListModel> = mutableListOf(SubjectListModel("","", "",""))
-        val prefs = context.getSharedPreferences("SubjectData",Context.MODE_PRIVATE)
+        val prefs = requireActivity().getSharedPreferences("SubjectData",Context.MODE_PRIVATE)
         val readKeys = readList("SubjectData")
         for (keys in 0 until readKeys.size) {
             val sCode = readKeys[keys]
@@ -185,14 +192,14 @@ class AddSubjectsDialog(private val context: Context) {
         }
 
         subjectList.removeAt(0)
-        val subjectListAdapter = ViewSubjectAdapter(context, subjectList)
+        val subjectListAdapter = ViewSubjectAdapter(requireContext(), subjectList)
         binding.SubjectList.adapter = subjectListAdapter
-        binding.SubjectList.layoutManager =
-            LinearLayoutManager(context)
+        binding.SubjectList.layoutManager = LinearLayoutManager(requireContext())
+        binding.SubjectList.adapter.let { it?.notifyDataSetChanged() }
     }
     private fun classroomListView(): MutableList<String>{
         val subjects = mutableListOf<String>()
-        val prefs = context.getSharedPreferences("ClassRoomData",Context.MODE_PRIVATE)
+        val prefs = requireActivity().getSharedPreferences("ClassRoomData",Context.MODE_PRIVATE)
         val read = readList("ClassRoomData")
         for (keys in 0 until read.size) {
             val cCode = read[keys]
@@ -211,8 +218,8 @@ class AddSubjectsDialog(private val context: Context) {
         electiveSubjectName: String ="",
         electiveSubjectCode: String="",
         ecName: String =""
-        ){
-        val fileBuilder: FileBuilder = FileBuilder(context)
+    ){
+        val fileBuilder: FileBuilder = FileBuilder(requireContext())
         subjectData = mapOf(subjectCode to "${subjectName+"ӿ"+subjectCode+"ӿ"+yearDeterminer(year)+"ӿ"+cName+"ӿ"+electiveSubjectCode+"ӿ"+electiveSubjectName+"ӿ"+ecName}")
         fileBuilder.makeFileForStorage("SubjectData", subjectData)
 
@@ -230,19 +237,17 @@ class AddSubjectsDialog(private val context: Context) {
         }
     }
     private fun readList(filename: String): MutableList<String>{
-        val fileBuilder: FileBuilder = FileBuilder(context)
+        val fileBuilder: FileBuilder = FileBuilder(requireContext())
         return  fileBuilder.readDataFromFileForClassroomStorage(filename)
     }
-    private fun toggleSubjectList(binding: DialogAddSubjectsBinding) {
+    private fun toggleSubjectList(binding: FragmentManageSubjectsViewBinding) {
         if (binding.SubjectList.isVisible){
             binding.PlaceholderImage.visibility = View.VISIBLE
             binding.SubjectList.visibility = View.GONE
-            binding.viewAllSubjectsButton.text = "View Added Subjects"
         } else {
             addToListView(binding)
             binding.PlaceholderImage.visibility = View.GONE
             binding.SubjectList.visibility = View.VISIBLE
-            binding.viewAllSubjectsButton.text = "Hide..."
         }
     }
 }
