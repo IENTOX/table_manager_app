@@ -14,7 +14,7 @@ import com.extremex.tablemanager.databinding.DialogCustomDefalutBinding
 import com.extremex.tablemanager.databinding.DialogCustomRemoveConfirmationBinding
 import java.lang.IllegalArgumentException
 
-class CustomDialog(private val context: Context){
+class CustomDialog(private val context: Context, private val dismissListener: CustomDialogDismissListener? = null, private val confirmListener: CustomDialogConfirmListener? = null){
 
     fun createBasicCustomDialog(dismissButtonText: String, text: String, gravityCentre: Boolean = false, isTitle: Boolean = false, title: String =""){
         return basicPopUpBox(context,dismissButtonText,text,isTitle,title,gravityCentre)
@@ -51,6 +51,7 @@ class CustomDialog(private val context: Context){
 
         binding.DialogBodyText.text = text
         binding.CloseButton.setOnClickListener {
+            dismissListener?.onDismiss()
             popupMenu.dismiss()
         }
     }
@@ -85,12 +86,14 @@ class CustomDialog(private val context: Context){
         binding.DialogText.text = text
 
         binding.DialogDismissButton.setOnClickListener {
+            dismissListener?.onDismiss()
             popUpBox.setCancelable(true)
             popupMenu.dismiss()
 
         }
 
         binding.DialogConfirmButton.setOnClickListener {
+            confirmListener?.onConfirm()
             popUpBox.setCancelable(true)
             popupMenu.dismiss()
         }

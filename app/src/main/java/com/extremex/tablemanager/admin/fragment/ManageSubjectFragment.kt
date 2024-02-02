@@ -55,7 +55,7 @@ class ManageSubjectFragment : Fragment(){
         val itemList = if (requireContext().resources.getStringArray(R.array.NumberByTimes).isNotEmpty()){
             requireContext().resources.getStringArray(R.array.NumberByTimes)
         } else { arrayOf("Unresolved Numbers") }
-
+        toggleSubjectList(binding)
         val customSpinnerAdapter = ArrayAdapter<Any?>(requireContext(), R.layout.item_simple_spinner_default,itemList)
         customSpinnerAdapter.setDropDownViewResource(R.layout.item_simple_spinner_default)
 
@@ -195,7 +195,9 @@ class ManageSubjectFragment : Fragment(){
         val subjectListAdapter = ViewSubjectAdapter(requireContext(), subjectList)
         binding.SubjectList.adapter = subjectListAdapter
         binding.SubjectList.layoutManager = LinearLayoutManager(requireContext())
-        binding.SubjectList.adapter.let { it?.notifyDataSetChanged() }
+        binding.SubjectList.adapter.let {
+            it?.notifyItemRangeInserted(0, subjectList.size)
+        }
     }
     private fun classroomListView(): MutableList<String>{
         val subjects = mutableListOf<String>()
@@ -241,7 +243,7 @@ class ManageSubjectFragment : Fragment(){
         return  fileBuilder.readDataFromFileForClassroomStorage(filename)
     }
     private fun toggleSubjectList(binding: FragmentManageSubjectsViewBinding) {
-        if (binding.SubjectList.isVisible){
+        if (readList("ClassRoomData").isEmpty()){
             binding.PlaceholderImage.visibility = View.VISIBLE
             binding.SubjectList.visibility = View.GONE
         } else {

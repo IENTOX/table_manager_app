@@ -83,7 +83,9 @@ class ManageClassroomFragment : Fragment() {
         binding.ClassroomList.adapter = classroomAdapter
         binding.ClassroomList.layoutManager = LinearLayoutManager(requireContext())
         // live updates the list
-        binding.ClassroomList.adapter.let {it?.notifyDataSetChanged()}
+        binding.ClassroomList.adapter.let {
+            it?.notifyItemRangeInserted(0, classroomList.size)
+        }
     }
     private fun storeClassroomData(classroomName: String, classroomCode: String){
         val fileBuilder: FileBuilder = FileBuilder(requireContext())

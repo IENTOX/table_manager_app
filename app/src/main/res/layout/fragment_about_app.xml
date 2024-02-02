@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/FragmentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/b_black"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="About App"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:paddingHorizontal="30dp"
+        android:src="@drawable/ic_arrow_back"/>
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/AppIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/FragmentTitle"
+        android:layout_margin="30dp"
+        android:padding="5dp"
+        android:src="@mipmap/ic_launcher_round"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        style="@style/ShapeAppearanceOverlay.App.Circle"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.Circle"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/AppVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/AppIcon"
+        android:layout_alignTop="@+id/AppIcon"
+        android:layout_alignParentEnd="true"
+        android:layout_marginVertical="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/tv_background_2"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:text="V0.0"
+        android:textSize="14sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/AppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/AppIcon"
+        android:text="@string/app_name"
+        android:paddingHorizontal="10dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="14sp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/AppPackage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/AppName"
+        android:text="Select a Teacher"
+        android:paddingHorizontal="10dp"
+        android:gravity="center"
+        android:layout_marginVertical="5dp"
+        android:textSize="14sp"/>
+
+    <LinearLayout
+        android:id="@+id/ButtonPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/TAndC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_terms_of_use"
+                android:text="Terms of Use"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Credits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_contribution"
+                android:text="Credits"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_collaboration"
+                android:text="Collaboration"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Licences"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_licence"
+                android:text="Licences"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -3,21 +3,30 @@ package com.extremex.tablemanager.admin
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.admin.fragment.AboutAppFragment
+import com.extremex.tablemanager.admin.fragment.AdminSettingsFragment
+import com.extremex.tablemanager.admin.fragment.AdminTimeTableFragment
 import com.extremex.tablemanager.admin.fragment.DashboardFragment
 import com.extremex.tablemanager.admin.fragment.ManageClassroomFragment
 import com.extremex.tablemanager.admin.fragment.ManageSubjectFragment
 import com.extremex.tablemanager.admin.fragment.ManageTeacherFragment
 import com.extremex.tablemanager.admin.fragment.ManageTimeSlotFragment
 import com.extremex.tablemanager.databinding.ActivityAdminHomeBinding
+import com.extremex.tablemanager.teacher.fragment.TimetableFragment
 
 class AdminHomeActivity : AppCompatActivity(),
     DashboardFragment.ItemListeners,
     ManageTimeSlotFragment.TimeSlotFragmentListener,
     ManageTeacherFragment.ManageTeacherListener,
     ManageClassroomFragment.ManageClassroomListener,
-    ManageSubjectFragment.ManageSubjectListener{
+    ManageSubjectFragment.ManageSubjectListener,
+    AdminSettingsFragment.AdminSettingsListener,
+    AboutAppFragment.AboutAppListener{
 
     private lateinit var binding : ActivityAdminHomeBinding
     private lateinit var prefs : SharedPreferences
@@ -26,15 +35,14 @@ class AdminHomeActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         binding = ActivityAdminHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTheme()
 
-        setCurrentFrame(lastOpened())
+        setCurrentFrame(lastOpenedDashboardFragment())
         binding.BottomNavBarA.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.Home -> {
-                    setCurrentFrame(lastOpened())
-                }
-                //R.id.Schedule -> setCurrentFrame(TimetableFragment())
-                // add more id's and set fragment as frame
+                R.id.Home -> setCurrentFrame(loadLastDashboardFragment())
+                R.id.Schedule -> setCurrentFrame(TimetableFragment())
+                R.id.Settings -> setCurrentFrame(lastOpenedSettingsFragment())
                 else -> {
                     setCurrentFrame(DashboardFragment())
                 }
@@ -44,14 +52,55 @@ class AdminHomeActivity : AppCompatActivity(),
 
 
     }
-    private fun lastOpened(): Fragment{
+    private fun setTheme(){
+        val pref = getSharedPreferences("APP_DATA_PREFS", AppCompatActivity.MODE_PRIVATE)
+        when(pref.getFloat("SetTheme",2.0f)) {
+            1f -> {
+                Log.v("ThemeValue", "set : 1.0f")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            2f -> {
+                Log.v("ThemeValue", "set : 2.0f")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+
+            3f -> {
+                Log.v("ThemeValue", "set : 3.0f")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else -> {
+                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
+                Log.v("ThemeValue", "set : 1")
+                //slider.value = 1f
+            }
+        }
+    }
+    private fun loadLastDashboardFragment(): Fragment{
+
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.MainViewFrameA)
+        return if (currentFragment is AdminSettingsFragment || currentFragment is AdminTimeTableFragment){
+            DashboardFragment()
+        } else {
+            lastOpenedDashboardFragment()
+        }
+    }
+    private fun lastOpenedDashboardFragment(): Fragment{
         prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
-        return when(prefs.getInt("LastFragment",0)){
+        return when(prefs.getInt("LastFragmentDashboard",0)){
             0 -> DashboardFragment()
             1 -> ManageSubjectFragment()
             2 -> ManageTimeSlotFragment()
             3 -> ManageClassroomFragment()
             4 -> ManageTeacherFragment()
+            else -> DashboardFragment()
+        }
+    }
+    private fun lastOpenedSettingsFragment(): Fragment{
+        prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
+        return when(prefs.getInt("LastFragmentSettings",0)){
+            0 -> AdminSettingsFragment()
+            1 -> AboutAppFragment()
+            //2 -> ManageTimeSlotFragment()
             else -> DashboardFragment()
         }
     }
@@ -64,7 +113,7 @@ class AdminHomeActivity : AppCompatActivity(),
     override fun onManageTeacher() {
         prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
         val prefEditor = prefs.edit()
-        prefEditor.putInt("LastFragment", 4)
+        prefEditor.putInt("LastFragmentDashboard", 4)
         prefEditor.commit()
         setCurrentFrame(ManageTeacherFragment())
     }
@@ -72,7 +121,7 @@ class AdminHomeActivity : AppCompatActivity(),
     override fun onManageClassroom() {
         prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
         val prefEditor = prefs.edit()
-        prefEditor.putInt("LastFragment", 3)
+        prefEditor.putInt("LastFragmentDashboard", 3)
         prefEditor.commit()
         setCurrentFrame(ManageClassroomFragment())
     }
@@ -80,7 +129,7 @@ class AdminHomeActivity : AppCompatActivity(),
     override fun onAddTimeSlot() {
         prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
         val prefEditor = prefs.edit()
-        prefEditor.putInt("LastFragment", 2)
+        prefEditor.putInt("LastFragmentDashboard", 2)
         prefEditor.commit()
         setCurrentFrame(ManageTimeSlotFragment())
     }
@@ -88,17 +137,61 @@ class AdminHomeActivity : AppCompatActivity(),
     override fun onManageSubject() {
         prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
         val prefEditor = prefs.edit()
-        prefEditor.putInt("LastFragment", 1)
+        prefEditor.putInt("LastFragmentDashboard", 1)
         prefEditor.commit()
         setCurrentFrame(ManageSubjectFragment())
     }
-
-
     override fun onBack() {
         prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
         val prefEditor = prefs.edit()
-        prefEditor.putInt("LastFragment", 0)
+        prefEditor.putInt("LastFragmentDashboard", 0)
         prefEditor.commit()
         setCurrentFrame(DashboardFragment())
+    }
+
+    private var count = 0
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.MainViewFrameA)
+        if (currentFragment is DashboardFragment) {
+            count++
+            if (count == 2) {
+                super.onBackPressed()
+                finish()
+            } else {
+                Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
+            val prefEditor = prefs.edit()
+            prefEditor.putInt("LastFragmentDashboard", 0)
+            prefEditor.commit()
+            binding.BottomNavBarA.selectedItemId = R.id.Dashboard
+            setCurrentFrame(DashboardFragment())
+        }
+    }
+
+    override fun onAboutApp() {
+        prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
+        val prefEditor = prefs.edit()
+        prefEditor.putInt("LastFragmentSettings", 1)
+        prefEditor.commit()
+        setCurrentFrame(AboutAppFragment())
+    }
+
+    override fun onPrivacyPolicy() {
+        // yet to be done
+    }
+
+    override fun onProfile() {
+        // yet to be done
+    }
+
+    override fun onBackSettings() {
+        prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
+        val prefEditor = prefs.edit()
+        prefEditor.putInt("LastFragmentSettings", 0)
+        prefEditor.commit()
+        setCurrentFrame(AdminSettingsFragment())
     }
 }

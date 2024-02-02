@@ -56,6 +56,9 @@ class ManageTeacherFragment: Fragment() {
         val allAdapter = ManageAllTeachersAdapter(requireContext(), allTeacherList)
         binding.ManageTeachersListView.layoutManager = LinearLayoutManager(context)
         binding.ManageTeachersListView.adapter = allAdapter
+        binding.ManageTeachersListView.adapter?.let {
+            it.notifyItemRangeInserted(0, allTeacherList.size)
+        }
 
         binding.SubjectSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, subjectList)
         binding.TeachersSpinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, teachersList)

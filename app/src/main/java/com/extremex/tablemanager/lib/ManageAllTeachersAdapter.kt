@@ -40,22 +40,34 @@ class ManageAllTeachersAdapter(private val context: Context, private val teacher
 
     }
 
-    private fun removeTeacher(position: Int, teacherList: MutableList<ManageTeachersModel>): Int{
-        val makeDialog = CustomDialog(context)
-        Log.v("Deleting: ", teacherList[position].name)
-        val delete = makeDialog.createBasicRemoveDialog(
+    private fun removeTeacher(position: Int, teacherList: MutableList<ManageTeachersModel>): Int {
+        val makeDialog = CustomDialog( context,null, object : CustomDialogConfirmListener{
+            override fun onConfirm() {
+                Log.v("Deleting: ", teacherList[position].name)
+                remove(position)
+            }
+        })
+
+        makeDialog.createBasicRemoveDialog(
             "Cancel",
             "Confirm",
             "Are you sure, you want to remove ${teacherList[position].name} from this group.",
             true
         )
-        Log.v("Delete Confirmed: ", delete.toString())
 
         return position
     }
     private fun remove(position: Int){
-        Log.v("Deleted: ", teacherList[position].name)
-        teacherList.removeAt(position)
-        notifyItemRemoved(position)
+        if (position > 0) {
+            Log.v("Deleted: ", "$position"+teacherList[position].name)
+            teacherList.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeRemoved(0, teacherList.size -1)
+        } else if (position == 0){
+            Log.v("Deleted: ", "$position"+teacherList[0].name)
+            teacherList.removeAt(0)
+            notifyItemRemoved(0)
+            notifyItemRangeRemoved(0, teacherList.size -1)
+        }
     }
 }

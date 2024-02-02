@@ -15,6 +15,11 @@ class MainActivity : AppCompatActivity() {
         Log.v("MainActivity","Starting SignUpInActivity")
         startActivity(loginActivity)
         // Close this Activity
+        // finish()
+    }
+
+    override fun onResume() {
+        super.onResume()
         finish()
     }
 }

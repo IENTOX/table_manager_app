@@ -26,6 +26,14 @@ import com.extremex.tablemanager.lib.UnavailableTeachers
 /*
 *
 *
+*   <a href="https://www.flaticon.com/free-icons/certified" title="certified icons">Certified icons created by Afian Rochmah Afif - Flaticon</a>
+*   <a href="https://www.flaticon.com/free-icons/collaboration" title="collaboration icons">Collaboration icons created by Freepik - Flaticon</a>
+*   <a href="https://www.flaticon.com/free-icons/contribution" title="Contribution icons">Contribution icons created by Circlon Tech - Flaticon</a>
+*   <a href="https://www.flaticon.com/free-icons/terms-and-conditions" title="terms and conditions icons">Terms and conditions icons created by Anggara - Flaticon</a>
+*   <a href="https://www.flaticon.com/free-icons/privacy-policy" title="privacy-policy icons">Privacy-policy icons created by Pixel perfect - Flaticon</a>
+*   <a href="https://www.flaticon.com/free-icons/cab" title="cab icons">Cab icons created by Freepik - Flaticon</a>
+*   <a href="https://www.flaticon.com/free-icons/day-and-night" title="day and night icons">Day and night icons created by Freepik - Flaticon</a>
+*   <a href="https://www.flaticon.com/free-icons/female" title="female icons">Female icons created by Prosymbols Premium - Flaticon</a>
 *   <a href="https://www.flaticon.com/free-icons/books" title="books icons">Books icons created by popo2021 - Flaticon</a>
 *   <a href="https://www.flaticon.com/free-icons/classroom" title="classroom icons">Classroom icons created by Freepik - Flaticon</a>
 *   login icon attr/ <a href="https://www.flaticon.com/free-icons/login" title="login icons">Login icons created by afif fudin - Flaticon</a>

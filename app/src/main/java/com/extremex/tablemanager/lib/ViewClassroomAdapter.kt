@@ -42,19 +42,23 @@ class ViewClassroomAdapter(private val context: Context, private val classroomDa
         val pref = context.getSharedPreferences("ClassRoomData", Context.MODE_PRIVATE)
         val edit = pref.edit()
         val key = classroomData[position]
-        if (position != 0 && position != null) {
+        if (position > 0) {
             classroomData.removeAt(position)
             Log.w("remove key:", "selected key is $key")
             edit.remove(key.toString())
             edit.commit()
-            notifyItemRemoved(position)
+            classroomData.removeAt(position)
+            notifyItemRemoved(0)
+            notifyItemRangeRemoved(0, classroomData.size -1)
             notifyDataSetChanged()
-        } else {
+        } else if (position == 0) {
             classroomData.removeAt(0)
             Log.w("remove key:", "selected key is $key")
             edit.remove(key.toString())
             edit.commit()
+            classroomData.removeAt(position)
             notifyItemRemoved(0)
+            notifyItemRangeRemoved(0, classroomData.size -1)
             notifyDataSetChanged()
         }
     }

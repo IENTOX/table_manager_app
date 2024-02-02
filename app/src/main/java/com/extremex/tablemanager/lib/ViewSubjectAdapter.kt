@@ -63,10 +63,11 @@ class ViewSubjectAdapter(private val context: Context,private val subjectList: M
     private fun removeItem(key: String, position: Int) {
         val pref = context.getSharedPreferences("SubjectData", Context.MODE_PRIVATE)
         val edit = pref.edit()
-        subjectList.removeAt(position)
         Log.w("remove key:","selected key is $key")
         edit.remove(key)
         edit.commit()
-        notifyItemRemoved(position)
+        subjectList.removeAt(position)
+        notifyItemRemoved(0)
+        notifyItemRangeRemoved(0, subjectList.size -1)
     }
 }
