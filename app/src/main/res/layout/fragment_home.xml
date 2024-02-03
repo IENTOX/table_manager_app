@@ -77,47 +77,6 @@
                     android:padding="5dp"
                     android:weightSum="3">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="5dp"
-                        android:weightSum="2">
-
-                        <TextView
-                            android:id="@+id/DateView"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/tv_background_inner"
-                            android:elevation="5dp"
-                            android:fontFamily="@font/b_bold"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:text="Date"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/TimeView"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/tv_background_inner"
-                            android:elevation="5dp"
-                            android:fontFamily="@font/b_bold"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:text="Time"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
                     <TextView
                         android:id="@+id/TimeTableShortView"
                         android:layout_width="match_parent"

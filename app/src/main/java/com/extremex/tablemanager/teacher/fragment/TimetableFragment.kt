@@ -1,10 +1,12 @@
 package com.extremex.tablemanager.teacher.fragment
 
+import android.content.SharedPreferences
 import com.extremex.tablemanager.lib.TeachersTimetableGenerator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.databinding.FragmentTimetableBinding
@@ -17,6 +19,7 @@ class TimetableFragment : Fragment() {
 
     private var _binding: FragmentTimetableBinding? = null
     private val binding get() = _binding!!
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +31,9 @@ class TimetableFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        prefs = requireContext().getSharedPreferences("FRAGMENT_TRANSACTIONS", AppCompatActivity.MODE_PRIVATE)
+        init()
 
         val year = 2023 // Replace with the desired year
         val month = Calendar.AUGUST // Replace with the desired month
@@ -67,6 +73,11 @@ class TimetableFragment : Fragment() {
         val adapter = TimetableAdapter(timetable) // Use the correct import statement for TimetableAdapter
         binding.timetableRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.timetableRecyclerView.adapter = adapter
+    }
+    private fun init(){
+        val prefEditor = prefs.edit()
+        prefEditor.putInt("LastFragmentMain", 1)
+        prefEditor.commit()
     }
 
     override fun onDestroyView() {

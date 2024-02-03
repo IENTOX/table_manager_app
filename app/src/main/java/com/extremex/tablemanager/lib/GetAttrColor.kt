@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.util.TypedValue
 import androidx.core.content.res.ResourcesCompat
+import com.extremex.tablemanager.R
 
 class GetAttrColor(private val context: Context) {
 
@@ -12,7 +13,7 @@ class GetAttrColor(private val context: Context) {
         return getColorFromThemeAttribute(android.R.attr.colorBackground)
     }
     fun getTextInverseColor(): ColorDrawable {
-        return getColorFromThemeAttribute(android.R.attr.textColorPrimaryInverse)
+        return getColorFromThemeAttribute(R.attr.colorTextInverse)
     }
     fun getTextColor(): ColorDrawable {
         return getColorFromThemeAttribute(android.R.attr.textColor)

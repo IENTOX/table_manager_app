@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,9 +14,33 @@ class MainActivity : AppCompatActivity() {
         val loginActivity = Intent(this@MainActivity, SignupInActivity::class.java)
         // Intent to go to Activity
         Log.v("MainActivity","Starting SignUpInActivity")
+        setTheme()
         startActivity(loginActivity)
         // Close this Activity
         // finish()
+    }
+    private fun setTheme(){
+        val pref = getSharedPreferences("APP_DATA_PREFS", AppCompatActivity.MODE_PRIVATE)
+        when(pref.getFloat("SetTheme",2.0f)) {
+            1f -> {
+                Log.v("ThemeValue", "set : 1.0f")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            2f -> {
+                Log.v("ThemeValue", "set : 2.0f")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+
+            3f -> {
+                Log.v("ThemeValue", "set : 3.0f")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else -> {
+                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
+                Log.v("ThemeValue", "set : 1")
+                //slider.value = 1f
+            }
+        }
     }
 
     override fun onResume() {

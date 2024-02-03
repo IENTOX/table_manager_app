@@ -48,7 +48,7 @@ class ManageAllTeachersAdapter(private val context: Context, private val teacher
             }
         })
 
-        makeDialog.createBasicRemoveDialog(
+        makeDialog.createBasicTwoStateCustomDialog(
             "Cancel",
             "Confirm",
             "Are you sure, you want to remove ${teacherList[position].name} from this group.",

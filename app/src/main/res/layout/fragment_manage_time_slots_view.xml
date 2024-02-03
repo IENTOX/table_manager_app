@@ -12,7 +12,7 @@
         android:layout_height="?actionBarSize"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="?colorPrimaryContainer"
+        android:background="?android:statusBarColor"
         android:fontFamily="@font/b_black"
         android:elevation="5dp"
         android:gravity="center"
@@ -42,11 +42,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/LectureDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Lecture Duration"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="10dp"/>
+
             <LinearLayout
                 android:id="@+id/SetterPanel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/LectureDuration"
                 android:layout_centerHorizontal="true"
                 android:orientation="horizontal">
 
@@ -64,7 +76,7 @@
                         android:layout_marginStart="5dp"
                         android:autoSizeTextType="uniform"
                         android:text="Set Lecture Start Time"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.button.MaterialButton
@@ -86,7 +98,7 @@
                         android:autoSizeTextType="uniform"
                         android:layout_marginStart="5dp"
                         android:text="Set Lecture Duration"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -94,6 +106,8 @@
                         style="@style/Widget.AppCompat.DropDownItem.Spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:paddingVertical="5dp"
                         android:scrollbars="none"
                         android:scrollbarSize="0dp"
                         android:autoSizeTextType="uniform"
@@ -120,7 +134,7 @@
                         android:layout_marginStart="5dp"
                         android:autoSizeTextType="uniform"
                         android:text="Set Break Start Time"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.button.MaterialButton
@@ -142,7 +156,7 @@
                         android:layout_marginStart="5dp"
                         android:autoSizeTextType="uniform"
                         android:text="Set Break Duration"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -150,6 +164,8 @@
                         style="@style/Widget.AppCompat.DropDownItem.Spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:paddingVertical="5dp"
                         android:scrollbars="none"
                         android:scrollbarSize="0dp"
                         android:autoSizeTextType="uniform"
@@ -236,19 +252,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/SetSemesterSizeTitle"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="0dp"
-                android:layout_toStartOf="@+id/SemesterSizeView"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="40dp"
                 android:stepSize="1"
                 android:valueFrom="1"
+                app:labelBehavior="gone"
                 android:valueTo="52" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/SemesterSizeView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/SetSemesterSizeTitle"
                 android:layout_alignParentEnd="true"
+                android:gravity="start|center_vertical"
                 android:fontFamily="@font/b_black"
-                android:padding="15dp"
+                android:paddingVertical="10dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="10dp"
                 android:textSize="16sp"
                 android:text="52"/>
 
@@ -269,7 +291,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Divider1"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginBottom="10dp"
                 android:autoSizeTextType="uniform"
                 android:text="Fixed Day Offs"
@@ -282,7 +304,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/FixedDayOff"
                 android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="20dp"
                 android:scrollbars="none" />
 
             <ImageView
@@ -302,11 +324,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Divider2"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginBottom="10dp"
                 android:autoSizeTextType="uniform"
                 android:text="Add Custom Day Offs"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -314,6 +336,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/CustomDayOff"
+                android:layout_marginStart="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -391,7 +414,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
                     android:gravity="top|start">
 
                     <com.google.android.material.textview.MaterialTextView
@@ -444,6 +468,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
                                 android:layout_weight="1"
+                                android:layout_marginStart="5dp"
                                 android:background="@drawable/bg_spinner_main_default_1"
                                 android:entries="@array/LargeTimeUnits"
                                 android:fontFamily="@font/b_bold"
@@ -486,11 +511,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Divider3"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginBottom="10dp"
                 android:autoSizeTextType="uniform"
                 android:text="View Added Days Off"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <com.google.android.material.textview.MaterialTextView

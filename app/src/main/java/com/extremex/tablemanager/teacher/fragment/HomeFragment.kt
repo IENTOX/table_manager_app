@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.FragmentHomeBinding
@@ -30,37 +32,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     // Date Time service intent
     private lateinit var serviceIntent: Intent
 
-
-    private val dateTimeReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val time = intent.getStringExtra(DateTimeService.DEVICE_TIME_UPDATED)
-            val date = intent.getStringExtra(DateTimeService.DEVICE_DATE_UPDATED)
-
-            binding.DateView.text = date
-            binding.TimeView.text = time
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        // initialising DateTime updating Service
-        serviceIntent = Intent(requireActivity().applicationContext, DateTimeService::class.java)
-        this.requireActivity().registerReceiver(dateTimeReceiver, IntentFilter(DateTimeService.DEVICE_DATE_TIME))
-        requireActivity().startService(serviceIntent)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         // init leave prefs
         leavePref = requireContext().getSharedPreferences(SerialService.LEAVE_APPLICATION_FILE, AppCompatActivity.MODE_PRIVATE)
-
         leavePrefEditor = leavePref.edit()
-
         binding.LeaveApplicationButton.setOnClickListener {
             createLeaveApplication(LeaveProgressStatus.requested.name)
         }
@@ -121,10 +103,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.LeaveStartDate.text = leaveStartDate
         binding.LeaveEndDate.text = leaveEndDate
         LeaveProgressController(requireContext(), binding.LeaveProgress, applicationStatus!!, binding.LeaveStatus)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        requireActivity().stopService(serviceIntent)
     }
 }

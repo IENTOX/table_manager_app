@@ -1,4 +1,4 @@
-package com.extremex.tablemanager.admin.fragment
+package com.extremex.tablemanager.common.fragment
 
 import android.content.Context
 import android.content.pm.PackageInfo
@@ -44,7 +44,7 @@ class AboutAppFragment() : Fragment() {
     private fun getAppVersion(context: Context): String {
         try {
             val pInfo: PackageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-            return pInfo.versionName
+            return "v"+pInfo.versionName
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
             return "N/A"

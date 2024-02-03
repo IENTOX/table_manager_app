@@ -20,8 +20,8 @@ class CustomDialog(private val context: Context, private val dismissListener: Cu
         return basicPopUpBox(context,dismissButtonText,text,isTitle,title,gravityCentre)
     }
 
-    fun createBasicRemoveDialog(dismissButtonText: String, confirmButtonText: String, text: String, gravityCentre: Boolean = false, isTitle: Boolean = false, title: String =""){
-        return basicRemoveItemPopUpBox(context,dismissButtonText,confirmButtonText,text,isTitle,title,gravityCentre)
+    fun createBasicTwoStateCustomDialog(dismissButtonText: String, confirmButtonText: String, text: String, gravityCentre: Boolean = false, isTitle: Boolean = false, title: String =""){
+        return basicTwoStateItemPopUpBox(context,dismissButtonText,confirmButtonText,text,isTitle,title,gravityCentre)
     }
 
 
@@ -56,7 +56,7 @@ class CustomDialog(private val context: Context, private val dismissListener: Cu
         }
     }
 
-    private fun basicRemoveItemPopUpBox(
+    private fun basicTwoStateItemPopUpBox(
         context: Context,
         dismissButtonText: String,
         confirmButtonText: String,

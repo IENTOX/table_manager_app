@@ -13,7 +13,7 @@
         android:maxLines="1"
         android:fontFamily="@font/b_light"
         android:textSize="12sp"
-        android:textColor="?android:textColorTertiaryInverse"
+        android:textColor="?colorTextInverse"
         android:text="Sunday"
         android:background="@drawable/tv_background_2" />
 

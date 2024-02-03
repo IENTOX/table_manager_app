@@ -32,6 +32,8 @@
         <item name="android:textColor">@color/md_theme_light_onSecondaryContainer</item>
         <item name="android:textColorPrimaryInverse">@color/md_theme_dark_onSurface</item>
         <item name="colorErrorInverse">@color/md_theme_light_error</item>
+        <item name="colorTextInverse">@color/md_theme_dark_onSurface</item>
+        <item name="colorMainContainer">@color/md_theme_light_onMainContainer</item>
     </style>
 
 

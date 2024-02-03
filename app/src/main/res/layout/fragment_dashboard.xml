@@ -187,6 +187,15 @@
                                     android:paddingHorizontal="20dp"
                                     android:alpha="0.7"
                                     android:text="Add, remove or update subjects." />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:alpha="0.3"
+                                    android:src="@drawable/black_box"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:visibility="visible"/>
                             </LinearLayout>
 
                             <com.google.android.material.button.MaterialButton
@@ -232,6 +241,15 @@
                                     android:textAlignment="center"
                                     android:alpha="0.7"
                                     android:text="manage time including holidays and days off." />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:alpha="0.3"
+                                    android:src="@drawable/black_box"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:visibility="visible"/>
                             </LinearLayout>
 
                             <com.google.android.material.button.MaterialButton
@@ -273,6 +291,15 @@
                                     android:paddingHorizontal="20dp"
                                     android:alpha="0.7"
                                     android:text="add and remove classrooms." />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:alpha="0.3"
+                                    android:src="@drawable/black_box"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:visibility="visible"/>
                             </LinearLayout>
 
                             <com.google.android.material.button.MaterialButton
@@ -314,6 +341,16 @@
                                 android:paddingHorizontal="20dp"
                                 android:alpha="0.7"
                                 android:text="Manage teachers Preferences" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:alpha="0.3"
+                                android:src="@drawable/black_box"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginHorizontal="5dp"
+                                android:visibility="visible"/>
+
                         </LinearLayout>
 
                         <com.google.android.material.button.MaterialButton

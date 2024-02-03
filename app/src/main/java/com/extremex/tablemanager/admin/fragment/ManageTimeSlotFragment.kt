@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.FragmentManageTimeSlotsViewBinding
 import com.extremex.tablemanager.lib.ViewWeekdaysAdapter
+import kotlin.math.roundToInt
 
 class ManageTimeSlotFragment: Fragment() {
 
@@ -52,6 +53,19 @@ class ManageTimeSlotFragment: Fragment() {
         val layoutManager = GridLayoutManager(requireContext(), 7)
         binding.FixedDaysOffSelector.layoutManager = layoutManager
         binding.FixedDaysOffSelector.adapter = ViewWeekdaysAdapter(requireContext(), weekdays)
+
+        binding.SemesterSizeView.text = "01"
+        binding.SemesterSizeSlider.addOnChangeListener { slider, value, fromUser ->
+            var semValue = ""
+            if (fromUser){
+                if (value.roundToInt() < 10){
+                    semValue = "0${value.roundToInt()}"
+                } else {
+                    semValue = value.roundToInt().toString()
+                }
+                binding.SemesterSizeView.text = semValue
+            }
+        }
 
         binding.BackButton.setOnClickListener {
             listener?.onBack()

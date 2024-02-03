@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.admin.AdminHomeActivity
 import com.extremex.tablemanager.databinding.FragmentLoginBinding
+import com.extremex.tablemanager.lib.CustomDialog
+import com.extremex.tablemanager.lib.CustomDialogConfirmListener
+import com.extremex.tablemanager.lib.CustomDialogDismissListener
 import com.extremex.tablemanager.lib.ResetPasswordDialog
 import com.extremex.tablemanager.teacher.TeachersHomeActivity
 
@@ -63,8 +66,27 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     }
     private fun verifyAndLogin(username: String, password: String){
-        requireContext().startActivity(Intent(requireContext(), AdminHomeActivity::class.java))
-        requireActivity().finish()
+        val prompt = CustomDialog(requireContext(),object :CustomDialogDismissListener{
+            override fun onDismiss() {
+                requireContext().startActivity(Intent(requireContext(), AdminHomeActivity::class.java))
+                requireActivity().finish()
+            }
+
+        },object :CustomDialogConfirmListener{
+            override fun onConfirm() {
+                requireContext().startActivity(Intent(requireContext(), TeachersHomeActivity::class.java))
+                requireActivity().finish()
+            }
+
+        })
+        prompt.createBasicTwoStateCustomDialog(
+            "Admin",
+            "Teacher",
+            "",
+            true,
+            true,
+            "Login AS"
+            )
     }
 
     override fun onDestroy() {
