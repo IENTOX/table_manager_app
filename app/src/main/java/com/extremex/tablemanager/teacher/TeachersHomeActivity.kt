@@ -6,16 +6,19 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.admin.fragment.AdminProfileFragment
 import com.extremex.tablemanager.admin.fragment.DashboardFragment
 import com.extremex.tablemanager.common.fragment.AboutAppFragment
 import com.extremex.tablemanager.common.fragment.SettingsFragment
 import com.extremex.tablemanager.databinding.ActivityHomeTeachersBinding
 import com.extremex.tablemanager.teacher.fragment.HomeFragment
+import com.extremex.tablemanager.teacher.fragment.TeacherProfileFragment
 import com.extremex.tablemanager.teacher.fragment.TimetableFragment
 
 class TeachersHomeActivity : AppCompatActivity(),
     SettingsFragment.SettingsListener,
-    AboutAppFragment.AboutAppListener {
+    AboutAppFragment.AboutAppListener,
+    TeacherProfileFragment.TeacherProfileListener{
     private lateinit var binding : ActivityHomeTeachersBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +70,7 @@ class TeachersHomeActivity : AppCompatActivity(),
         return when(prefs.getInt("LastFragmentSettings",0)){
             0 -> SettingsFragment()
             1 -> AboutAppFragment()
-            //2 -> ManageTimeSlotFragment()
+            2 -> TeacherProfileFragment()
             else -> DashboardFragment()
         }
     }
@@ -99,6 +102,10 @@ class TeachersHomeActivity : AppCompatActivity(),
     }
 
     override fun onProfile() {
-        //T/ODO("Not yet implemented")
+        val prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
+        val prefEditor = prefs.edit()
+        prefEditor.putInt("LastFragmentSettings", 2)
+        prefEditor.commit()
+        setCurrentFrame(TeacherProfileFragment())
     }
 }

@@ -2,9 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".admin.fragment.AdminProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/ManageProfileTitle"
@@ -71,82 +69,38 @@
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:weightSum="2"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/InstuteTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:autoSizeTextType="uniform"
+                android:text="@string/institute_title_string"
+                android:textIsSelectable="false"
+                android:textStyle="bold"
+                android:visibility="visible"/>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/InstuteTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_weight="1"
-                    android:autoSizeTextType="uniform"
-                    android:text="@string/institute_title_string"
-                    android:textIsSelectable="false"
-                    android:textStyle="bold"
-                    android:visibility="visible"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/InstituteName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:autofillHints="name"
-                    android:hint="@string/institute_title_string"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:textIsSelectable="true"
-                    android:visibility="visible" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/InstituteName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginHorizontal="20dp"
+                android:autofillHints="name"
+                android:hint="@string/institute_title_string"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textIsSelectable="true"
+                android:visibility="visible" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/InstituteCodeTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_weight="1"
-                    android:autoSizeTextType="uniform"
-                    android:text="@string/institute_code_title_string"
-                    android:textIsSelectable="false"
-                    android:textStyle="bold"
-                    android:visibility="visible"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/InstituteCode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:autofillHints="name"
-                    android:hint="@string/institute_code_string"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:textIsSelectable="true"
-                    android:visibility="visible" />
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -316,7 +270,7 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:backgroundTint="?colorSecondaryContainer"
-            android:textColor="?android:textColor"
+            android:textColor="?colorTextInverse"
             app:iconGravity="textStart"
             app:icon="@drawable/ic_terms_of_use"
             android:text="Reset Password"/>
@@ -328,7 +282,7 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:backgroundTint="?colorErrorInverse"
-            android:textColor="?colorTextInverse"
+            android:textColor="?android:textColorPrimaryInverse"
             app:iconGravity="textStart"
             app:icon="@drawable/ic_contribution"
             android:text="Delete Account"/>

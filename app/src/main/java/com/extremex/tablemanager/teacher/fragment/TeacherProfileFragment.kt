@@ -1,4 +1,4 @@
-package com.extremex.tablemanager.admin.fragment
+package com.extremex.tablemanager.teacher.fragment
 
 import android.app.Activity
 import android.content.Context
@@ -9,23 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.common.SignupInActivity
-import com.extremex.tablemanager.databinding.FragmentAdminProfileBinding
+import com.extremex.tablemanager.databinding.FragmentTeacherProfileBinding
 
-class AdminProfileFragment : Fragment() {
+class TeacherProfileFragment : Fragment() {
 
-    interface AdminProfileListener{
+    interface TeacherProfileListener{
         fun onBackSettings()
     }
-    private lateinit var _binding: FragmentAdminProfileBinding
+    private lateinit var _binding: FragmentTeacherProfileBinding
     private val binding get() = _binding
-    private var listener: AdminProfileListener? = null
+    private var listener: TeacherProfileListener? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is AdminProfileListener){
+        if (context is TeacherProfileListener){
             listener = context
         } else {
-            throw IllegalArgumentException("AdminProfileListener has to be implemented on root activity")
+            throw IllegalArgumentException("TeacherProfileListener has to be implemented on root activity")
         }
     }
     override fun onCreateView(
@@ -33,7 +33,7 @@ class AdminProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAdminProfileBinding.inflate(LayoutInflater.from(context), container, false)
+        _binding = FragmentTeacherProfileBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
     }
 
@@ -43,7 +43,6 @@ class AdminProfileFragment : Fragment() {
         binding.BackButton.setOnClickListener {
             listener?.onBackSettings()
         }
-
         binding.LogoutButton.setOnClickListener {
             logout(requireContext(), requireActivity())
         }
