@@ -59,11 +59,14 @@ class SettingsFragment : Fragment() {
             if (fromUser) {
                 Log.v("ThemeValue from Slider", "stored $value")
                 storeThemeData(value)
-                handler.postDelayed({setTheme(slider)},100)
+                handler.postDelayed({setTheme(slider)},500)
             }
         }
         binding.AppInfo.setOnClickListener {
             listener?.onAboutApp()
+        }
+        binding.ProfileView.setOnClickListener {
+            listener?.onProfile()
         }
 
         return binding.root

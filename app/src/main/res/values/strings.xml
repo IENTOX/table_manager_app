@@ -27,8 +27,12 @@
     <string name="create_account_title_string">Sign Up</string>
     <string name="reset_password_title_string">Reset Password</string>
     <string name="Login_title_string">Login</string>
-    <string name="instute_title_string">Instute Name</string>
+    <string name="institute_title_string">Instute Name</string>
     <string name="assign_teachers_info_string">you have to assign a subject to a teacher, one teacher can teach multiple subjects in this case the second subject of the teacher will be considered as a substitute</string>
     <string name="manage_hours_title">Manage Hours</string>
+    <string name="android_appCompat_packageInfo_package_name_type">com.extremex.{AppContext.packageInfo.pName}</string>
+    <string name="name_placeholder_string">Full name</string>
+    <string name="institute_code_title_string">Instute Code</string>
+    <string name="institute_code_string">Institue Code</string>
 
 </resources>

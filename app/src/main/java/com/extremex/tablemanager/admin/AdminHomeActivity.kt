@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.admin.fragment.AdminProfileFragment
 import com.extremex.tablemanager.common.fragment.AboutAppFragment
 import com.extremex.tablemanager.common.fragment.SettingsFragment
 import com.extremex.tablemanager.admin.fragment.DashboardFragment
@@ -25,7 +26,8 @@ class AdminHomeActivity : AppCompatActivity(),
     ManageClassroomFragment.ManageClassroomListener,
     ManageSubjectFragment.ManageSubjectListener,
     SettingsFragment.SettingsListener,
-    AboutAppFragment.AboutAppListener{
+    AboutAppFragment.AboutAppListener,
+    AdminProfileFragment.AdminProfileListener{
 
     private lateinit var binding : ActivityAdminHomeBinding
     private lateinit var prefs : SharedPreferences
@@ -90,7 +92,7 @@ class AdminHomeActivity : AppCompatActivity(),
         return when(prefs.getInt("LastFragmentSettings",0)){
             0 -> SettingsFragment()
             1 -> AboutAppFragment()
-            //2 -> ManageTimeSlotFragment()
+            2 -> AdminProfileFragment()
             else -> DashboardFragment()
         }
     }
@@ -160,7 +162,7 @@ class AdminHomeActivity : AppCompatActivity(),
             } else {
                 Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
             }
-        } else if (currentFragment is AboutAppFragment) {
+        } else if (currentFragment is AboutAppFragment || currentFragment is AdminProfileFragment) {
             prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
             val prefEditor = prefs.edit()
             prefEditor.putInt("LastFragmentSettings", 0)
@@ -189,7 +191,11 @@ class AdminHomeActivity : AppCompatActivity(),
     }
 
     override fun onProfile() {
-        // yet to be done
+        prefs = getSharedPreferences("FRAGMENT_TRANSACTIONS", MODE_PRIVATE)
+        val prefEditor = prefs.edit()
+        prefEditor.putInt("LastFragmentSettings", 2)
+        prefEditor.commit()
+        setCurrentFrame(AdminProfileFragment())
     }
 
     override fun onBackSettings() {

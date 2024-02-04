@@ -57,32 +57,44 @@
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:paddingHorizontal="10dp"
-        android:text="V0.0"
-        android:textSize="14sp" />
+        android:textSize="16sp"
+        android:text="V0.0"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/AppName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/AppIcon"
-        android:text="@string/app_name"
-        android:paddingHorizontal="10dp"
+        android:layout_alignTop="@+id/AppIcon"
+        android:layout_alignEnd="@+id/AppIcon"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="-30dp"
+        android:layout_marginEnd="60dp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/tv_background_2"
+        android:fontFamily="@font/b_black_italic"
         android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="14sp"/>
+        android:paddingHorizontal="10dp"
+        android:textSize="14sp"
+        android:text="@string/app_name"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/AppPackage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/AppName"
-        android:text="Select a Teacher"
-        android:paddingHorizontal="10dp"
+        android:layout_alignBottom="@+id/AppIcon"
+        android:layout_alignEnd="@+id/AppIcon"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-45dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="25dp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/tv_background_2"
+        android:fontFamily="@font/b_black_italic"
         android:gravity="center"
-        android:layout_marginVertical="5dp"
-        android:textSize="14sp"/>
+        android:paddingHorizontal="10dp"
+        android:textSize="12sp"
+        android:text="@string/android_appCompat_packageInfo_package_name_type" />
 
     <LinearLayout
         android:id="@+id/ButtonPanel"

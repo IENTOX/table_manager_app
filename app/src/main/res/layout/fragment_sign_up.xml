@@ -323,7 +323,7 @@
                         android:layout_marginHorizontal="20dp"
                         android:layout_weight="1"
                         android:autoSizeTextType="uniform"
-                        android:text="@string/instute_title_string"
+                        android:text="@string/institute_title_string"
                         android:textIsSelectable="false"
                         android:textStyle="bold"
                         android:visibility="visible"/>
@@ -334,7 +334,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:autofillHints="name"
-                        android:hint="@string/instute_title_string"
+                        android:hint="@string/institute_title_string"
                         android:inputType="text"
                         android:maxLines="1"
                         android:textIsSelectable="true"
