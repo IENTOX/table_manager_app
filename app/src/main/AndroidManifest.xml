@@ -33,7 +33,7 @@
         </activity>
 
         <service
-            android:name=".service.DateTimeService"
+            android:name=".service.AppCloseService"
             android:enabled="true"
             android:exported="false" />
     </application>

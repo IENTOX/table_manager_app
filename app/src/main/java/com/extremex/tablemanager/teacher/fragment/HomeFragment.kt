@@ -1,36 +1,39 @@
 package com.extremex.tablemanager.teacher.fragment
 
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.FragmentHomeBinding
-import com.extremex.tablemanager.lib.LeaveApplicationDialog
 import com.extremex.tablemanager.lib.LeaveProgressController
 import com.extremex.tablemanager.lib.LeaveProgressStatus
 import com.extremex.tablemanager.lib.SerialService
-import com.extremex.tablemanager.service.DateTimeService
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
+    interface HomeListener{
+        fun onLeaveApplication()
+    }
     private lateinit var binding: FragmentHomeBinding
-
+    private var listener: HomeListener? = null
     // save leave data
     private lateinit var leavePref : SharedPreferences
     private lateinit var leavePrefEditor : SharedPreferences.Editor
 
-    // Date Time service intent
-    private lateinit var serviceIntent: Intent
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is HomeListener){
+            listener = context
+        } else {
+            throw IllegalArgumentException("HomeListener is not implemented to root Activity")
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -44,16 +47,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         leavePref = requireContext().getSharedPreferences(SerialService.LEAVE_APPLICATION_FILE, AppCompatActivity.MODE_PRIVATE)
         leavePrefEditor = leavePref.edit()
         binding.LeaveApplicationButton.setOnClickListener {
-            createLeaveApplication(LeaveProgressStatus.requested.name)
+            listener?.onLeaveApplication()
         }
     }
 
     private fun createLeaveApplication(applicationStatus: String?, reason: String="") {
-        val leaveApplicationDialog = LeaveApplicationDialog(requireContext())
-
-
-        leaveApplicationDialog.setApplyListener(object : LeaveApplicationDialog.ApplyListener {
-            override fun onApply(
+            fun onApply(
                 userName: String,
                 userId: String,
                 description: String,
@@ -85,14 +84,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 //binding.TimeTableShortView.text = selectedLeaveType
                 return ""
             }
-        })
-
-        leaveApplicationDialog.setCancelListener(object : LeaveApplicationDialog.CancelListener {
-            override fun onCancel() {
-                binding.LeaveApplicationProgressView.visibility = View.GONE
-            }
-        })
-        leaveApplicationDialog.show()
     }
 
     private fun statusType(title: String, description: String, applicationStatus: String?, status: String?, applicationDate: String, leaveStartDate: String, leaveEndDate: String){

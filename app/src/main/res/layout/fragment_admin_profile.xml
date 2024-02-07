@@ -13,11 +13,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="?android:statusBarColor"
-        android:fontFamily="@font/b_black"
+        android:fontFamily="@font/tablemanager_black"
+        android:textStyle="bold|italic"
         android:elevation="5dp"
         android:gravity="center"
         android:padding="10dp"
-        android:textStyle="bold"
         android:textSize="20sp"
         android:text="Profile"/>
 
@@ -54,7 +54,8 @@
         android:layout_below="@+id/ProfilePictureView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/b_medium"
+        android:fontFamily="@font/tablemanager_black"
+        android:textStyle="bold|italic"
         android:autoSizeTextType="uniform"
         app:iconGravity="textStart"
         android:paddingVertical="5dp"

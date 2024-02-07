@@ -11,11 +11,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="?android:statusBarColor"
-        android:fontFamily="@font/b_black"
+        android:fontFamily="@font/font_tablemanager_extra_light"
         android:elevation="5dp"
         android:gravity="center"
         android:padding="10dp"
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         android:textSize="20sp"
         android:text="Profile"/>
 
@@ -52,7 +52,7 @@
         android:layout_below="@+id/ProfilePictureView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/b_medium"
+        android:fontFamily="@font/tablemanager_bold_italic"
         android:autoSizeTextType="uniform"
         app:iconGravity="textStart"
         android:paddingVertical="5dp"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/NameTitle"
         android:background="@drawable/tv_background_2"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="25dp"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -77,7 +77,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/InstuteTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="20dp"
@@ -90,7 +90,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/InstituteName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:autofillHints="name"
@@ -118,7 +118,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/Name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
@@ -130,7 +130,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/FirstName"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingHorizontal="20dp"
@@ -147,7 +147,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="20dp"
@@ -159,7 +159,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/DobSetter"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingHorizontal="20dp"
@@ -186,7 +186,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
@@ -198,7 +198,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/PhoneNumber"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingHorizontal="20dp"
@@ -216,7 +216,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_weight="1"
@@ -227,7 +227,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/EmailAddress"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:hint="@string/email_id_placeholder_string"
@@ -269,10 +269,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:backgroundTint="?colorSecondaryContainer"
-            android:textColor="?colorTextInverse"
+            app:strokeColor="?colorPrimary"
+            app:strokeWidth="3dp"
+            android:backgroundTint="?android:colorBackground"
+            android:textColor="?android:textColor"
             app:iconGravity="textStart"
-            app:icon="@drawable/ic_terms_of_use"
+            app:iconTint="?android:textColor"
+            app:icon="@drawable/ic_reset_password_black"
             android:text="Reset Password"/>
 
         <com.google.android.material.button.MaterialButton
@@ -281,10 +284,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:backgroundTint="?colorErrorInverse"
-            android:textColor="?android:textColorPrimaryInverse"
+            android:backgroundTint="?android:colorBackground"
+            app:strokeColor="?colorErrorInverse"
+            app:strokeWidth="3dp"
+            android:textColor="?colorErrorInverse"
+            app:iconTint="?colorErrorInverse"
             app:iconGravity="textStart"
-            app:icon="@drawable/ic_contribution"
+            app:icon="@drawable/ic_delete_button"
             android:text="Delete Account"/>
 
     </LinearLayout>

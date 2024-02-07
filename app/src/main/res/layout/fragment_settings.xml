@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/b_black"
+        android:fontFamily="@font/tablemanager_black"
+        android:textStyle="bold|italic"
         android:gravity="start|bottom"
         android:paddingStart="10dp"
         android:paddingEnd="0dp"
         android:paddingTop="30dp"
         android:elevation="5dp"
-        android:textStyle="bold"
         android:textSize="28sp"
         android:text="Settings"/>
 

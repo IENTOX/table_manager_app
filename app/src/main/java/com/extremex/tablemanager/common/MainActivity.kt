@@ -2,10 +2,12 @@ package com.extremex.tablemanager.common
 
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import com.extremex.tablemanager.service.AppCloseService
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         val loginActivity = Intent(this@MainActivity, SignupInActivity::class.java)
         // Intent to go to Activity
         Log.v("MainActivity","Starting SignUpInActivity")
+        startService(Intent(applicationContext, AppCloseService::class.java))
         setTheme()
         startActivity(loginActivity)
         // Close this Activity
@@ -45,6 +48,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        Log.i("AppClosedCompletely", "True")
+        val prefs: SharedPreferences = applicationContext.getSharedPreferences("FRAGMENT_TRANSACTIONS", AppCompatActivity.MODE_PRIVATE)
+        val prefEditor: SharedPreferences.Editor = prefs.edit()
+        prefEditor.apply {
+            putInt("LastFragmentDashboard", 0)
+            putInt("LastFragmentHome", 0)
+        }.apply()
         finish()
     }
 }

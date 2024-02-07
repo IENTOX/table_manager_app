@@ -15,10 +15,9 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:elevation="5dp"
-        android:layout_marginBottom="10dp"
+        android:padding="5dp"
         android:background="@drawable/tv_background"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="50dp"
@@ -28,15 +27,17 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:fontFamily="@font/b_bold_italic"
+            android:fontFamily="@font/tablemanager_black"
+            android:textStyle="bold|italic"
             android:gravity="center_vertical"
             android:padding="10dp"
             android:text="@string/teacher_name_placeholder_string"
-            android:textSize="18sp"/>
+            android:textSize="14sp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/Notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -45,6 +46,17 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         app:icon="@drawable/ic_notifications" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/LeaveApplicationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/Notifications"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="30dp"
+        app:icon="@drawable/ic_leave_application"/>
 
     <RelativeLayout
         android:id="@+id/MainContainer"
@@ -82,12 +94,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:fontFamily="@font/b_bold"
+                        android:fontFamily="@font/tablemanager_black"
+                        android:textStyle="bold|italic"
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="Today's View"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="14sp"/>
 
                 </LinearLayout>
 
@@ -111,17 +123,18 @@
                             android:id="@+id/StatusTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/b_bold"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:padding="5dp"
                             android:text="Progresss Name"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textSize="18sp" />
                         <TextView
                             android:id="@+id/ApplicationDate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="Application date"
-                            android:fontFamily="@font/b_medium"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:textSize="16sp"
                             android:gravity="end|center_vertical"/>
 
@@ -163,7 +176,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/b_black"
+                                android:fontFamily="@font/tablemanager_black"
+                                android:textStyle="bold|italic"
                                 android:text="Requested"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -183,7 +197,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/b_black"
+                                android:fontFamily="@font/tablemanager_black"
+                                android:textStyle="bold|italic"
                                 android:text="Awaiting"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -204,7 +219,8 @@
                                 android:id="@+id/LeaveStatus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/b_black"
+                                android:fontFamily="@font/tablemanager_black"
+                                android:textStyle="bold|italic"
                                 android:text="Approved"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -228,12 +244,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:elevation="5dp"
-                            android:fontFamily="@font/b_bold"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:gravity="start"
                             android:padding="5dp"
                             android:text="Status:"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/StatusDescription"
@@ -241,12 +257,12 @@
                             android:layout_height="match_parent"
                             android:elevation="5dp"
                             android:layout_weight="1"
-                            android:fontFamily="@font/b_bold"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text=""
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -267,14 +283,16 @@
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="Leave start date"
-                            android:fontFamily="@font/b_medium"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:textSize="16sp"/>
                         <TextView
                             android:id="@+id/LeaveEndDate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="Leave end date"
-                            android:fontFamily="@font/b_medium"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:textSize="16sp"
                             android:gravity="end|center_vertical"/>
                     </LinearLayout>
@@ -296,42 +314,28 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:elevation="5dp"
-                            android:fontFamily="@font/b_bold"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:gravity="start"
                             android:padding="5dp"
                             android:text="Description:"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textSize="16sp"/>
 
                         <TextView
                             android:id="@+id/UserDescription"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:elevation="5dp"
-                            android:fontFamily="@font/b_bold"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text=""
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
-
     </RelativeLayout>
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/LeaveApplicationButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Leave Application" />
-
-
 </RelativeLayout>

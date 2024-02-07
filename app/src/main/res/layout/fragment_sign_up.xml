@@ -281,7 +281,8 @@
                             android:gravity="center"
                             android:paddingStart="5dp"
                             android:textSize="14sp"
-                            android:fontFamily="@font/b_bold"
+                            android:fontFamily="@font/tablemanager_black"
+                            android:textStyle="bold|italic"
                             android:text="Join an existing room"/>
 
                         <androidx.appcompat.widget.AppCompatImageButton

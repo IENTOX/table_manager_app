@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Messages &amp; Requests"
-        android:fontFamily="@font/b_black"
+        android:fontFamily="@font/tablemanager_black"
         android:textSize="24sp"
         android:padding="20dp"
         android:gravity="start"

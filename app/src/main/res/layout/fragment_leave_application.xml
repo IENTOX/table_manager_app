@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LeaveApplicationRoot"
@@ -7,45 +7,55 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/LeaveApplicationTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="20dp"
+    android:id="@+id/LeaveApplicationTitle"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:background="?android:statusBarColor"
+    android:fontFamily="@font/tablemanager_black"
+    android:textStyle="bold|italic"
+    android:elevation="5dp"
+    android:gravity="center"
+    android:padding="10dp"
+    android:textSize="20sp"
+    android:text="Leave Application"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:elevation="5dp"
-        android:autoSizeTextType="uniform"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:fontFamily="@font/b_bold"
-        android:background="@drawable/tv_background"
-        android:text="Leave Application"/>
+        android:paddingHorizontal="30dp"
+        android:src="@drawable/ic_arrow_back"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_below="@+id/LeaveApplicationTitle"
         android:elevation="5dp"
-        android:padding="20dp"
-        android:background="@drawable/tv_background_inner"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="10dp"
-            android:weightSum="4"
-            android:orientation="horizontal">
+            android:weightSum="4">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoSizeTextType="uniform"
-                android:textSize="16sp"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
+                android:text="Name : "
                 android:textAlignment="textStart"
-                android:fontFamily="@font/b_bold"
-                android:text="Name : "/>
+                android:textSize="16sp" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -54,29 +64,31 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:autoSizeTextType="uniform"
-                android:textSize="14sp"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
+                android:text="NAME_PLACEHOLDER"
                 android:textAlignment="textEnd"
-                android:fontFamily="@font/b_bold"
-                android:text="NAME_PLACEHOLDER"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="10dp"
-            android:weightSum="4"
-            android:orientation="horizontal">
+            android:weightSum="4">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:autoSizeTextType="uniform"
-                android:textSize="16sp"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
+                android:text="ID Number : "
                 android:textAlignment="textStart"
-                android:fontFamily="@font/b_bold"
-                android:text="ID Number : "/>
+                android:textSize="16sp" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -84,31 +96,33 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:textSize="14sp"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
+                android:text="NAME_PLACEHOLDER"
                 android:textAlignment="textEnd"
-                android:fontFamily="@font/b_bold"
-                android:text="NAME_PLACEHOLDER"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
             android:paddingTop="5dp"
             android:paddingEnd="10dp"
             android:paddingBottom="0dp"
-            android:paddingStart="10dp"
-            android:weightSum="8"
-            android:orientation="horizontal">
+            android:weightSum="8">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:textSize="16sp"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
                 android:gravity="center_vertical|start"
-                android:fontFamily="@font/b_bold"
-                android:text="Leave Type : "/>
+                android:text="Leave Type : "
+                android:textSize="16sp" />
 
             <Spinner
                 android:id="@+id/LeaveTypeDropDown"
@@ -116,10 +130,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:autoSizeTextType="uniform"
-                android:textSize="16sp"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
                 android:gravity="center_vertical|start"
-                android:fontFamily="@font/b_bold"
-                android:text="To : "/>
+                android:text="To : "
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -127,76 +142,79 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoSizeTextType="uniform"
+            android:fontFamily="@font/tablemanager_black"
+            android:textStyle="bold|italic"
+            android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:paddingEnd="10dp"
             android:paddingBottom="5dp"
-            android:paddingStart="10dp"
-            android:textSize="16sp"
+            android:text="Description "
             android:textAlignment="textStart"
-            android:fontFamily="@font/b_bold"
-            android:text="Description "/>
+            android:textSize="16sp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/UserLeaveDescription"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_stroked_box"
-            android:scrollbars="none"
-            android:text=""
             android:layout_marginTop="0dp"
             android:layout_marginBottom="20dp"
-            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
-            android:hint="Describe in detail rationalising this leave application"/>
+            android:background="@drawable/bg_stroked_box"
+            android:hint="Describe in detail rationalising this leave application"
+            android:scrollbars="none"
+            android:text="" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
             android:layout_margin="5dp"
-            android:gravity="center"
             android:background="@drawable/tv_background_2"
             android:elevation="5dp"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="20dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:autoSizeTextType="uniform"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
                 android:gravity="center"
                 android:padding="5dp"
-                android:textSize="14sp"
-                android:fontFamily="@font/b_bold"
-                android:text="Unsure about how long the leave's going to be "/>
+                android:text="Unsure about how long the leave's going to be "
+                android:textSize="14sp" />
 
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/LeaveCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
             android:paddingTop="20dp"
             android:paddingEnd="10dp"
             android:paddingBottom="0dp"
-            android:paddingStart="10dp"
-            android:weightSum="4"
-            android:orientation="horizontal">
+            android:weightSum="4">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:autoSizeTextType="uniform"
-                android:textSize="16sp"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
+                android:text="From : "
                 android:textAlignment="textStart"
-                android:fontFamily="@font/b_bold"
-                android:text="From : "/>
+                android:textSize="16sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/LeaveEndDurationTitle"
@@ -204,19 +222,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:autoSizeTextType="uniform"
-                android:textSize="16sp"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
+                android:text="To : "
                 android:textAlignment="textStart"
-                android:fontFamily="@font/b_bold"
-                android:text="To : "/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="10dp"
-            android:weightSum="2"
-            android:orientation="horizontal">
+            android:weightSum="2">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/LeaveStart"
@@ -225,12 +244,13 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:text=""
-                app:icon="@drawable/ic_calendar_month"
-                app:iconGravity="textStart"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
                 android:padding="5dp"
+                android:text=""
                 android:textSize="14sp"
-                android:fontFamily="@font/b_bold"/>
+                app:icon="@drawable/ic_calendar_month"
+                app:iconGravity="textStart" />
 
 
             <com.google.android.material.button.MaterialButton
@@ -240,59 +260,32 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:text=""
-                app:icon="@drawable/ic_calendar_month"
-                app:iconGravity="textStart"
+                android:fontFamily="@font/tablemanager_black"
+                android:textStyle="bold|italic"
                 android:padding="5dp"
+                android:text=""
                 android:textSize="14sp"
-                android:fontFamily="@font/b_bold"/>
+                app:icon="@drawable/ic_calendar_month"
+                app:iconGravity="textStart" />
 
         </LinearLayout>
 
-
-
-        <LinearLayout
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ApplyButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="0dp"
-            android:weightSum="2"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/CancelButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textSize="14sp"
-                app:icon="@drawable/ic_close"
-                app:iconGravity="textStart"
-                android:text="Cancel"
-                android:fontFamily="@font/b_bold"/>
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/ApplyButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textSize="14sp"
-                app:icon="@drawable/ic_check"
-                app:iconGravity="textStart"
-                android:text="Apply"
-                android:fontFamily="@font/b_bold"/>
-
-        </LinearLayout>
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/tablemanager_black"
+            android:textStyle="bold|italic"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Apply"
+            android:textSize="14sp"
+            app:icon="@drawable/ic_check"
+            app:iconGravity="textStart" />
 
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

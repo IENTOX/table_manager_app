@@ -26,6 +26,7 @@ import com.extremex.tablemanager.lib.TeachersUnavailabilityAdapter
 import com.extremex.tablemanager.lib.UnavailableTeachers
 
 /*
+*   <a href="https://www.flaticon.com/free-icons/application" title="application icons">Application icons created by Freepik - Flaticon</a>
 *   <a href="https://www.flaticon.com/free-icons/login" title="login icons">Login icons created by Pixel perfect - Flaticon</a>
 *   <a href="https://www.flaticon.com/free-icons/reset-password" title="reset password icons">Reset password icons created by Uniconlabs - Flaticon</a>
 *   <a href="https://www.flaticon.com/free-icons/logout" title="logout icons">Logout icons created by HideMaru - Flaticon</a>

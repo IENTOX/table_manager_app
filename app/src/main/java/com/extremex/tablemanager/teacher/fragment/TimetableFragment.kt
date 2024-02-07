@@ -57,6 +57,12 @@ class TimetableFragment : Fragment() {
             // Timetable entries for Teacher2
             TimetableEntry("Monday", "08:00 - 09:00", Teacher("Teacher2", listOf("english")), "Math", "Classroom M1"),
             TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
             TimetableEntry("Wednesday", "08:00 - 09:00", Teacher("Teacher2", listOf("english")), "English", "Classroom E5")
         )
 
