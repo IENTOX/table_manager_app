@@ -19,14 +19,19 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.databinding.FragmentManageClassroomViewBinding
 import com.extremex.tablemanager.databinding.FragmentManageTimeSlotsViewBinding
+import com.extremex.tablemanager.lib.ClassroomModel
 import com.extremex.tablemanager.lib.CustomDialog
 import com.extremex.tablemanager.lib.CustomDialogDismissListener
 import com.extremex.tablemanager.lib.DateModel
 import com.extremex.tablemanager.lib.DurationUnit
 import com.extremex.tablemanager.lib.HolidayInfoModel
 import com.extremex.tablemanager.lib.StandardCompanion
+import com.extremex.tablemanager.lib.ViewClassroomAdapter
+import com.extremex.tablemanager.lib.ViewHolidayAdapter
 import com.extremex.tablemanager.lib.ViewWeekdaysAdapter
 import com.google.android.material.slider.Slider
 import java.time.LocalTime
@@ -86,6 +91,14 @@ class ManageTimeSlotFragment: Fragment() {
         binding.HolidayNumberSetterDropDown.adapter = customSpinnerAdapter
         binding.HolidayUnitSetterDropDown.adapter = customUnitSpinnerAdapter
         val weekdays = requireContext().resources.getStringArray(R.array.WeekDays)
+        if (getCustomHolidays().isEmpty()){
+            binding.HolidayViewPlaceHolder.visibility = View.VISIBLE
+            binding.CustomHolidayList.visibility = View.GONE
+        } else {
+            binding.HolidayViewPlaceHolder.visibility = View.GONE
+            binding.CustomHolidayList.visibility = View.VISIBLE
+            addToListView(binding)
+        }
 
         // Set up the RecyclerView
         val layoutManager = GridLayoutManager(requireContext(), 7)
@@ -223,8 +236,9 @@ class ManageTimeSlotFragment: Fragment() {
                         override fun onDismiss() {
                             binding.CustomHolidayNameText.text?.clear()
                             binding.CustomHolidayDateSetter.text = ""
-                            binding.NumberSetterDropDown.setSelection(0)
+                            binding.HolidayNumberSetterDropDown.setSelection(0)
                             binding.HolidayUnitSetterDropDown.setSelection(0)
+                            addToListView(binding)
                         }
 
                     }, null)
@@ -258,6 +272,25 @@ class ManageTimeSlotFragment: Fragment() {
         }
 
 
+    }
+
+    private fun addToListView(binding: FragmentManageTimeSlotsViewBinding){
+        if (getCustomHolidays().isEmpty()){
+            binding.HolidayViewPlaceHolder.visibility = View.VISIBLE
+            binding.CustomHolidayList.visibility = View.GONE
+        } else {
+            binding.HolidayViewPlaceHolder.visibility = View.GONE
+            binding.CustomHolidayList.visibility = View.VISIBLE
+        }
+        val holidayAdapter = ViewHolidayAdapter(requireContext(), getCustomHolidays())
+        holidayAdapter.attachItemTouchHelper(binding.CustomHolidayList)
+        holidayAdapter.attachItemTouchHelper(binding.CustomHolidayList)
+        binding.CustomHolidayList.adapter = holidayAdapter
+        binding.CustomHolidayList.layoutManager = LinearLayoutManager(requireContext())
+        // live updates the list
+        binding.CustomHolidayList.adapter.let {
+            it?.notifyItemRangeInserted(0, getCustomHolidays().size)
+        }
     }
 
 
