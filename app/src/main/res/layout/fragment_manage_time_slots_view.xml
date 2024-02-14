@@ -10,16 +10,15 @@
         android:id="@+id/AddTimeSlotTitle"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="?android:statusBarColor"
-        android:fontFamily="@font/tablemanager_extra_bold"
-        android:textStyle="bold"
         android:elevation="5dp"
+        android:fontFamily="@font/font_tablemanager_extra_bold"
         android:gravity="center"
         android:padding="10dp"
+        android:text="Add Time Slots"
         android:textSize="20sp"
-        android:text="Add Time Slots" />
+        android:textStyle="bold" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/BackButton"
@@ -50,6 +49,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:text="Lecture Duration"
+                android:fontFamily="@font/font_tablemanager_bold"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginHorizontal="10dp"/>
@@ -76,6 +76,7 @@
                         android:layout_marginStart="5dp"
                         android:autoSizeTextType="uniform"
                         android:text="Set Lecture Start Time"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -99,6 +100,7 @@
                         android:autoSizeTextType="uniform"
                         android:layout_marginStart="5dp"
                         android:text="Set Lecture Duration"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -135,6 +137,7 @@
                         android:layout_marginStart="5dp"
                         android:autoSizeTextType="uniform"
                         android:text="Set Break Start Time"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -158,6 +161,7 @@
                         android:layout_marginStart="5dp"
                         android:autoSizeTextType="uniform"
                         android:text="Set Break Duration"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -203,7 +207,8 @@
             android:layout_marginStart="20dp"
             android:gravity="center"
             android:autoSizeTextType="uniform"
-            android:text="Number of lectures per day:"
+                android:fontFamily="@font/font_tablemanager_bold"
+                android:text="Number of lectures per day:"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -244,6 +249,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="Set Semester Size (in Weeks)"
                 android:textSize="16sp"
+                android:fontFamily="@font/font_tablemanager_bold"
                 android:textStyle="bold"
                 android:layout_marginHorizontal="10dp"
                 android:layout_below="@+id/Divider0"/>
@@ -269,7 +275,7 @@
                 android:layout_below="@+id/SetSemesterSizeTitle"
                 android:layout_alignParentEnd="true"
                 android:gravity="start|center_vertical"
-                android:fontFamily="@font/tablemanager_black"
+                android:fontFamily="@font/font_tablemanager_bold"
                 android:textStyle="bold"
                 android:paddingVertical="10dp"
                 android:paddingStart="0dp"
@@ -332,6 +338,7 @@
                 android:autoSizeTextType="uniform"
                 android:text="Add Custom Day Offs"
                 android:textSize="16sp"
+                android:fontFamily="@font/font_tablemanager_bold"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -358,6 +365,7 @@
                         android:layout_marginVertical="5dp"
                         android:autoSizeTextType="uniform"
                         android:text="Add Holiday Name"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -369,6 +377,7 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginBottom="10dp"
                         android:hint="Holiday name"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:inputType="text" />
 
                 </LinearLayout>
@@ -388,6 +397,7 @@
                         android:layout_marginVertical="5dp"
                         android:autoSizeTextType="uniform"
                         android:text="Add Holiday Date"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -427,6 +437,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
                         android:text="Add Number Of Holidays"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textSize="14sp"
                         android:textStyle="bold"/>
 
@@ -453,18 +464,18 @@
                                 android:id="@+id/HolidayNumberSetterDropDown"
                                 style="@style/Widget.AppCompat.DropDownItem.Spinner"
                                 android:layout_width="match_parent"
-                                android:layout_height="35dp"
+                                android:layout_height="25dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/bg_spinner_main_default_1"
                                 android:entries="@array/NumberByTimes"
-                                android:fontFamily="@font/tablemanager_black"
-                                android:textStyle="bold|italic"
+                                android:fontFamily="@font/font_tablemanager_extra_light"
                                 android:gravity="start"
                                 android:padding="5dp"
                                 android:popupBackground="@drawable/bg_spinner_default_1"
                                 android:scrollbarSize="0dp"
                                 android:scrollbars="none"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                android:textStyle="bold|italic" />
 
                             <Spinner
                                 android:id="@+id/HolidayUnitSetterDropDown"
@@ -475,7 +486,7 @@
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/bg_spinner_main_default_1"
                                 android:entries="@array/LargeTimeUnits"
-                                android:fontFamily="@font/tablemanager_black"
+                                android:fontFamily="@font/font_tablemanager_extra_light"
                                 android:textStyle="bold|italic"
                                 android:gravity="start"
                                 android:padding="5dp"
@@ -493,6 +504,7 @@
                             android:layout_gravity="end|fill_horizontal"
                             android:layout_marginStart="10dp"
                             android:text="Add"
+                            android:fontFamily="@font/font_tablemanager_extra_light"
                             app:icon="@drawable/ic_add"
                             app:iconGravity="textStart" />
                     </LinearLayout>
@@ -520,6 +532,7 @@
                 android:layout_marginBottom="10dp"
                 android:autoSizeTextType="uniform"
                 android:text="View Added Days Off"
+                android:fontFamily="@font/font_tablemanager_bold"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
@@ -538,6 +551,7 @@
                 android:gravity="center"
                 android:padding="40dp"
                 android:text="No holidays has been added yet"
+                android:fontFamily="@font/font_tablemanager_bold"
                 android:textSize="14sp"
                 android:textStyle="normal" />
 

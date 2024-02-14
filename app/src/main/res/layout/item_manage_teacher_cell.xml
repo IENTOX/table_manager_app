@@ -17,6 +17,7 @@
         android:layout_gravity="center"
         android:layout_weight="3"
         android:gravity="center"
+        android:fontFamily="@font/font_tablemanager_bold"
         android:textStyle="bold"
         android:textSize="12sp"
         android:text="ID"/>
@@ -28,6 +29,7 @@
         android:layout_gravity="center"
         android:layout_weight="3"
         android:gravity="center"
+        android:fontFamily="@font/font_tablemanager_bold"
         android:maxLines="2"
         android:textSize="12sp"
         android:text="NAME"/>
@@ -38,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="3"
-        android:maxLines="2"
+    android:fontFamily="@font/font_tablemanager_bold"
+    android:maxLines="2"
         android:gravity="center"
         android:textSize="12sp"
         android:text="ASSIGNED SUBJECT"/>

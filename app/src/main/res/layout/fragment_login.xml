@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:alpha="1.0"
                 android:autoSizeTextType="uniform"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/font_tablemanager_extra_bold"
                 android:gravity="center"
                 android:text="@string/Login_title_string"
                 android:textAllCaps="true"
@@ -83,6 +83,7 @@
                         android:layout_weight="1"
                         android:autoSizeTextType="uniform"
                         android:text="@string/email_title_string"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textIsSelectable="false"
                         android:textStyle="bold" />
 
@@ -93,6 +94,8 @@
                         android:layout_marginHorizontal="20dp"
                         android:autofillHints="EmailID"
                         android:hint="@string/email_id_placeholder_string"
+                        android:fontFamily="@font/font_tablemanager_extra_light"
+                        android:textStyle="bold"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:textIsSelectable="true" />
@@ -103,6 +106,7 @@
                         android:layout_marginHorizontal="20dp"
                         android:autoSizeTextType="uniform"
                         android:text="@string/password_title_string"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textIsSelectable="false"
                         android:textStyle="bold" />
 
@@ -114,6 +118,8 @@
                         android:layout_weight="1"
                         android:autofillHints="Password"
                         android:hint="@string/password_title_string"
+                        android:fontFamily="@font/font_tablemanager_extra_light"
+                        android:textStyle="bold"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:textIsSelectable="true" />
@@ -137,6 +143,7 @@
                     android:textColor="?android:textColor"
                     app:strokeColor="?colorPrimary"
                     app:strokeWidth="3dp"
+                    android:fontFamily="@font/font_tablemanager_extra_light"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
@@ -152,6 +159,7 @@
                     android:backgroundTint="?colorPrimaryContainer"
                     android:textColor="?android:textColor"
                     app:strokeColor="?colorPrimary"
+                    android:fontFamily="@font/font_tablemanager_extra_light"
                     app:strokeWidth="3dp"
                     app:iconGravity="textStart"
                     android:maxLines="1"
@@ -177,5 +185,7 @@
         android:layout_marginHorizontal="10dp"
         app:iconGravity="textStart"
         app:icon="@drawable/ic_login_button"
+        android:fontFamily="@font/font_tablemanager_extra_light"
         android:text="@string/Login_title_string" />
+
 </RelativeLayout>
