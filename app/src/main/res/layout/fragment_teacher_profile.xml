@@ -274,7 +274,7 @@
             android:backgroundTint="?android:colorBackground"
             android:textColor="?android:textColor"
             app:iconGravity="textStart"
-            app:iconTint="?android:textColor"
+            app:iconTint="?colorPrimary"
             app:icon="@drawable/ic_reset_password_black"
             android:text="Reset Password"/>
 
