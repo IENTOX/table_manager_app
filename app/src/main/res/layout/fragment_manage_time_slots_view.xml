@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:background="?android:statusBarColor"
         android:fontFamily="@font/tablemanager_black"
-        android:textStyle="bold|italic"
+        android:textStyle="bold"
         android:elevation="5dp"
         android:gravity="center"
         android:padding="10dp"
@@ -162,7 +162,7 @@
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:id="@+id/TeachersSpinner"
+                        android:id="@+id/BreakDurationSetter"
                         style="@style/Widget.AppCompat.DropDownItem.Spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

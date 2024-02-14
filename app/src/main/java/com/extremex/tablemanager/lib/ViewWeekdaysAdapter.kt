@@ -1,15 +1,19 @@
 package com.extremex.tablemanager.lib
 
 import android.content.Context
+import android.icu.text.Transliterator.Position
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.ItemWeekdaysBinding
 
 class ViewWeekdaysAdapter(private val context: Context, private val weekdays: Array<String>) : RecyclerView.Adapter<ViewWeekdaysAdapter.ViewHolder>() {
 
-
+    val userPref = context.getSharedPreferences(StandardCompanion.USER_PREF_FILE_MANE, AppCompatActivity.MODE_PRIVATE)
+    val userPrefEditor = userPref.edit()
     private val selectedPositions = mutableSetOf<Int>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -40,6 +44,12 @@ class ViewWeekdaysAdapter(private val context: Context, private val weekdays: Ar
             }
         }
         fun bind(weekday: String, position: Int) {
+            getSelectedPositionsFromPrefetch()
+            if (getSelectedPositionsFromPrefetch() != null){
+                for (elements in getSelectedPositionsFromPrefetch()!!){
+                    selectedPositions.add(elements)
+                }
+            }
             binding.apply {
                 DaysDisplay.text = weekday
                 if (selectedPositions.contains(position)) {
@@ -59,12 +69,42 @@ class ViewWeekdaysAdapter(private val context: Context, private val weekdays: Ar
     }
 
     private fun toggleSelection(position: Int) {
+        var data = mutableListOf<Int>()
         if (selectedPositions.contains(position)) {
             selectedPositions.remove(position)
+            userPrefEditor.remove(StandardCompanion.TIME_SLOTS_FIXED_DAYS_OFF)
+            data  = selectedPositions.toMutableList()
         } else {
             selectedPositions.add(position)
+            userPrefEditor.remove(StandardCompanion.TIME_SLOTS_FIXED_DAYS_OFF)
+            data = selectedPositions.toMutableList()
         }
+        var dataStream = ""
+        for (i in data.indices){
+            dataStream += "${data[i]}:"
+        }
+        Log.v(StandardCompanion.TIME_SLOTS_FIXED_DAYS_OFF, dataStream)
+        userPrefEditor.putString(StandardCompanion.TIME_SLOTS_FIXED_DAYS_OFF,dataStream)
+        userPrefEditor.commit()
         notifyItemChanged(position)
     }
-
+    private fun getSelectedPositionsFromPrefetch(): MutableList<Int>? {
+        val positionList = mutableListOf<Int>()
+        val dataStream: String? =
+            userPref.getString(StandardCompanion.TIME_SLOTS_FIXED_DAYS_OFF, "")
+        return if (!dataStream.isNullOrBlank()) {
+            val dataStreamArray = dataStream.split(":")
+            for (element in dataStreamArray) {
+                Log.v("ReceivedItemsFromStorage", element)
+                try {
+                    positionList.add(element.toInt())
+                } catch (e: NumberFormatException){
+                    //do nothing for now
+                }
+            }
+            positionList
+        }else {
+            null
+        }
+    }
 }

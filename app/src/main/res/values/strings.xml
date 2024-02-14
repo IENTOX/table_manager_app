@@ -32,7 +32,7 @@
     <string name="manage_hours_title">Manage Hours</string>
     <string name="android_appCompat_packageInfo_package_name_type">com.extremex.{AppContext.packageInfo.pName}</string>
     <string name="name_placeholder_string">Full name</string>
-    <string name="institute_code_title_string">Instute Code</string>
-    <string name="institute_code_string">Institue Code</string>
+    <string name="institute_code_title_string">Institute Code</string>
+    <string name="institute_code_string">Institute Code</string>
 
 </resources>

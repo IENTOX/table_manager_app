@@ -38,6 +38,7 @@ class AdminHomeActivity : AppCompatActivity(),
         setContentView(binding.root)
         setTheme()
 
+
         setCurrentFrame(lastOpenedMainFragment())
         binding.BottomNavBarA.setOnItemSelectedListener {
             when(it.itemId){

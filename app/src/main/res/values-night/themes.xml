@@ -34,6 +34,7 @@
         <item name="colorErrorInverse">#FA0D0D</item>
         <item name="colorTextInverse">@color/md_theme_light_onSecondaryContainer</item>
         <item name="colorMainContainer">@color/md_theme_Dark_onMainContainer</item>
+        <item name="colorBackgroundInverse">@color/md_theme_light_background</item>
     </style>
 
     <style name="DialogBox" parent="Theme.AppCompat.DayNight.Dialog.Alert">

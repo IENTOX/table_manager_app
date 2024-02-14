@@ -3,4 +3,5 @@
     <attr format="color" name="colorErrorInverse"/>
     <attr format="color" name="colorTextInverse"/>
     <attr format="color" name="colorMainContainer"/>
+    <attr format="color" name="colorBackgroundInverse"/>
 </resources>

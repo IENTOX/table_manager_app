@@ -6,31 +6,16 @@
         <item>Emergency Leave</item>
         <item>Unofficial Leave</item>
     </string-array>
-
-    <string-array name="subjects1">
-        <item>Web Tech</item>
-    </string-array>
-
-    <string-array name="subjects2">
-        <item>Web Tech</item>
-    </string-array>
-
-    <string-array name="subjects3">
-        <item>Web Tech</item>
-    </string-array>
     <string-array name="WeekDays">
-        <item>Sun</item>
         <item>Mon</item>
         <item>Tue</item>
         <item>Wed</item>
         <item>Thu</item>
         <item>Fri</item>
         <item>Sat</item>
+        <item>Sun</item>
     </string-array>
 
-    <string-array name="ClassRooms">
-        <item>c1</item>
-    </string-array>
     <string-array name="Tier">
         <item>1 Year</item>
         <item>2 Year</item>
@@ -48,13 +33,12 @@
         <item>Teacher 8</item>
         <item>Teacher 9</item>
         <item>Teacher 10</item>
-        <!-- Add more teacher names here -->
     </string-array>
 
     <string-array name="LargeTimeUnits">
         <item>Days</item>
         <item>Weeks</item>
-        <item>Month</item>
+        <item>Months</item>
         <item>Years</item>
     </string-array>
 
@@ -87,6 +71,7 @@
         <item>11:45–12:45</item>
         <item>12:45–01:45</item>
     </string-array>
+
     <string-array name="TimeDuration">
         <item>0:05:00</item>
         <item>00:10:00</item>
@@ -118,17 +103,5 @@
         <item>All Teachers</item>
         <item>available Teachers</item>
         <item>unavailable Teachers</item>
-    </string-array>
-
-    <integer-array name="CountryCode">
-        <item>91</item>
-        <item>1</item>
-        <item>44</item>
-    </integer-array>
-
-    <string-array name="CountryCodeNames">
-        <item>(India)</item>
-        <item>(Canada)</item>
-        <item>(United Kingdom)</item>
     </string-array>
 </resources>
