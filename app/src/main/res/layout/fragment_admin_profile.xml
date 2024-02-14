@@ -311,27 +311,33 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/TAndC"
+            android:id="@+id/ResetPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:backgroundTint="?colorSecondaryContainer"
+            app:strokeColor="?colorPrimary"
+            app:strokeWidth="3dp"
+            android:backgroundTint="?android:colorBackground"
             android:textColor="?android:textColor"
             app:iconGravity="textStart"
-            app:icon="@drawable/ic_terms_of_use"
+            app:iconTint="?android:textColor"
+            app:icon="@drawable/ic_reset_password_black"
             android:text="Reset Password"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/Credits"
+            android:id="@+id/DeleteAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:backgroundTint="?colorErrorInverse"
-            android:textColor="?colorTextInverse"
+            android:backgroundTint="?android:colorBackground"
+            app:strokeColor="?colorErrorInverse"
+            app:strokeWidth="3dp"
+            android:textColor="?colorErrorInverse"
+            app:iconTint="?colorErrorInverse"
             app:iconGravity="textStart"
-            app:icon="@drawable/ic_contribution"
+            app:icon="@drawable/ic_delete_button"
             android:text="Delete Account"/>
 
     </LinearLayout>

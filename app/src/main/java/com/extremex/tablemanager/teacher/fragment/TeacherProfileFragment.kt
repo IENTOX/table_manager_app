@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.extremex.tablemanager.common.SignupInActivity
 import com.extremex.tablemanager.databinding.FragmentTeacherProfileBinding
+import com.extremex.tablemanager.lib.ResetPasswordDialog
 
 class TeacherProfileFragment : Fragment() {
 
@@ -45,6 +47,10 @@ class TeacherProfileFragment : Fragment() {
         }
         binding.LogoutButton.setOnClickListener {
             logout(requireContext(), requireActivity())
+        }
+        binding.ResetPassword.setOnClickListener {
+            Log.v("TeachersFragment","Reset Password Button Pressed")
+            ResetPasswordDialog(requireContext())
         }
 
     }

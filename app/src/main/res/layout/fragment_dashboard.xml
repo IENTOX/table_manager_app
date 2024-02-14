@@ -63,9 +63,8 @@
                         android:layout_toStartOf="@+id/ShareCodeButton"
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/tv_background_3"
-                        android:fontFamily="@font/tablemanager_black"
-                        android:textStyle="bold|italic"
-                        android:padding="10dp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:paddingHorizontal="20dp"
                         android:text="A3Q5DG430S"
                         android:textSize="18sp" />
 

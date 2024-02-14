@@ -264,7 +264,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/TAndC"
+            android:id="@+id/ResetPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -279,7 +279,7 @@
             android:text="Reset Password"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/Credits"
+            android:id="@+id/DeleteAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
