@@ -34,7 +34,10 @@ import com.extremex.tablemanager.lib.ViewClassroomAdapter
 import com.extremex.tablemanager.lib.ViewHolidayAdapter
 import com.extremex.tablemanager.lib.ViewWeekdaysAdapter
 import com.google.android.material.slider.Slider
+import java.time.LocalDate
 import java.time.LocalTime
+import java.time.Year
+import java.time.YearMonth
 import java.util.Calendar
 import kotlin.math.roundToInt
 
@@ -79,7 +82,7 @@ class ManageTimeSlotFragment: Fragment() {
 
         userPref = requireContext().getSharedPreferences(StandardCompanion.USER_PREF_FILE_MANE, AppCompatActivity.MODE_PRIVATE)
         userPrefEditor = userPref.edit()
-        holidayPref = requireContext().getSharedPreferences(StandardCompanion.TIME_SLOTS_CUSTOM_HOLIDAY_FILE, AppCompatActivity.MODE_PRIVATE)
+        holidayPref = requireContext().getSharedPreferences(StandardCompanion.TIME_SLOTS_CUSTOM_HOLIDAY_FILE_MANE, AppCompatActivity.MODE_PRIVATE)
         holidayPrefEditor = holidayPref.edit()
         val item = requireContext().resources.getStringArray(R.array.NumberByTimes)
         val unitItem = requireContext().resources.getStringArray(R.array.LargeTimeUnits)
@@ -217,20 +220,24 @@ class ManageTimeSlotFragment: Fragment() {
                 val name = binding.CustomHolidayNameText.text.toString().trim()
                 val date = holidayStartDate
                 val number = binding.HolidayNumberSetterDropDown.selectedItemPosition
-                val selectedUnit = binding.HolidayUnitSetterDropDown.selectedItemPosition
-                val unit = when (selectedUnit) {
-                    0 -> DurationUnit.Days.name
-                    1 -> DurationUnit.Weeks.name
-                    2 -> DurationUnit.Months.name
-                    3 -> DurationUnit.Years.name
-                    else -> DurationUnit.Days.name
+                val unit = when (binding.HolidayUnitSetterDropDown.selectedItemPosition) {
+                    0 -> DurationUnit.Days
+                    1 -> DurationUnit.Weeks
+                    2 -> DurationUnit.Months
+                    3 -> DurationUnit.Years
+                    else -> DurationUnit.Days
                 }
                 if (date.size > 2 || date[0].toInt() != 0 || date[1].toInt() != 0 || date[2].toInt() != 0) {
                     createCustomHolidays(
                         name,
                         DateModel(date[0], date[1], date[2]),
                         number,
-                        unit
+                        unit,
+                        getHolidayEndDate(
+                            DateModel(date[0], date[1], date[2]),
+                            number,
+                            unit
+                        )
                     )
                     val popup = CustomDialog(requireContext(), object : CustomDialogDismissListener{
                         override fun onDismiss() {
@@ -288,9 +295,8 @@ class ManageTimeSlotFragment: Fragment() {
         binding.CustomHolidayList.adapter = holidayAdapter
         binding.CustomHolidayList.layoutManager = LinearLayoutManager(requireContext())
         // live updates the list
-        binding.CustomHolidayList.adapter.let {
-            it?.notifyItemRangeInserted(0, getCustomHolidays().size)
-        }
+        binding.CustomHolidayList.adapter.let { it?.notifyItemRangeChanged(0, getCustomHolidays().size) }
+        binding.CustomHolidayList.adapter.let { it?.notifyItemRangeRemoved(0, getCustomHolidays().size) }
     }
 
 
@@ -350,47 +356,84 @@ class ManageTimeSlotFragment: Fragment() {
 
         datePicker.show()
     }
+    private fun getHolidayEndDate(startDate: DateModel, numberHolidays: Int, unit: DurationUnit): DateModel {
+        val startLocalDate = LocalDate.of(startDate.year, startDate.month, startDate.day)
+        val endDate = when (unit) {
+            DurationUnit.Days -> startLocalDate.plusDays(numberHolidays+1.toLong())
+            DurationUnit.Weeks -> startLocalDate.plusWeeks(numberHolidays+1.toLong())
+            DurationUnit.Months -> {
+                val yearMonth = YearMonth.of(startDate.year, startDate.month)
+                val endYearMonth = yearMonth.plusMonths(numberHolidays+1.toLong())
+                LocalDate.of(endYearMonth.year, endYearMonth.month, startDate.day)
+            }
+            DurationUnit.Years -> startLocalDate.plusYears(numberHolidays+1.toLong())
+        }
+
+        // Adjust end date based on the start date
+        val adjustedEndDate = when {
+            startDate.day > 1 -> endDate.minusDays(1)
+            startDate.day == 1 && startDate.month > 1 -> {
+                val daysInPreviousMonth = YearMonth.of(startDate.year, startDate.month - 1).lengthOfMonth()
+                endDate.withDayOfMonth(daysInPreviousMonth)
+            }
+            startDate.day == 1 && startDate.month == 1 -> {
+                val daysInPreviousMonth = YearMonth.of(startDate.year - 1, 12).lengthOfMonth()
+                endDate.withDayOfMonth(daysInPreviousMonth).minusYears(1)
+            }
+            else -> endDate
+        }
+
+        return DateModel(
+            adjustedEndDate.dayOfMonth,
+            adjustedEndDate.monthValue,
+            adjustedEndDate.year
+        )
+    }
 
     private fun createCustomHolidays(
         holidayName: String,
-        date: DateModel,
+        startDate: DateModel,
         numberOfHolidays: Int = 0,
-        holidayUnit: String = DurationUnit.Days.name
+        holidayUnit: DurationUnit = DurationUnit.Days,
+        endDate: DateModel
+
     ){
         val position = (holidayPref.all.keys.size + 1) ?: 0
-        val holidayDate = "${date.day}@${date.month}@${date.year}"
-        val holiday = holidayName+"ӿ"+holidayDate+"ӿ"+(numberOfHolidays+1)+"ӿ"+holidayUnit
+        val holidayStartDate = "${startDate.day}@${startDate.month}@${startDate.year}"
+        val holidayEndDate = "${endDate.day}@${endDate.month}@${endDate.year}"
+        val holiday = holidayName+"ӿ"+holidayStartDate+"ӿ"+(numberOfHolidays+1)+"ӿ"+holidayUnit+"ӿ"+holidayEndDate
         holidayPrefEditor.putString(position.toString(), holiday)
         holidayPrefEditor.commit()
     }
 
     private fun getCustomHolidays(): MutableList<HolidayInfoModel>{
         var holidays = mutableListOf<HolidayInfoModel>()
-        val position = (holidayPref.all.keys.size -1) ?: 0
-        if (position > 0){
-            for (i in 1.. position){
-                try {
-                    val raw: MutableList<String> = holidayPref.getString(i.toString(),"None")?.split("ӿ")?.toMutableList() ?: mutableListOf("Unknown")
-                    if (raw[0] != "Unknown") {
-                        val name = raw[0]
-                        val rawDate = raw[1]
-                        val number = raw[2].toInt()
-                        val  unit = raw[3]
-                        val rawDateDate: MutableList<String> = rawDate.split("@").toMutableList()
-                        val day = rawDateDate[0].toInt()
-                        val month = rawDateDate[1].toInt()
-                        val year = rawDateDate[2].toInt()
-
-                        holidays.add(HolidayInfoModel(name, DateModel(day, month, year), number, unit))
-                    }
-                } catch ( e: NumberFormatException){
-                    // nothing to do for now
+        val holidayObjectSize = (holidayPref.all.keys.size) ?: null
+        val value_d = holidayPref.all.values.toMutableList()
+        if (holidayObjectSize != null){
+            for (data in value_d){
+                val raw: MutableList<String> = data.toString().split("ӿ").toMutableList() ?: mutableListOf("Unknown")
+                if (raw[0] != "Unknown") {
+                    val name = raw[0]
+                    val rawStartDate = raw[1]
+                    val number = raw[2].toInt()
+                    val  unit = raw[3]
+                    val rawEndDate = raw[4]
+                    val rawStartDateFinal: MutableList<String> = rawStartDate.split("@").toMutableList()
+                    val startDay = rawStartDateFinal[0].toInt()
+                    val startMonth = rawStartDateFinal[1].toInt()
+                    val startYear = rawStartDateFinal[2].toInt()
+                    val rawEndDateFinal: MutableList<String> = rawEndDate.split("@").toMutableList()
+                    val endDay = rawEndDateFinal[0].toInt()
+                    val endMonth = rawEndDateFinal[1].toInt()
+                    val endYear = rawEndDateFinal[2].toInt()
+                    holidays.add(HolidayInfoModel(name, DateModel(startDay, startMonth, startYear), number, unit, DateModel(endDay, endMonth, endYear)))
                 }
             }
         } else {
             holidayPref.getString(1.toString(),"None")
+            Log.e("Retrieved Holiday Data 2", "null")
         }
-
         return holidays
     }
 }

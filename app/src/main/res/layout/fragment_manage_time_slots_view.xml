@@ -464,7 +464,7 @@
                                 android:id="@+id/HolidayNumberSetterDropDown"
                                 style="@style/Widget.AppCompat.DropDownItem.Spinner"
                                 android:layout_width="match_parent"
-                                android:layout_height="25dp"
+                                android:layout_height="35dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/bg_spinner_main_default_1"
                                 android:entries="@array/NumberByTimes"

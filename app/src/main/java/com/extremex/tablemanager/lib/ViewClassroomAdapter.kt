@@ -1,6 +1,7 @@
 package com.extremex.tablemanager.lib
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,10 @@ class ViewClassroomAdapter(private val context: Context, private val classroomDa
     // Initialize the ItemTouchHelper
     private val swipeToDeleteCallback = SwipeToDeleteCallback(this)
     private val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+    private val pref: SharedPreferences = context.getSharedPreferences(StandardCompanion.CLASSROOM_DATA_FILE_MANE, Context.MODE_PRIVATE)
+    private val editor: SharedPreferences.Editor = pref.edit()
+    private var keys_d = pref.all.keys.toMutableList()
+    private var value_d = pref.all.values.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemClassroomDataBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -38,28 +43,25 @@ class ViewClassroomAdapter(private val context: Context, private val classroomDa
         }
     }
 
-    fun removeItem( position: Int) {
-        val pref = context.getSharedPreferences("ClassRoomData", Context.MODE_PRIVATE)
-        val edit = pref.edit()
-        val key = classroomData[position]
-        if (position > 0) {
-            classroomData.removeAt(position)
-            Log.w("remove key:", "selected key is $key")
-            edit.remove(key.toString())
-            edit.commit()
-            classroomData.removeAt(position)
-            notifyItemRemoved(0)
-            notifyItemRangeRemoved(0, classroomData.size -1)
-            notifyDataSetChanged()
-        } else if (position == 0) {
-            classroomData.removeAt(0)
-            Log.w("remove key:", "selected key is $key")
-            edit.remove(key.toString())
-            edit.commit()
-            classroomData.removeAt(position)
-            notifyItemRemoved(0)
-            notifyItemRangeRemoved(0, classroomData.size -1)
-            notifyDataSetChanged()
+
+
+    fun removeItem(position: Int, name: String="Item") {
+        if (keys_d.size == value_d.size && keys_d.isNotEmpty()){
+            editor.remove(keys_d[position])
+            editor.commit()
+            keys_d = pref.all.keys.toMutableList()
+            value_d = pref.all.values.toMutableList()
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(0,keys_d.size-1)
+
+        } else {
+            val dialog = CustomDialog(context, null, null)
+            dialog.createBasicCustomDialog(
+                "Dismiss", "An error was caused while deleting ${name}, try again later.",
+                true,
+                true,
+                "failed To Delete"
+            )
         }
     }
 

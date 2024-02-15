@@ -15,14 +15,16 @@
 
         <activity
             android:name=".admin.AdminHomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".common.SignupInActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".teacher.TeachersHomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".common.MainActivity"
             android:exported="true" >
