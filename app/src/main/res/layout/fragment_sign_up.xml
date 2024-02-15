@@ -54,7 +54,7 @@
 
             <ImageView
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="111dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
                 android:adjustViewBounds="true"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:alpha="1.0"
                 android:autoSizeTextType="uniform"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/font_tablemanager_extra_bold"
                 android:gravity="center"
                 android:text="@string/sign_up_title_string"
                 android:textAllCaps="true"
@@ -97,6 +97,7 @@
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_weight="1"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:autoSizeTextType="uniform"
                         android:text="@string/name_title_String"
                         android:textIsSelectable="false"
@@ -117,6 +118,7 @@
                             android:layout_weight="1"
                             android:autofillHints="FirstName"
                             android:hint="@string/first_name_placeholder_string"
+                            android:fontFamily="@font/font_tablemanager_bold"
                             android:inputType="textPersonName"
                             android:maxLength="15"
                             android:maxLines="1"
@@ -129,6 +131,7 @@
                             android:layout_weight="1"
                             android:autofillHints="LastName"
                             android:hint="@string/last_name_placeholder_string"
+                            android:fontFamily="@font/font_tablemanager_bold"
                             android:inputType="textPersonName"
                             android:maxLength="15"
                             android:maxLines="1"
@@ -149,6 +152,7 @@
                             android:layout_weight="1"
                             android:autoSizeTextType="uniform"
                             android:text="@string/date_of_birth_title_string"
+                            android:fontFamily="@font/font_tablemanager_bold"
                             android:textIsSelectable="false"
                             android:textStyle="bold" />
 
@@ -161,6 +165,7 @@
                             android:background="@drawable/bg_stroke_primary"
                             android:gravity="center"
                             android:padding="5dp"
+                            android:fontFamily="@font/font_tablemanager_bold"
                             android:text="@string/date_format_placeholder_string"
                             android:textSize="14sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -172,6 +177,7 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:text="@string/phone_number_title_string"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textAllCaps="false"
                         android:textStyle="bold" />
 
@@ -191,6 +197,7 @@
                             android:hint="@string/phone_number_title_string"
                             android:inputType="phone"
                             android:maxLength="10"
+                            android:fontFamily="@font/font_tablemanager_bold"
                             android:maxLines="1"
                             android:textIsSelectable="true" />
 
@@ -203,6 +210,7 @@
                         android:layout_weight="1"
                         android:autoSizeTextType="uniform"
                         android:text="@string/email_title_string"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textIsSelectable="false"
                         android:textStyle="bold" />
 
@@ -213,6 +221,7 @@
                         android:layout_marginHorizontal="20dp"
                         android:autofillHints="EmailID"
                         android:hint="@string/email_id_placeholder_string"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:textIsSelectable="true" />
@@ -223,6 +232,7 @@
                         android:layout_marginHorizontal="20dp"
                         android:autoSizeTextType="uniform"
                         android:text="@string/create_password_title_string"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textIsSelectable="false"
                         android:textStyle="bold" />
 
@@ -242,6 +252,7 @@
                             android:hint="@string/new_password_placeholder_string"
                             android:inputType="textPassword"
                             android:maxLines="1"
+                            android:fontFamily="@font/font_tablemanager_bold"
                             android:textIsSelectable="true" />
 
                         <EditText
@@ -253,6 +264,7 @@
                             android:hint="@string/confirm_password_placeholder_string"
                             android:inputType="textPassword"
                             android:maxLines="1"
+                            android:fontFamily="@font/font_tablemanager_bold"
                             android:textIsSelectable="true" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -281,7 +293,7 @@
                             android:gravity="center"
                             android:paddingStart="5dp"
                             android:textSize="14sp"
-                            android:fontFamily="@font/tablemanager_black"
+                            android:fontFamily="@font/font_tablemanager_bold"
                             android:textStyle="bold|italic"
                             android:text="Join an existing room"/>
 
@@ -327,6 +339,7 @@
                         android:text="@string/institute_title_string"
                         android:textIsSelectable="false"
                         android:textStyle="bold"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:visibility="visible"/>
 
                     <EditText
@@ -338,6 +351,7 @@
                         android:hint="@string/institute_title_string"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:fontFamily="@font/font_tablemanager_bold"
                         android:textIsSelectable="true"
                         android:visibility="visible" />
 
@@ -351,6 +365,7 @@
                 android:layout_marginVertical="10dp"
                 android:text="By signing up you except our terms of use."
                 android:textAllCaps="false"
+                android:fontFamily="@font/font_tablemanager_bold"
                 android:textStyle="normal" />
 
         </LinearLayout>
@@ -366,6 +381,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="10dp"
+        android:fontFamily="@font/font_tablemanager_extra_light"
         android:layout_marginBottom="673dp"
         android:text="@string/sign_up_title_string" />
 

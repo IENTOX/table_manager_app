@@ -10,7 +10,7 @@
         android:layout_height="?actionBarSize"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/tablemanager_black"
+        android:fontFamily="@font/tablemanager_extra_bold"
         android:textStyle="bold|italic"
         android:elevation="5dp"
         android:gravity="center"
@@ -52,8 +52,7 @@
         android:layout_marginTop="70dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="80dp"
-        android:fontFamily="@font/tablemanager_black"
-        android:textStyle="bold|italic"
+        android:fontFamily="@font/tablemanager_bold"        android:textStyle="bold|italic"
         android:background="@drawable/tv_background_2"
         android:autoSizeTextType="uniform"
         android:gravity="center"
@@ -73,7 +72,7 @@
         android:layout_marginEnd="60dp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/tv_background_2"
-        android:fontFamily="@font/tablemanager_black"
+        android:fontFamily="@font/tablemanager_bold"
         android:textStyle="bold|italic"
         android:gravity="center"
         android:paddingHorizontal="10dp"
@@ -92,8 +91,7 @@
         android:layout_marginEnd="25dp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/tv_background_2"
-        android:fontFamily="@font/tablemanager_black"
-        android:textStyle="bold|italic"
+        android:fontFamily="@font/tablemanager_bold"        android:textStyle="bold|italic"
         android:gravity="center"
         android:paddingHorizontal="10dp"
         android:textSize="12sp"
@@ -120,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 app:iconGravity="textStart"
+                android:fontFamily="@font/tablemanager_extra_light"
                 app:icon="@drawable/ic_terms_of_use"
                 android:text="Terms of Use"/>
 
@@ -130,6 +129,7 @@
                 android:layout_margin="5dp"
                 app:iconGravity="textStart"
                 app:icon="@drawable/ic_contribution"
+                android:fontFamily="@font/tablemanager_extra_light"
                 android:text="Credits"/>
 
         </LinearLayout>
@@ -147,6 +147,7 @@
                 android:layout_margin="5dp"
                 app:iconGravity="textStart"
                 app:icon="@drawable/ic_collaboration"
+                android:fontFamily="@font/tablemanager_extra_light"
                 android:text="Collaboration"/>
 
             <com.google.android.material.button.MaterialButton
@@ -156,6 +157,7 @@
                 android:layout_margin="5dp"
                 app:iconGravity="textStart"
                 app:icon="@drawable/ic_licence"
+                android:fontFamily="@font/tablemanager_extra_light"
                 android:text="Licences"/>
 
         </LinearLayout>

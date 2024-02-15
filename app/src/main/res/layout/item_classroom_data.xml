@@ -16,12 +16,13 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:fontFamily="@font/b_bold"
+        android:fontFamily="@font/font_tablemanager_bold"
         android:textColor="?android:textColorPrimaryInverse"
         android:textSize="16sp"
         android:layout_marginHorizontal="5dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+
         android:text="C12"/>
     <TextView
         android:id="@+id/ClassroomName"
@@ -30,7 +31,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="?android:textColorPrimaryInverse"
-        android:fontFamily="@font/b_bold"
+        android:fontFamily="@font/font_tablemanager_bold"
         android:textSize="16sp"
         android:layout_marginHorizontal="5dp"
         android:layout_marginStart="10dp"
