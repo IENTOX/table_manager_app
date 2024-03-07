@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".admin.fragment.ManageSubjectFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/AddSubjectTitle"
@@ -11,13 +13,13 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="?android:statusBarColor"
-        android:fontFamily="@font/font_tablemanager_extra_bold"
-        android:textStyle="bold|italic"
+        android:fontFamily="@font/font_tablemanager_bold"
+        android:textStyle="bold"
         android:elevation="5dp"
         android:gravity="center"
         android:padding="10dp"
         android:textSize="20sp"
-        android:text="Add a subject"/>
+        android:text="@string/manage_subject_title_string"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/BackButton"
@@ -29,418 +31,521 @@
         android:paddingHorizontal="30dp"
         android:src="@drawable/ic_arrow_back"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/SubjectNameTitle"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Subject Name"
-        android:textSize="14sp"
-        android:fontFamily="@font/font_tablemanager_bold"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_below="@+id/AddSubjectTitle"/>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/SubjectNameText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SubjectNameTitle"
-        android:layout_marginHorizontal="10dp"
-        android:textSize="14sp"
-        android:layout_marginTop="0dp"
-        android:fontFamily="@font/font_tablemanager_bold"
-        android:layout_marginBottom="10dp"
-        android:hint="Subject Name"/>
-
-    <LinearLayout
-        android:id="@+id/ClassroomCodeBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SubjectNameText"
+        android:layout_below="@+id/AddSubjectTitle"
         android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:weightSum="2"
-        android:orientation="horizontal">
+        android:scrollbars="none">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="start|center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ViewSubjectsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/SubjectCodeTitle"
-                android:layout_width="wrap_content"
+                android:id="@+id/ViewAllSubjectsTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Subject Code"
+                android:text="@string/view_all_subjects_title_string"
+                android:textSize="16sp"
                 android:fontFamily="@font/font_tablemanager_bold"
-                android:textSize="14sp"
                 android:textStyle="bold"
+                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="10dp"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/SubjectCode"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/PlaceholderImage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="300dp"
+                android:alpha="0.7"
+                android:padding="50dp"
+                android:src="@drawable/img_books"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/SubjectList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="0dp"
                 android:layout_marginBottom="10dp"
-                android:autoSizeTextType="uniform"
-                android:textSize="14sp"
-                android:fontFamily="@font/font_tablemanager_bold"
-                android:hint="Code"
-                android:maxLines="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:weightSum="3"
-            android:layout_gravity="center"
-            android:gravity="start|center_vertical"
-            android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/ClassroomCodeSetTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Classroom Code"
-                android:fontFamily="@font/font_tablemanager_bold"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="10dp"/>
-
-            <Spinner
-                android:id="@+id/ClassroomCodeSetter"
-                style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:background="@drawable/tv_background_inner"
                 android:scrollbars="none"
-                android:scrollbarSize="0dp"
-                android:autoSizeTextType="uniform"
-                android:background="@drawable/bg_spinner_main_default"
-                android:fontFamily="@font/font_tablemanager_bold"
-                android:textStyle="bold|italic"
-                android:gravity="center"
-                android:popupBackground="@drawable/bg_spinner_default"
-                android:textSize="14sp" />
+                android:visibility="gone"/>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/Divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/ClassroomCodeBox"
-        android:alpha="0.3"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/black_box"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="5dp"
-        android:visibility="invisible"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/ElectiveSubjectNameTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Divider"
-        android:layout_marginHorizontal="10dp"
-        android:text="Elective Subject Name"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:visibility="gone" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/ElectiveSubjectNameText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ElectiveSubjectNameTitle"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="0dp"
-        android:textSize="14sp"
-        android:layout_marginBottom="10dp"
-        android:hint="Elective Subject Name"
-        android:visibility="gone"/>
-
-    <LinearLayout
-        android:id="@+id/ClassroomCodeElectiveBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ElectiveSubjectNameText"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="10dp"
-        android:gravity="center"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="start|center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/ViewSubjectsContainer"
+                android:alpha="0.3"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/black_box"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:visibility="visible"
+                android:contentDescription="@string/_divider_" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/ElectiveSubjectCodeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Elective Subject Code"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="10dp"/>
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ElectiveSubjectCode"
+                android:id="@+id/AddASubjectTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
+                android:layout_below="@+id/Divider"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="10dp"
-                android:hint="Elective code"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center_vertical|start"
-            android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/ClassroomCodeSetElectiveTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Elective Classroom Code"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="10dp"/>
-
-            <Spinner
-                android:id="@+id/ClassroomCodeElectiveSetter"
-                style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:scrollbarSize="0dp"
-                android:background="@drawable/bg_spinner_main_default"
-                android:fontFamily="@font/tablemanager_black"
-                android:textStyle="bold|italic"
-                android:gravity="center"
-                android:popupBackground="@drawable/bg_spinner_default"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/CheckBoxPanel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ClassroomCodeElectiveBox"
-        android:layout_centerHorizontal="true"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="0dp"
-        android:elevation="5dp"
-        android:background="@drawable/tv_background_inner">
-
-        <LinearLayout
-            android:id="@+id/ElectivePanel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/ElectiveTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Elective :"
-                android:fontFamily="@font/font_tablemanager_bold"
-                android:padding="5dp"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"/>
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/ElectiveCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/ElectivePanel"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginHorizontal="15dp"
-            android:gravity="end|top"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/SubjectPerWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Subject Per Week:"
-                android:textSize="14sp"
+                android:text="@string/add_subjects_title_string"
+                android:textSize="16sp"
                 android:fontFamily="@font/font_tablemanager_bold"
                 android:textStyle="bold"/>
 
-            <Spinner
-                android:id="@+id/NumberSetter"
-                style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:scrollbars="none"
-                android:scrollbarSize="0dp"
-                android:autoSizeTextType="uniform"
-                android:background="@drawable/bg_spinner_main_default_1"
-                android:fontFamily="@font/font_tablemanager_bold"
-                android:textStyle="bold|italic"
-                android:gravity="start"
-                android:layout_marginStart="5dp"
-                android:entries="@array/NumberByTimes"
-                android:popupBackground="@drawable/bg_spinner_default_1"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/ElectivePanel"
-            android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/YearTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:fontFamily="@font/font_tablemanager_bold"
-                android:text="Select eligible Year :"
-                android:paddingHorizontal="5dp"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="10dp"/>
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/AddSubjectContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
+                android:layout_below="@+id/AddASubjectTitle"
+                android:layout_marginHorizontal="10dp"
+                android:layout_centerHorizontal="true"
                 android:orientation="horizontal"
-                android:layout_marginStart="10dp">
+                android:baselineAligned="false">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/Year1Title"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="start|center_vertical"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/SubjectNameTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="@string/subject_name_title_staring"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/SubjectNameText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:textSize="12sp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/subject_name_title_staring"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start|center_vertical"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/SubjectCodeTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Subject Code"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/SubjectCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:textSize="12sp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Code" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical|end"
-                    android:layout_marginStart="10dp"
-                    android:text="Year 1"
-                    android:fontFamily="@font/font_tablemanager_bold"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    android:layout_gravity="end|center_vertical"
+                    android:orientation="vertical">
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/Year1CheckBox"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="5dp"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/ClassroomCodeSetTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Classroom Code"/>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/Year2Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|end"
-                    android:layout_marginStart="10dp"
-                    android:text="Year 2"
-                    android:fontFamily="@font/font_tablemanager_bold"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
+                    <Spinner
+                        android:id="@+id/ClassroomCodeSetter"
+                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:textSize="12sp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_spinner_main_default"
+                        android:textStyle="bold|italic"
+                        android:gravity="center"
+                        android:popupBackground="@drawable/bg_spinner_default"
+                        android:scrollbars="none"
+                        android:scrollbarSize="0dp" />
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/Year2Checkbox"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="5dp"/>
+                </LinearLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/Year3Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|end"
-                    android:layout_marginStart="10dp"
-                    android:text="Year 3"
-                    android:fontFamily="@font/font_tablemanager_bold"
-                    android:textStyle="bold"
-                    android:textSize="12sp"/>
-
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/Year3CheckBox"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="5dp"/>
             </LinearLayout>
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/Divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/AddSubjectContainer"
+                android:alpha="0.3"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/black_box"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:visibility="visible"
+                android:contentDescription="@string/_divider_" />
 
-    </RelativeLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/AddElectiveSubjectTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Divider1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/add_elective_subjects_title_string"
+                android:textSize="16sp"
+                android:fontFamily="@font/font_tablemanager_bold"
+                android:visibility="gone"
+                android:textStyle="bold"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/AddButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/CheckBoxPanel"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Add"
-        android:fontFamily="@font/font_tablemanager_extra_light"
-        app:icon="@drawable/ic_add"
-        app:iconGravity="textStart" />
+            <LinearLayout
+                android:id="@+id/AddElectiveSubjectContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/AddElectiveSubjectTitle"
+                android:layout_marginHorizontal="10dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:baselineAligned="false">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/PlaceholderImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/AddButton"
-        android:layout_centerHorizontal="true"
-        android:alpha="0.5"
-        android:padding="50dp"
-        android:src="@drawable/img_books"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="start|center_vertical"
+                    android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/SubjectList"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/AddButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:background="@drawable/tv_background_inner"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:visibility="gone"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/ElectiveSubjectNameTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="@string/subject_name_title_staring"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ElectiveSubjectNameText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:textSize="12sp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/subject_name_title_staring"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start|center_vertical"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/ElectiveSubjectCodeTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Subject Code"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ElectiveSubjectCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:textSize="12sp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Code" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/ClassroomCodeSetElectiveTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="Classroom Code"/>
+
+                    <Spinner
+                        android:id="@+id/ClassroomCodeElectiveSetter"
+                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:textSize="12sp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_spinner_main_default"
+                        android:textStyle="bold|italic"
+                        android:gravity="center"
+                        android:popupBackground="@drawable/bg_spinner_default"
+                        android:scrollbars="none"
+                        android:scrollbarSize="0dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/Divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/AddElectiveSubjectContainer"
+                android:alpha="0.3"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/black_box"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:visibility="gone"
+                android:contentDescription="@string/_divider_" />
+
+            <RelativeLayout
+                android:id="@+id/CheckBoxPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Divider2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:elevation="5dp"
+                android:background="@drawable/tv_background_inner">
+
+                <LinearLayout
+                    android:id="@+id/ElectivePanel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/ElectiveTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Elective :"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:padding="5dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"/>
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/ElectiveCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/ElectivePanel"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:gravity="end|top"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/SubjectPerWeek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subject Per Week:"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/NumberSetter"
+                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:scrollbars="none"
+                        android:scrollbarSize="0dp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/bg_spinner_main_default_1"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:textStyle="bold|italic"
+                        android:gravity="start"
+                        android:layout_marginStart="5dp"
+                        android:entries="@array/NumberByTimes"
+                        android:popupBackground="@drawable/bg_spinner_default_1"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/ElectivePanel"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/YearTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:text="Assign A Year :"
+                        android:paddingHorizontal="5dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="10dp"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="10dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/Year1Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|end"
+                            android:layout_marginStart="10dp"
+                            android:text="First Year"
+                            android:fontFamily="@font/font_tablemanager_bold"
+                            android:textSize="12sp"/>
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/Year1CheckBox"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="5dp"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/Year2Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|end"
+                            android:layout_marginStart="10dp"
+                            android:text="Second Year"
+                            android:fontFamily="@font/font_tablemanager_bold"
+                            android:textSize="12sp"/>
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/Year2Checkbox"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="5dp"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/Year3Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|end"
+                            android:layout_marginStart="10dp"
+                            android:text="Third  Year"
+                            android:fontFamily="@font/font_tablemanager_bold"
+                            android:textSize="12sp"/>
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/Year3CheckBox"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="5dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/AddButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/CheckBoxPanel"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/add_button_string_title"
+                android:fontFamily="@font/font_tablemanager_extra_light"
+                app:icon="@drawable/ic_add"
+                app:iconGravity="textStart"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.adapter
 
 
 import android.content.Context
@@ -9,11 +9,19 @@ import android.view.ViewGroup
 import com.google.android.material.imageview.ShapeableImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.lib.CustomDialog
+import com.extremex.tablemanager.lib.CustomDialogConfirmListener
+import com.extremex.tablemanager.lib.ManageTeachersModel
 import com.google.android.material.textview.MaterialTextView
 
 
 class ManageAllTeachersAdapter(private val context: Context, private val teacherList: MutableList<ManageTeachersModel>) :
     RecyclerView.Adapter<ManageAllTeachersAdapter.ViewHolder>() {
+        interface TeacherListener{
+            fun onTeacherRemoved()
+        }
+
+    private var listener: TeacherListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_manage_teacher_cell, parent, false)
@@ -41,7 +49,7 @@ class ManageAllTeachersAdapter(private val context: Context, private val teacher
     }
 
     private fun removeTeacher(position: Int, teacherList: MutableList<ManageTeachersModel>): Int {
-        val makeDialog = CustomDialog( context,null, object : CustomDialogConfirmListener{
+        val makeDialog = CustomDialog( context,null, object : CustomDialogConfirmListener {
             override fun onConfirm() {
                 Log.v("Deleting: ", teacherList[position].name)
                 remove(position)
@@ -51,23 +59,22 @@ class ManageAllTeachersAdapter(private val context: Context, private val teacher
         makeDialog.createBasicTwoStateCustomDialog(
             "Cancel",
             "Confirm",
-            "Are you sure, you want to remove ${teacherList[position].name} from this group.",
+            "Are you sure, you want to remove ${teacherList[position].name} from this institute.",
             true
         )
 
         return position
     }
     private fun remove(position: Int){
-        if (position > 0) {
-            Log.v("Deleted: ", "$position"+teacherList[position].name)
+        if (position >= 0) {
+            Log.v("Deleted: ", "$position" + teacherList[position].name)
             teacherList.removeAt(position)
+            listener?.onTeacherRemoved()
             notifyItemRemoved(position)
-            notifyItemRangeRemoved(0, teacherList.size -1)
-        } else if (position == 0){
-            Log.v("Deleted: ", "$position"+teacherList[0].name)
-            teacherList.removeAt(0)
-            notifyItemRemoved(0)
-            notifyItemRangeRemoved(0, teacherList.size -1)
         }
+    }
+
+    fun setListener(listener: TeacherListener){
+        this.listener = listener
     }
 }

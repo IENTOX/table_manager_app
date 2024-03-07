@@ -1,22 +1,34 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.extremex.tablemanager.databinding.ItemHolidayBinding
+import com.extremex.tablemanager.lib.HolidayInfoModel
+import com.extremex.tablemanager.lib.StandardCompanion
+import com.extremex.tablemanager.lib.SwipeToDeleteCallbackH
+import java.lang.IndexOutOfBoundsException
 
 class ViewHolidayAdapter(private val context: Context, private val holidayData: MutableList<HolidayInfoModel>) : RecyclerView.Adapter<ViewHolidayAdapter.ViewHolder>() {
 
-    // Initialize the ItemTouchHelper
+    // Define a listener interface
+    interface ViewHolidayAdapterListener {
+        fun onHolidayCleared()
+    }
+
+    // Listener instance
+    private var listener: ViewHolidayAdapterListener? = null
     private val swipeToDeleteCallback = SwipeToDeleteCallbackH(this)
     private val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
     private val pref: SharedPreferences = context.getSharedPreferences(StandardCompanion.TIME_SLOTS_CUSTOM_HOLIDAY_FILE_MANE, Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = pref.edit()
-    private var keys_d = pref.all.keys.toMutableList()
-    private var value_d = pref.all.values.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemHolidayBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,6 +45,7 @@ class ViewHolidayAdapter(private val context: Context, private val holidayData: 
         private val context: Context,
         private val binding: ItemHolidayBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(holidayData: HolidayInfoModel) {
             binding.apply {
                 StartDate.text = "${holidayData.holidayStartDay.day}/${holidayData.holidayStartDay.month}/${holidayData.holidayStartDay.year}"
@@ -44,24 +57,24 @@ class ViewHolidayAdapter(private val context: Context, private val holidayData: 
         }
     }
 
-    fun removeItem(position: Int, name: String="Item") {
-        if (keys_d.size == value_d.size && keys_d.isNotEmpty()){
-            editor.remove(keys_d[position])
+    fun removeItem(position: Int) {
+        try {
+            val fromPrefKeys = pref.all.keys.toMutableList()
+            editor.remove(fromPrefKeys[position])
             editor.commit()
-            keys_d = pref.all.keys.toMutableList()
-            value_d = pref.all.values.toMutableList()
+            listener?.onHolidayCleared()
             notifyItemRemoved(position)
-            notifyItemRangeChanged(0,keys_d.size-1)
-
-        } else {
-            val dialog = CustomDialog(context, null, null)
-            dialog.createBasicCustomDialog(
-                "Dismiss", "An error was caused while deleting ${name}, try again later.",
-                true,
-                true,
-                "failed To Delete"
-            )
+        } catch (e: IndexOutOfBoundsException) {
+            Log.v("deletion", "current position: $position")
+            for (i in pref.all.keys) {
+                Log.v("deletion", "OutOfBoundsFile -> ${pref.getString(i, "")}")
+            }
         }
+    }
+
+    // Setter method for the listener
+    fun setListener(listener: ViewHolidayAdapterListener) {
+        this.listener = listener
     }
 
     // Attach the ItemTouchHelper to the RecyclerView in your Fragment or Activity

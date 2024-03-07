@@ -1,5 +1,7 @@
 package com.extremex.tablemanager.lib
 
+import com.extremex.tablemanager.data.Gender
+import com.extremex.tablemanager.models.TeacherObject
 import java.util.*
 
 class TeachersTimetableGenerator(private val teacherNames: List<String>, private val subjectList: List<String>) {
@@ -20,7 +22,9 @@ class TeachersTimetableGenerator(private val teacherNames: List<String>, private
             if (dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY) {
                 val day = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
                 for (timeSlot in timeSlots) {
-                    val availableTeachers = teacherNames.map { Teacher(it, subjectList) }
+                    val availableTeachers = teacherNames.map { TeacherObject(it, Gender.OTHER,"","",subjectList,
+                        arrayOf(0)
+                    ) }
                         .filter { teacher -> isTeacherAvailable(teacher, day, timeSlot, teacherTimetables) }
 
                     if (availableTeachers.isNotEmpty()) {
@@ -57,7 +61,7 @@ class TeachersTimetableGenerator(private val teacherNames: List<String>, private
     }
 
     private fun isTeacherAvailable(
-        teacher: Teacher,
+        teacher: TeacherObject,
         day: String,
         timeSlot: String,
         teacherTimetables: Map<String, List<TimetableEntry>>
@@ -71,10 +75,10 @@ class TeachersTimetableGenerator(private val teacherNames: List<String>, private
         }
     }
 
-    private fun findSubstituteTeacher(teacherNames: List<String>, day: String, timeSlot: String): Teacher? {
+    private fun findSubstituteTeacher(teacherNames: List<String>, day: String, timeSlot: String): TeacherObject? {
         return if (teacherNames.size > 1) {
             val substituteTeacherName = teacherNames.filterNot { it == day }.random()
-            Teacher(substituteTeacherName, subjectList)
+            TeacherObject("", Gender.OTHER,"","",subjectList, arrayOf(0))
         } else {
             null
         }

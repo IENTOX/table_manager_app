@@ -2,6 +2,7 @@ package com.extremex.tablemanager.lib
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.extremex.tablemanager.adapter.ViewHolidayAdapter
 
 class SwipeToDeleteCallbackH(private val adapter: ViewHolidayAdapter) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {

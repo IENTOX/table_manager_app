@@ -1,24 +1,32 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.extremex.tablemanager.databinding.ItemClassroomDataBinding
+import com.extremex.tablemanager.lib.ClassroomModel
+import com.extremex.tablemanager.lib.CustomDialog
+import com.extremex.tablemanager.lib.StandardCompanion
+import com.extremex.tablemanager.lib.SwipeToDeleteCallback
+import java.lang.IndexOutOfBoundsException
 
 class ViewClassroomAdapter(private val context: Context, private val classroomData: MutableList<ClassroomModel>) : RecyclerView.Adapter<ViewClassroomAdapter.ViewHolder>() {
 
-    // Initialize the ItemTouchHelper
+    // Define a listener interface
+    interface ViewClassroomAdapterListener {
+        fun onClassroomCleared()
+    }
+
+    // Listener instance
+    private var listener: ViewClassroomAdapterListener? = null
     private val swipeToDeleteCallback = SwipeToDeleteCallback(this)
     private val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
     private val pref: SharedPreferences = context.getSharedPreferences(StandardCompanion.CLASSROOM_DATA_FILE_MANE, Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = pref.edit()
-    private var keys_d = pref.all.keys.toMutableList()
-    private var value_d = pref.all.values.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemClassroomDataBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -45,24 +53,24 @@ class ViewClassroomAdapter(private val context: Context, private val classroomDa
 
 
 
-    fun removeItem(position: Int, name: String="Item") {
-        if (keys_d.size == value_d.size && keys_d.isNotEmpty()){
-            editor.remove(keys_d[position])
+    fun removeItem(position: Int) {
+        try {
+            val fromPrefKeys = pref.all.keys.toMutableList()
+            editor.remove(fromPrefKeys[position])
             editor.commit()
-            keys_d = pref.all.keys.toMutableList()
-            value_d = pref.all.values.toMutableList()
+            listener?.onClassroomCleared()
             notifyItemRemoved(position)
-            notifyItemRangeChanged(0,keys_d.size-1)
-
-        } else {
-            val dialog = CustomDialog(context, null, null)
-            dialog.createBasicCustomDialog(
-                "Dismiss", "An error was caused while deleting ${name}, try again later.",
-                true,
-                true,
-                "failed To Delete"
-            )
+        } catch (e: IndexOutOfBoundsException) {
+            Log.v("deletion", "current position: $position")
+            for (i in pref.all.keys) {
+                Log.v("deletion", "OutOfBoundsFile -> ${pref.getString(i, "")}")
+            }
         }
+    }
+
+    // Setter method for the listener
+    fun setListener(listener: ViewClassroomAdapterListener) {
+        this.listener = listener
     }
 
     // Attach the ItemTouchHelper to the RecyclerView in your Fragment or Activity

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".admin.fragment.DashboardFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,7 +23,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:id="@+id/TopPanel"
@@ -77,140 +79,80 @@
                         android:background="@drawable/bg_share_button"
                         android:elevation="10dp"
                         android:padding="15dp"
-                        android:src="@drawable/ic_forward_icon" />
+                        android:src="@drawable/ic_forward_icon"
+                        android:contentDescription="@string/_share_button_" />
+
                 </RelativeLayout>
 
-
-                <RelativeLayout
-                    android:id="@+id/TeachersAvailabilityContainer"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/JoiningTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/TopPanel"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/font_tablemanager_bold"
+                    android:gravity="start|center_vertical"
+                    android:textSize="18sp"
+                    android:text="Joining Requests"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/TeachersListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/JoiningTitle"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/tv_background"
                     android:elevation="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                        <Spinner
-                            android:id="@+id/TeachersAvailabilitySpinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:autoSizeTextType="uniform"
-                            android:fontFamily="@font/tablemanager_black"
-                            android:textStyle="bold|italic"
-                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
-                            android:gravity="center_vertical|start"
-                            android:background="@drawable/bg_spinner_main_default"
-                            android:popupBackground="@drawable/bg_spinner_default"
-                            android:textSize="16sp"
-                            android:visibility="gone"/>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/TeachersListView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/TeachersAvailabilitySpinner"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginVertical="5dp"
-                        android:scrollbars="none"
-                        android:visibility="gone"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/ToggleTeachersList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/TeachersListView"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="5dp"
-                        android:text="View all teachers"
-                        android:fontFamily="@font/font_tablemanager_bold"
-                        app:icon="@drawable/ic_list_bulleted"
-                        app:iconGravity="textStart"/>
-                </RelativeLayout>
+                    android:padding="10dp"
+                    android:scrollbars="none"/>
 
                 <RelativeLayout
                     android:id="@+id/AdminInputPanel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/TeachersAvailabilityContainer"
+                    android:layout_below="@+id/TeachersListView"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/tv_background"
                     android:elevation="5dp"
                     android:orientation="horizontal"
                     android:padding="5dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/TitleSetup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/font_tablemanager_bold"
+                        android:gravity="start|center_vertical"
+                        android:textSize="18sp"
+                        android:text="Admin Console" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:layout_below="@+id/TitleSetup"
+                        android:padding="5dp"
+                        android:background="@drawable/tv_background"
+                        android:elevation="5dp"
+                        android:layout_centerHorizontal="true"
                         android:gravity="center">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:gravity="center_vertical"
-                            android:layout_margin="5dp"
-                            android:elevation="5dp"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:weightSum="2"
-                                android:orientation="vertical">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:text="Manage Subjects"
-                                    android:fontFamily="@font/font_tablemanager_bold"
-                                    android:layout_weight="1"
-                                    android:textSize="16sp"
-                                    android:textAlignment="center"/>
-
-                                <com.extremex.tablemanager.lib.MarqueeTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:textAlignment="center"
-                                    android:paddingHorizontal="20dp"
-                                    android:fontFamily="@font/font_tablemanager_extra_light"
-                                    android:textStyle="bold"
-                                    android:alpha="0.7"
-                                    android:text="Add, remove or update subjects." />
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:alpha="0.3"
-                                    android:src="@drawable/black_box"
-                                    android:layout_marginTop="1dp"
-                                    android:layout_marginHorizontal="5dp"
-                                    android:visibility="visible"/>
-                            </LinearLayout>
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/AddSubjectButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="10dp"
-                                app:icon="@drawable/ic_settings_filled_nav_icon"
-                                app:iconGravity="textEnd"/>
-
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -267,6 +209,7 @@
                                 app:iconGravity="textEnd"/>
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -319,63 +262,123 @@
                                 app:iconGravity="textEnd"/>
 
                         </LinearLayout>
-                        <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:gravity="center_vertical"
-                        android:layout_margin="5dp"
-                        android:elevation="5dp"
-                        android:orientation="horizontal">
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center_vertical"
+                            android:layout_margin="5dp"
+                            android:elevation="5dp"
+                            android:orientation="horizontal">
 
-                            <com.google.android.material.textview.MaterialTextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:weightSum="2"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Manage Subjects"
+                                    android:fontFamily="@font/font_tablemanager_bold"
+                                    android:layout_weight="1"
+                                    android:textSize="16sp"
+                                    android:textAlignment="center"/>
+
+                                <com.extremex.tablemanager.lib.MarqueeTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:textAlignment="center"
+                                    android:paddingHorizontal="20dp"
+                                    android:fontFamily="@font/font_tablemanager_extra_light"
+                                    android:textStyle="bold"
+                                    android:alpha="0.7"
+                                    android:text="Add, remove or update subjects." />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:alpha="0.3"
+                                    android:src="@drawable/black_box"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:visibility="visible"/>
+
+                            </LinearLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/AddSubjectButton"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Manage Teachers"
-                                android:textSize="16sp"
-                                android:fontFamily="@font/font_tablemanager_bold"
-                                android:textAlignment="center"/>
-
-                            <com.extremex.tablemanager.lib.MarqueeTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                android:paddingHorizontal="20dp"
-                                android:fontFamily="@font/font_tablemanager_extra_light"
-                                android:textStyle="bold"
-                                android:alpha="0.7"
-                                android:text="Manage teachers Preferences" />
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:alpha="0.3"
-                                android:src="@drawable/black_box"
-                                android:layout_marginTop="1dp"
-                                android:layout_marginHorizontal="5dp"
-                                android:visibility="visible"/>
+                                android:padding="10dp"
+                                app:icon="@drawable/ic_settings_filled_nav_icon"
+                                app:iconGravity="textEnd"/>
 
                         </LinearLayout>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/ManageTeachersButton"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            app:icon="@drawable/ic_settings_filled_nav_icon"
-                            app:iconGravity="textEnd"/>
+                            android:layout_centerInParent="true"
+                            android:gravity="center_vertical"
+                            android:layout_margin="5dp"
+                            android:elevation="5dp"
+                            android:orientation="horizontal">
 
-                    </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Manage Teachers"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/font_tablemanager_bold"
+                                    android:textAlignment="center"/>
+
+                                <com.extremex.tablemanager.lib.MarqueeTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:paddingHorizontal="20dp"
+                                    android:fontFamily="@font/font_tablemanager_extra_light"
+                                    android:textStyle="bold"
+                                    android:alpha="0.7"
+                                    android:text="Manage teachers Preferences" />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:alpha="0.3"
+                                    android:src="@drawable/black_box"
+                                    android:layout_marginTop="1dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:visibility="visible"/>
+
+                            </LinearLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/ManageTeachersButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                app:icon="@drawable/ic_settings_filled_nav_icon"
+                                app:iconGravity="textEnd"/>
+
+                        </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>
         </ScrollView>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
@@ -385,29 +388,29 @@
 
     </RelativeLayout>
 
-<LinearLayout
-    android:id="@+id/MessagesButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentBottom="true"
-    android:background="@drawable/bg_notify_button"
-    android:padding="15dp"
-    android:layout_marginEnd="20dp"
-    android:elevation="15dp"
-    android:gravity="center"
-    android:layout_marginBottom="20dp">
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:adjustViewBounds="true"
-        android:background="#00000000"
+    <LinearLayout
+        android:id="@+id/MessagesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_notify_button"
+        android:padding="15dp"
+        android:layout_marginEnd="20dp"
+        android:elevation="15dp"
         android:gravity="center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_notification" />
+        android:layout_marginBottom="20dp">
 
-</LinearLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:adjustViewBounds="true"
+            android:background="#00000000"
+            android:gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_notification" />
+
+    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/GenerateTimeTableButton"

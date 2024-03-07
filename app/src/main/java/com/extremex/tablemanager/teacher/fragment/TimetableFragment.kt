@@ -1,6 +1,5 @@
 package com.extremex.tablemanager.teacher.fragment
 
-import android.content.IntentFilter
 import android.content.SharedPreferences
 import com.extremex.tablemanager.lib.TeachersTimetableGenerator
 import android.os.Bundle
@@ -10,10 +9,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.extremex.tablemanager.data.Gender
 import com.extremex.tablemanager.databinding.FragmentTimetableBinding
-import com.extremex.tablemanager.lib.Teacher
 import com.extremex.tablemanager.lib.TimetableEntry
-import com.extremex.tablemanager.lib.TimetableAdapter // Correct import statement for TimetableAdapter
+import com.extremex.tablemanager.adapter.TimetableAdapter // Correct import statement for TimetableAdapter
+import com.extremex.tablemanager.models.TeacherObject
 import java.util.Calendar
 
 class TimetableFragment : Fragment() {
@@ -48,23 +48,23 @@ class TimetableFragment : Fragment() {
 
         // Assuming you have the teacher timetables as a list of com.extremex.tablemanager.lib.TimetableEntry objects for each teacher
         val timetableEntriesListTeacher1 = listOf(
-            TimetableEntry("Monday", "08:00 - 09:00", Teacher("Teacher1", listOf("Math")), "Math", "Classroom M1"),
-            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher1", listOf("Math")), "Physics", "Classroom P2"),
-            TimetableEntry("Wednesday", "08:00 - 09:00", Teacher("Teacher1", listOf("Math")), "English", "Classroom E5")
+            TimetableEntry("Monday", "08:00 - 09:00", TeacherObject("1001",Gender.MALE, "Teacher1","Math", listOf("Math"), arrayOf(1,2)), "English", "Classroom E5"),
+            TimetableEntry("Monday", "09:00 - 10:00",TeacherObject("1001",Gender.MALE, "Teacher1","Math", listOf("Math"), arrayOf(1,2)), "Physics", "Classroom P2"),
+            TimetableEntry("Wednesday", "08:00 - 09:00", TeacherObject("1001",Gender.MALE, "Teacher1","Math", listOf("Math"), arrayOf(1,2)), "English", "Classroom E5")
             // Add more timetable entries for Teacher1
         )
 
         val timetableEntriesListTeacher2 = listOf(
             // Timetable entries for Teacher2
-            TimetableEntry("Monday", "08:00 - 09:00", Teacher("Teacher2", listOf("english")), "Math", "Classroom M1"),
-            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
-            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
-            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
-            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
-            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
-            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
-            TimetableEntry("Monday", "09:00 - 10:00", Teacher("Teacher2", listOf("english")), "Physics", "Classroom P2"),
-            TimetableEntry("Wednesday", "08:00 - 09:00", Teacher("Teacher2", listOf("english")), "English", "Classroom E5")
+            TimetableEntry("Monday", "08:00 - 09:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "Math", "Classroom M1"),
+            TimetableEntry("Monday", "09:00 - 10:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "Physics", "Classroom P2"),
+            TimetableEntry("Monday", "09:00 - 10:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "Physics", "Classroom P2"),
+            TimetableEntry("Wednesday", "08:00 - 09:00", TeacherObject("1002",Gender.FEMALE, "Teacher2","Math", listOf("Math"), arrayOf(1,3)), "English", "Classroom E5")
         )
 
         // Create a map with teacher names as keys and their respective lists of timetable entries as values

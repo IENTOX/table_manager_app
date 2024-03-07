@@ -1,4 +1,4 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.applet
 import kotlin.random.Random
 
 class CodeGenerator {

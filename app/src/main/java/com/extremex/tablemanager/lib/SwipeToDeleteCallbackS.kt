@@ -2,9 +2,9 @@ package com.extremex.tablemanager.lib
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.extremex.tablemanager.adapter.ViewClassroomAdapter
+import com.extremex.tablemanager.adapter.ViewSubjectAdapter
 
-class SwipeToDeleteCallback(private val adapter: ViewClassroomAdapter) :
+class SwipeToDeleteCallbackS(private val adapter: ViewSubjectAdapter) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
     override fun onMove(

@@ -34,5 +34,15 @@
     <string name="name_placeholder_string">Full name</string>
     <string name="institute_code_title_string">Institute Code</string>
     <string name="institute_code_string">Institute Code</string>
+    <string name="elective_subject_title_string">Elective subject:</string>
+    <string name="subject_title_string">Subject:</string>
+    <string name="add_button_string_title">Add</string>
+    <string name="manage_subject_title_string">Manage subject</string>
+    <string name="view_all_subjects_title_string">View all Subjects</string>
+    <string name="add_subjects_title_string">Add a subject</string>
+    <string name="subject_name_title_staring">Subject Name</string>
+    <string name="add_elective_subjects_title_string">Add elective subject</string>
+    <string name="_divider_">Just a Divirer</string>
+    <string name="_share_button_">Share button</string>
 
 </resources>

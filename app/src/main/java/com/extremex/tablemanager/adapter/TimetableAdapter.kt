@@ -1,4 +1,4 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.lib.TimetableEntry
 
 class TimetableAdapter(private val timetableEntries: List<TimetableEntry>) : RecyclerView.Adapter<TimetableAdapter.TimetableViewHolder>() {
 

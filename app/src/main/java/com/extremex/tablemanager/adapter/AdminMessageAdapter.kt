@@ -1,10 +1,10 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.extremex.tablemanager.databinding.ItemNotificationAdminBinding
-import com.google.android.material.button.MaterialButton
+import com.extremex.tablemanager.lib.AdminMessage
 
 class AdminMessageAdapter(
     private val messageList: List<AdminMessage>,

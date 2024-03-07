@@ -21,27 +21,24 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.R
-import com.extremex.tablemanager.databinding.FragmentManageClassroomViewBinding
 import com.extremex.tablemanager.databinding.FragmentManageTimeSlotsViewBinding
-import com.extremex.tablemanager.lib.ClassroomModel
 import com.extremex.tablemanager.lib.CustomDialog
 import com.extremex.tablemanager.lib.CustomDialogDismissListener
 import com.extremex.tablemanager.lib.DateModel
 import com.extremex.tablemanager.lib.DurationUnit
 import com.extremex.tablemanager.lib.HolidayInfoModel
+import com.extremex.tablemanager.lib.LocalStorageData
 import com.extremex.tablemanager.lib.StandardCompanion
-import com.extremex.tablemanager.lib.ViewClassroomAdapter
-import com.extremex.tablemanager.lib.ViewHolidayAdapter
-import com.extremex.tablemanager.lib.ViewWeekdaysAdapter
+import com.extremex.tablemanager.adapter.ViewHolidayAdapter
+import com.extremex.tablemanager.adapter.ViewWeekdaysAdapter
 import com.google.android.material.slider.Slider
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.Year
 import java.time.YearMonth
 import java.util.Calendar
 import kotlin.math.roundToInt
 
-class ManageTimeSlotFragment: Fragment() {
+class ManageTimeSlotFragment: Fragment(), ViewHolidayAdapter.ViewHolidayAdapterListener {
 
     interface TimeSlotFragmentListener{
         fun onBack()
@@ -49,9 +46,7 @@ class ManageTimeSlotFragment: Fragment() {
     private lateinit var binding: FragmentManageTimeSlotsViewBinding
     private var listener: TimeSlotFragmentListener? = null
     private lateinit var userPref: SharedPreferences
-    private lateinit var holidayPref: SharedPreferences
     private lateinit var userPrefEditor: Editor
-    private lateinit var holidayPrefEditor: Editor
     private lateinit var lectureStartTime: Array<Int>
     private lateinit var breakStartTime: Array<Int>
     private lateinit var holidayStartDate: Array<Int>
@@ -60,6 +55,7 @@ class ManageTimeSlotFragment: Fragment() {
     private var lecturePerDay = 0
     private lateinit var datePicker: DatePickerDialog
     private var handler =  Handler(Looper.getMainLooper())
+    private lateinit var localStorage: LocalStorageData
     //private lateinit var numberOfHolidays: Int
 
     override fun onAttach(context: Context) {
@@ -79,11 +75,9 @@ class ManageTimeSlotFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentManageTimeSlotsViewBinding.bind(view)
-
+        localStorage = LocalStorageData(requireContext())
         userPref = requireContext().getSharedPreferences(StandardCompanion.USER_PREF_FILE_MANE, AppCompatActivity.MODE_PRIVATE)
         userPrefEditor = userPref.edit()
-        holidayPref = requireContext().getSharedPreferences(StandardCompanion.TIME_SLOTS_CUSTOM_HOLIDAY_FILE_MANE, AppCompatActivity.MODE_PRIVATE)
-        holidayPrefEditor = holidayPref.edit()
         val item = requireContext().resources.getStringArray(R.array.NumberByTimes)
         val unitItem = requireContext().resources.getStringArray(R.array.LargeTimeUnits)
         val customSpinnerAdapter = ArrayAdapter<Any?>(requireContext(), R.layout.item_simple_spinner_default, item)
@@ -94,14 +88,8 @@ class ManageTimeSlotFragment: Fragment() {
         binding.HolidayNumberSetterDropDown.adapter = customSpinnerAdapter
         binding.HolidayUnitSetterDropDown.adapter = customUnitSpinnerAdapter
         val weekdays = requireContext().resources.getStringArray(R.array.WeekDays)
-        if (getCustomHolidays().isEmpty()){
-            binding.HolidayViewPlaceHolder.visibility = View.VISIBLE
-            binding.CustomHolidayList.visibility = View.GONE
-        } else {
-            binding.HolidayViewPlaceHolder.visibility = View.GONE
-            binding.CustomHolidayList.visibility = View.VISIBLE
-            addToListView(binding)
-        }
+        addToListView()
+        toggleHolidayList()
 
         // Set up the RecyclerView
         val layoutManager = GridLayoutManager(requireContext(), 7)
@@ -228,7 +216,7 @@ class ManageTimeSlotFragment: Fragment() {
                     else -> DurationUnit.Days
                 }
                 if (date.size > 2 || date[0].toInt() != 0 || date[1].toInt() != 0 || date[2].toInt() != 0) {
-                    createCustomHolidays(
+                    localStorage.createHoliday(
                         name,
                         DateModel(date[0], date[1], date[2]),
                         number,
@@ -245,7 +233,8 @@ class ManageTimeSlotFragment: Fragment() {
                             binding.CustomHolidayDateSetter.text = ""
                             binding.HolidayNumberSetterDropDown.setSelection(0)
                             binding.HolidayUnitSetterDropDown.setSelection(0)
-                            addToListView(binding)
+                            addToListView()
+                            toggleHolidayList()
                         }
 
                     }, null)
@@ -281,22 +270,24 @@ class ManageTimeSlotFragment: Fragment() {
 
     }
 
-    private fun addToListView(binding: FragmentManageTimeSlotsViewBinding){
-        if (getCustomHolidays().isEmpty()){
+    @SuppressLint("NotifyDataSetChanged")
+    private fun addToListView() {
+        val holidayAdapter =
+            ViewHolidayAdapter(requireContext(), localStorage.get(LocalStorageData.From.MANAGE_HOLIDAYS) as MutableList<HolidayInfoModel>)
+        holidayAdapter.setListener(this)
+        holidayAdapter.attachItemTouchHelper(binding.CustomHolidayList)
+        binding.CustomHolidayList.adapter = holidayAdapter
+        binding.CustomHolidayList.layoutManager = LinearLayoutManager(requireContext())
+        binding.CustomHolidayList.adapter?.notifyDataSetChanged()
+    }
+    private fun toggleHolidayList() {
+        if (localStorage.get(LocalStorageData.From.MANAGE_HOLIDAYS).isEmpty()){
             binding.HolidayViewPlaceHolder.visibility = View.VISIBLE
             binding.CustomHolidayList.visibility = View.GONE
         } else {
             binding.HolidayViewPlaceHolder.visibility = View.GONE
             binding.CustomHolidayList.visibility = View.VISIBLE
         }
-        val holidayAdapter = ViewHolidayAdapter(requireContext(), getCustomHolidays())
-        holidayAdapter.attachItemTouchHelper(binding.CustomHolidayList)
-        holidayAdapter.attachItemTouchHelper(binding.CustomHolidayList)
-        binding.CustomHolidayList.adapter = holidayAdapter
-        binding.CustomHolidayList.layoutManager = LinearLayoutManager(requireContext())
-        // live updates the list
-        binding.CustomHolidayList.adapter.let { it?.notifyItemRangeChanged(0, getCustomHolidays().size) }
-        binding.CustomHolidayList.adapter.let { it?.notifyItemRangeRemoved(0, getCustomHolidays().size) }
     }
 
 
@@ -325,20 +316,6 @@ class ManageTimeSlotFragment: Fragment() {
         slider?.value = defaultSlider
         Log.v(StandardCompanion.TIME_SLOTS_SEMESTER_SIZE_WEEKS, defaultSlider.toString())
         return defaultSlider
-    }
-
-    private fun getTimeStringFromDouble(time: Double): String {
-        val result :Int = time.roundToInt()
-        val hours :Int = result % 86400 / 3600
-        val minutes :Int = result % 86400 % 3600 / 60
-        val seconds :Int = result % 86400 % 3600 % 60
-        return if (minutes == 0){
-            String.format("%02ds", seconds)
-        } else if ( hours == 0){
-            String.format("%02dm %02ds", minutes, seconds)
-        } else {
-            String.format("%02dh %02dm %02ds",hours, minutes, seconds)
-        }
     }
 
     private fun showDateSetter() {
@@ -390,51 +367,11 @@ class ManageTimeSlotFragment: Fragment() {
         )
     }
 
-    private fun createCustomHolidays(
-        holidayName: String,
-        startDate: DateModel,
-        numberOfHolidays: Int = 0,
-        holidayUnit: DurationUnit = DurationUnit.Days,
-        endDate: DateModel
-
-    ){
-        val position = (holidayPref.all.keys.size + 1) ?: 0
-        val holidayStartDate = "${startDate.day}@${startDate.month}@${startDate.year}"
-        val holidayEndDate = "${endDate.day}@${endDate.month}@${endDate.year}"
-        val holiday = holidayName+"ӿ"+holidayStartDate+"ӿ"+(numberOfHolidays+1)+"ӿ"+holidayUnit+"ӿ"+holidayEndDate
-        holidayPrefEditor.putString(position.toString(), holiday)
-        holidayPrefEditor.commit()
+    override fun onHolidayCleared() {
+        addToListView()
+        toggleHolidayList()
     }
 
-    private fun getCustomHolidays(): MutableList<HolidayInfoModel>{
-        var holidays = mutableListOf<HolidayInfoModel>()
-        val holidayObjectSize = (holidayPref.all.keys.size) ?: null
-        val value_d = holidayPref.all.values.toMutableList()
-        if (holidayObjectSize != null){
-            for (data in value_d){
-                val raw: MutableList<String> = data.toString().split("ӿ").toMutableList() ?: mutableListOf("Unknown")
-                if (raw[0] != "Unknown") {
-                    val name = raw[0]
-                    val rawStartDate = raw[1]
-                    val number = raw[2].toInt()
-                    val  unit = raw[3]
-                    val rawEndDate = raw[4]
-                    val rawStartDateFinal: MutableList<String> = rawStartDate.split("@").toMutableList()
-                    val startDay = rawStartDateFinal[0].toInt()
-                    val startMonth = rawStartDateFinal[1].toInt()
-                    val startYear = rawStartDateFinal[2].toInt()
-                    val rawEndDateFinal: MutableList<String> = rawEndDate.split("@").toMutableList()
-                    val endDay = rawEndDateFinal[0].toInt()
-                    val endMonth = rawEndDateFinal[1].toInt()
-                    val endYear = rawEndDateFinal[2].toInt()
-                    holidays.add(HolidayInfoModel(name, DateModel(startDay, startMonth, startYear), number, unit, DateModel(endDay, endMonth, endYear)))
-                }
-            }
-        } else {
-            holidayPref.getString(1.toString(),"None")
-            Log.e("Retrieved Holiday Data 2", "null")
-        }
-        return holidays
-    }
+
 }
 //"ӿ"

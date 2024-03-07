@@ -1,4 +1,4 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.adapter
 
 
 import android.view.LayoutInflater
@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.extremex.tablemanager.R
+import com.extremex.tablemanager.models.UnavailableTeachers
 
 
-class TeachersAvailabilityAdapter(private val teacherList: List<AvailableTeachers>) :
-    RecyclerView.Adapter<TeachersAvailabilityAdapter.ViewHolder>() {
+class TeachersUnavailabilityAdapter(private val teacherList: List<UnavailableTeachers>) :
+    RecyclerView.Adapter<TeachersUnavailabilityAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_available_teachers_list, parent, false)
+            .inflate(R.layout.item_unavailable_teachers_list, parent, false)
         return ViewHolder(view)
     }
 
@@ -21,6 +22,7 @@ class TeachersAvailabilityAdapter(private val teacherList: List<AvailableTeacher
         val teacher = teacherList[position]
         holder.nameTextView.text = teacher.name
         holder.idNumberTextView.text = teacher.idNumber
+        holder.AvailableView.text = teacher.availability
     }
 
     override fun getItemCount(): Int {
@@ -30,10 +32,12 @@ class TeachersAvailabilityAdapter(private val teacherList: List<AvailableTeacher
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var nameTextView: TextView
         var idNumberTextView: TextView
+        var AvailableView: TextView
 
         init {
-            nameTextView = itemView.findViewById(R.id.TeachersName)
-            idNumberTextView = itemView.findViewById(R.id.TeachersID)
+            nameTextView = itemView.findViewById(R.id.Name)
+            idNumberTextView = itemView.findViewById(R.id.IDNumber)
+            AvailableView = itemView.findViewById(R.id.AvailableUntil)
         }
     }
 }

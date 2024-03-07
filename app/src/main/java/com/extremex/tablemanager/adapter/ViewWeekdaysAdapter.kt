@@ -1,7 +1,6 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.adapter
 
 import android.content.Context
-import android.icu.text.Transliterator.Position
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.ItemWeekdaysBinding
+import com.extremex.tablemanager.lib.GetAttrColor
+import com.extremex.tablemanager.lib.StandardCompanion
 
 class ViewWeekdaysAdapter(private val context: Context, private val weekdays: Array<String>) : RecyclerView.Adapter<ViewWeekdaysAdapter.ViewHolder>() {
 
@@ -18,7 +19,7 @@ class ViewWeekdaysAdapter(private val context: Context, private val weekdays: Ar
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ViewWeekdaysAdapter.ViewHolder {
+    ): ViewHolder {
         val binding = ItemWeekdaysBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(context, binding)
     }

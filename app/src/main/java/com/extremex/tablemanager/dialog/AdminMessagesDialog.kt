@@ -1,12 +1,13 @@
-package com.extremex.tablemanager.lib
+package com.extremex.tablemanager.dialog
 
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
-import android.widget.RelativeLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.extremex.tablemanager.R
 import com.extremex.tablemanager.databinding.DialogAdminMessagesBinding
+import com.extremex.tablemanager.lib.AdminMessage
+import com.extremex.tablemanager.adapter.AdminMessageAdapter
 import java.time.LocalDate
 
 class AdminMessagesDialog(private val context: Context) {
