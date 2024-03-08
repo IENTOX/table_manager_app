@@ -9,6 +9,7 @@ import com.extremex.tablemanager.R
 import com.extremex.tablemanager.common.fragment.LoginFragment
 import com.extremex.tablemanager.common.fragment.SignUpFragment
 import com.extremex.tablemanager.lib.PopUpBox
+import com.extremex.tablemanager.network.ServerControl
 import com.google.firebase.auth.FirebaseUser
 
 class SignupInActivity : AppCompatActivity(),LoginFragment.AccountClickListener, SignUpFragment.SignupListener {
@@ -63,13 +64,11 @@ class SignupInActivity : AppCompatActivity(),LoginFragment.AccountClickListener,
         setCurrentFrame(LoginFragment())
     }
 
-    override fun onSuccess(
-        user :FirebaseUser, firstName: String, lastName: String, DOB: String, Id : Int, phNum: String, email: String, isTeacher: Boolean
-    ) {
+    override fun onSuccess(user: FirebaseUser?, status: ServerControl.EmailVerificationStatus){
         setCurrentFrame(LoginFragment())
     }
 
-    override fun onFail(message: String) {
+    override fun onFail(message: String, status: ServerControl.EmailVerificationStatus) {
         //setCurrentFrame(SignUpFragment())
         PopUpBox(this,
             "close",
